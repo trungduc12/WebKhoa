@@ -67,6 +67,7 @@ body {
     color: white;
 }
 
+
 .sidebar .menu li a.active img {
     filter: brightness(1); /* Giữ icon ở trạng thái sáng */
 }
