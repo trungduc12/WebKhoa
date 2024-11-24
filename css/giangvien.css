@@ -324,12 +324,23 @@ footer .footer-content p {
     margin: 20px auto;
 }
 
-.Noidung p {
-    font-size: 25px;
+.Noidung p:first-of-type {
+    font-size: 20px;
     color: #555;
-    margin-bottom: 15px;
+    margin-top: 60px;
+    margin-left: 40px;
+    margin-right: 800px;
+    text-align: justify;
 }
 
+.Noidung p:last-of-type {
+    font-size: 20px;
+    color: #555;
+    margin-top: 30px;
+    margin-left: 40px;
+    margin-right: 800px;
+    text-align: justify;
+}
 /* CSS CHO THÔNG TIN CÁ NHÂN */
 /* Profile Header Styling */
 .profile-header {
