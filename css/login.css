@@ -13,7 +13,6 @@ body {
 .container {
     background-color: white;
     width: 450px; /* Giảm kích thước */
-    height: 300px;
     padding: 20px; /* Giảm khoảng cách */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Giảm bóng đổ */
     text-align: center;
