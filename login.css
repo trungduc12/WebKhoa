@@ -12,51 +12,51 @@ body {
 
 .container {
     background-color: white;
-    width: 550px;
-    padding: 40px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Tăng bóng đổ */
+    width: 450px; /* Giảm kích thước */
+    padding: 20px; /* Giảm khoảng cách */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Giảm bóng đổ */
     text-align: center;
-    border-radius: 8px;
-    transform: translateY(-50px);
-    animation: fadeIn 1s ease-out forwards; /* Thời gian animation lâu hơn */
+    border-radius: 5px; /* Giảm độ bo tròn */
+    transform: translateY(-30px); /* Giảm dịch chuyển */
+    animation: fadeIn 0.8s ease-out forwards; /* Rút ngắn thời gian animation */
 }
 
 /* Logo */
 .logo img {
-    width: 300px;
+    width: 200px; /* Giảm kích thước */
     height: auto;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 /* Tiêu đề */
 h2, h3 {
     font: Verdana;
-    margin: 10px 0;
+    margin: 8px 0; /* Giảm khoảng cách */
     color: #333;
 }
 
 h2 {
-    font-size: 24px;
+    font-size: 18px; /* Giảm kích thước chữ */
     font-weight: bold;
     color: #333;
 }
 
 h3 {
-    font-size: 20px;
+    font-size: 16px; /* Giảm kích thước chữ */
     color: #777;
 }
 
 /* Form đăng nhập */
 form {
-    margin-top: 50px;
+    margin-top: 30px; /* Giảm khoảng cách */
 }
 
 /* Label cho username, password */
 label {
     display: block;
     text-align: left;
-    margin-bottom: 8px;
-    font-size: 18px;
+    margin-bottom: 5px; /* Giảm khoảng cách */
+    font-size: 14px; /* Giảm kích thước chữ */
     color: #444;
     font-weight: 500;
     transition: color 0.3s ease-in-out; /* Mượt mà hơn khi hover */
@@ -65,13 +65,13 @@ label {
 /* Input cho username, password */
 input[type="text"], input[type="password"] {
     width: 90%;
-    padding: 20px;
-    margin-bottom: 30px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    font-size: 25px; /* Tăng kích thước chữ */
+    padding: 12px; /* Giảm padding */
+    margin-bottom: 20px; /* Giảm khoảng cách */
+    border: 1px solid #ddd; /* Giảm độ dày border */
+    border-radius: 5px; /* Giảm độ bo tròn */
+    font-size: 14px; /* Giảm kích thước chữ */
     background-color: #fafafa;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Easing mượt mà hơn */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Easing mượt mà hơn */
     font: Verdana;
 }
 
@@ -79,43 +79,43 @@ input[type="text"]:focus, input[type="password"]:focus {
     border-color: #007bff;
     background-color: #fff;
     outline: none;
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.4); /* Bóng mượt mà hơn */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.4); /* Giảm bóng */
 }
 
 /* Button đăng nhập */
 button {
     width: 100%;
-    padding: 15px;
+    padding: 10px; /* Giảm padding */
     background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 8px;
-    font-size: 25px;
+    border-radius: 5px; /* Giảm độ bo tròn */
+    font-size: 16px; /* Giảm kích thước chữ */
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Hiệu ứng mượt mà cho nút */
 }
 
 button:hover {
     background-color: #0056b3;
-    transform: translateY(-4px); /* Nâng nút mượt mà hơn */
-    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.2); /* Hiệu ứng bóng đổ cho nút */
+    transform: translateY(-2px); /* Nâng nút mượt mà hơn */
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2); /* Hiệu ứng bóng đổ cho nút */
 }
 
 button:active {
     transform: translateY(1px); /* Hiệu ứng khi nhấn nút */
-    box-shadow: 0 5px 10px rgba(0, 123, 255, 0.2); /* Bóng khi nhấn */
+    box-shadow: 0 3px 8px rgba(0, 123, 255, 0.2); /* Bóng khi nhấn */
 }
 
 /* Hiệu ứng text cho Quên mật khẩu */
 p {
-    margin-top: 10px;
-    font-size: 18px;
+    margin-top: 8px; /* Giảm khoảng cách */
+    font-size: 14px; /* Giảm kích thước chữ */
 }
 
 a {
     color: #007bff;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 14px; /* Giảm kích thước chữ */
     transition: color 0.3s ease-in-out; /* Mượt mà khi hover */
 }
 
@@ -128,7 +128,7 @@ a:hover {
 @keyframes fadeIn {
     0% {
         opacity: 0;
-        transform: translateY(-50px);
+        transform: translateY(-30px); /* Giảm khoảng cách dịch chuyển */
     }
     100% {
         opacity: 1;
