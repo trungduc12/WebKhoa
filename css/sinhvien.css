@@ -36,7 +36,6 @@ body {
     margin: 0; /* Đảm bảo không có khoảng cách mặc định */
 }
 
-
 /* Menu styling */
 .sidebar .menu li a {
     text-decoration: none;
@@ -67,11 +66,9 @@ body {
     color: white;
 }
 
-
 .sidebar .menu li a.active img {
     filter: brightness(1); /* Giữ icon ở trạng thái sáng */
 }
-
 
 /* Custom icon styles */
 .sidebar .menu li:nth-child(1) a::before {
@@ -93,7 +90,6 @@ body {
 .sidebar .menu li:nth-child(5) a::before {
     content: url('icons/classes.svg'); /* Icon cho Quản lý lớp */
 }
-
 
 .sidebar .menu li a:hover {
     background-color: #00509e;
@@ -194,6 +190,7 @@ header {
     background-color: #0056b3;
 }
 
+/* Footer styling */
 .footer {
     background: #333;
     color: white;
@@ -214,6 +211,7 @@ header {
 .footer-links a:hover {
     text-decoration: underline;
 }
+
 /* Banner styling */
 .banner img {
     width: 60%;
@@ -361,6 +359,7 @@ footer .footer-content p {
     margin-right: 800px;
     text-align: justify;
 }
+
 /* CSS CHO THÔNG TIN CÁ NHÂN */
 /* Profile Header Styling */
 .profile-header {
@@ -533,10 +532,9 @@ footer .footer-content p {
     color: #0056b3;
 }
 
-
 /* CSS CHO QUẢN LÝ SINH VIÊN */
 /* General styles for the student management section */
-#student-management {
+#student {
     padding: 20px;
     background-color: #f5f5f5;
     border-radius: 8px;
@@ -598,36 +596,31 @@ h2 {
     cursor: pointer;
 }
 
-/* Table styles */
-.student-table {
+/* General Table Styling */
+table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Khoảng cách giữa các bảng */
 }
 
-.student-table th, .student-table td {
+th, td {
     padding: 12px 15px;
     text-align: left;
     font-size: 16px;
+    border: 1px solid #ddd; /* Lớp viền cho ô */
 }
 
-.student-table th {
-    background-color: #003366;
-    color: white;
+th {
+    background-color: #003366; /* Màu nền cho tiêu đề bảng */
+    color: white; /* Màu chữ cho tiêu đề bảng */
 }
 
-.student-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Màu nền cho hàng chẵn */
 }
 
-.student-table tbody tr:hover {
-    background-color: #f1f1f1;
-}
-
-.student-table td img {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
+tbody tr:hover {
+    background-color: #f1f1f1; /* Màu nền cho hàng khi hover */
 }
 
 /* Pagination styles */
@@ -653,4 +646,35 @@ h2 {
 
 .pagination-button:focus {
     outline: none;
+}
+
+/* Container for buttons */
+.button-container {
+    display: flex;
+    justify-content: flex-end; /* Căn chỉnh các nút về bên phải */
+}
+
+/* Button styles */
+.register-button, .cancel-button {
+    background-color: #007bff; /* Màu xanh cho nút */
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px; /* Khoảng cách giữa các nút */
+}
+
+.register-button:hover, .cancel-button:hover {
+    background-color: #0056b3; /* Màu xanh đậm khi hover */
+}
+
+/* Định dạng cho input tìm kiếm */
+.border1 {
+    border-radius: 8px; /* Bo góc cho input */
+    padding: 10px; /* Padding cho input */
+    width: 100%; /* Độ rộng tối đa cho input */
+    margin-bottom: 20px; /* Khoảng cách dưới input */
 }

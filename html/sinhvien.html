@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ</title>
+    <link rel="stylesheet" href="/css/sinhvien.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <img src="/img/Logo.png" alt="Logo">
+        </div>
+        <ul class="menu">
+            <li>
+                <a href="#" class="active" onclick="showContent('home')">
+                    <img src="/img/home.png" alt="Home Icon"> Trang chủ
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showContent('profile')">
+                    <img src="/img/profile.png" alt="Profile Icon"> Thông tin sinh viên
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showContent('schedule')">
+                    <img src="/img/schedule.png" alt="Schedule Icon"> Lịch học
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showContent('notifications')">
+                    <img src="/img/notifications.png" alt="Notifications Icon"> Thông báo
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showContent('registration')">
+                    <img src="/img/registration.png" alt="Registration Icon"> Đăng ký học phần
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showContent('grades')">
+                    <img src="/img/grades.png" alt="Grades Icon"> Xem điểm
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <header>
+            <div class="navbar">
+                <ul class="menu">
+                    <li><a href="#">GIỚI THIỆU</a></li>
+                    <li><a href="#">BIỂU MẪU</a></li>
+                    <li><a href="#">THÔNG BÁO CHUNG</a></li>
+                </ul>
+                <div class="search">
+                    <input type="text" placeholder="Tìm kiếm">
+                    <button class="search-btn">
+                        <img src="/img/search.png" alt="Search Icon">
+                    </button>
+                </div>
+                <button class="logout-btn">Đăng xuất</button>
+            </div>
+        </header>
+
+                    <!-- Nội dung chỉ hiển thị ở trang chủ -->
+            <div id="home" class="content-section active">
+                <div class="poster">
+                    <img src="/img/poster.png" alt="Poster">
+                </div>
+
+                <!-- Banner Section -->
+                <div class="banner">
+                    <img src="/img/banner.jpg" alt="Banner">
+                </div>
+
+                <!-- Nội dung bài viết -->
+                <div class="Noidung">
+                    <p>THÂN MỜI ĐẾN CỔ VŨ ĐOÀN NGHỆ THUẬT KHOA CÔNG NGHỆ THÔNG TIN</p>
+                    <p>Tiếp nối truyền thống các năm học, tại Liên hoan Tiếng hát Sinh viên Trường Đại học Sư phạm TP.HCM năm 2024, Đoàn Nghệ thuật khoa Công nghệ Thông tin tiếp tục chinh chiến với bảng chương trình bằng những tiết mục vô cùng đặc sắc, 25 “mảnh ghép” đang vô cùng háo hức được thể hiện tài năng và thành quả của hơn 1 tháng tập luyện vừa qua.</p>
+                </div>
+                <div class="poster-container">
+                    <img src="poster.png" alt="Poster" class="poster">
+                </div>
+                <footer class="footer">
+                    <div class="container">
+                        <div class="footer-info">
+                            <h3>Khoa Công nghệ Thông tin</h3>
+                            <p>Địa chỉ: Phòng B507, 280 An Dương Vương, P.4, Q.5, TP.HCM</p>
+                            <p>Số điện thoại: 028 38352020</p>
+                            <p>Email: khoacntt@hcmue.edu.vn</p>
+                        </div>
+                        <div class="footer-links">
+                            <h3>Liên kết</h3>
+                            <p><a href="#">Trường Đại học Sư phạm TP.HCM</a></p>
+                            <p><a href="#">Trang online sinh viên</a></p>
+                        </div>
+                    </div>
+                    <p class="copyright">© 2021 Trường Đại học Sư phạm TP.HCM - Khoa Công nghệ Thông tin</p>
+                </footer>
+            </div>
+
+
+        <!-- Profile Section for Thông tin cá nhân -->
+        <div id="profile" class="content-section">
+            <br>
+            <h2>Thông tin cá nhân</h2>
+            <div class="profile-container">
+                <div class="profile-header">
+                    <img src="/img/user.png" alt="Profile" class="profile-image">
+                    <div class="profile-name">
+                        <h3>Tên sinh viên</h3>
+                        <p>Sinh viên</p>
+                    </div>
+                </div>
+                <div class="profile-details">
+                    <table>
+                        <tr>
+                            <td><strong>Mã sinh viên</strong></td>
+                            <td>48.01.104.000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phone</strong></td>
+                            <td>+12 345 6789 0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email</strong></td>
+                            <td>@teacher.hcmue.edu.vn</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Họ tên</strong></td>
+                            <td>Họ tên</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Giới tính</strong></td>
+                            <td>Nam/Nữ</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lớp học</strong></td>
+                            <td>Lớp</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="notifications" class="content-section">
+            <br>
+            <h2>Thông báo</h2>
+            <!-- Content for Thông báo -->
+            <div class="notification-box">
+                <div class="notification-item">
+                    <div class="notification-header">
+                        <h3>Thông báo</h3>
+                        <span class="notification-date">Thu Mar 07, 2024</span>
+                    </div>
+                    <div class="notification-body">
+                        <textarea placeholder="Bài đăng mới..." rows="3"></textarea>
+                    </div>
+                    
+                </div>
+        
+                <div class="notification-item">
+                    <div class="notification-header">
+                        <h3>Thông báo</h3>
+                        <span class="notification-date">Thu Mar 07, 2024</span>
+                    </div>
+                    <div class="notification-body">
+                        <textarea placeholder="Bài đăng mới..." rows="3"></textarea>
+                    </div>
+                    
+                </div>
+            </div>
+        
+            <div class="news">
+                <h3>TIN TỨC MỚI NHẤT</h3>
+                <ul>
+                    <li><a href="#">Thông báo mới nhất từ trường</a></li>
+                    <li><a href="#">Thông báo việc ra soát số tín chỉ học kỳ II, năm học 2022-2023</a></li>
+                    <li><a href="#">Danh sách sinh viên tốt nghiệp</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="registration" class="content-section">
+            <br>
+            <h2>Đăng ký lớp học</h2>
+            <div class="container mx-auto p-4">
+                <div class="mb-4">
+                    <select id="course-select" class="border border-zinc-300 rounded-lg p-2 w-full">
+                        <option value="">Chọn môn học</option>
+                        <option value="course1">Tên lớp hp 1</option>
+                        <option value="course2">Tên lớp hp 2</option>
+                        <option value="course3">Tên lớp hp 3</option>
+                        <option value="course4">Tên lớp hp 4</option>
+                        <option value="course5">Tên lớp hp 5</option>
+                    </select>
+                    <input type="text" id="course-search" placeholder="Nhập tên môn học hoặc mã học phần" class="border1" />
+                </div>
+                <div class="bg-card p-4 rounded-lg shadow-md">
+                    <h2 class="text-xl font-bold text-primary">Danh sách lớp học phần</h2>
+                    <table class="student-table">
+                        <thead>
+                            <tr>
+                                <th class="p-2">Tên lớp học phần</th>
+                                <th class="p-2">Mã lớp</th>
+                                <th class="p-2">Tên giảng viên</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border p-2">Tên lớp hp 1</td>
+                                <td class="border p-2">Mã lớp hp 1</td>
+                                <td class="border p-2">Tên giảng viên 1</td>
+                            </tr>
+                            <tr>
+                                <td class="border p-2">Tên lớp hp 2</td>
+                                <td class="border p-2">Mã lớp hp 2</td>
+                                <td class="border p-2">Tên giảng viên 2</td>
+                            </tr>
+                            <tr>
+                                <td class="border p-2">Tên lớp hp 3</td>
+                                <td class="border p-2">Mã lớp hp 3</td>
+                                <td class="border p-2">Tên giảng viên 3</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="button-container mt-4"> <!-- Thêm lớp button-container -->
+                        <button class="cancel-button bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-lg">Hủy đăng ký</button>
+                        <button class="register-button bg-primary text-primary-foreground hover:bg-primary/80 rounded-lg">Đăng ký lớp học</button>
+                    </div>
+                </div>
+                <div class="mt-8 bg-card p-4 rounded-lg shadow-md">
+                    <h2 class="text-xl font-bold text-primary">Học phần đã đăng ký</h2>
+                    <table class="registered-courses student-table mt-4">
+                        <thead>
+                            <tr>
+                                <th>Tên lớp học phần</th>
+                                <th>Mã lớp</th>
+                                <th>Tên giảng viên</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Tên lớp hp 1</td>
+                                <td>Mã lớp 1</td>
+                                <td>Tên giảng viên 1</td>
+                            </tr>
+                            <tr>
+                                <td>Tên lớp hp 2</td>
+                                <td>Mã lớp 2</td>
+                                <td>Tên giảng viên 2</td>
+                            </tr>
+                            <tr>
+                                <td>Tên lớp hp 3</td>
+                                <td>Mã lớp 3</td>
+                                <td>Tên giảng viên 3</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="grades" class="content-section">
+            <br>
+            <h2>Quản lý điểm</h2>
+            <div class="container mx-auto p-4">
+                <div class="mb-4">
+                    <input type="text" placeholder="Nhập tên môn học hoặc mã học phần" class="border1" />
+                </div>
+                
+                <h2 class="text-xl font-semibold mb-2">Học kì 1</h2>
+                <table class="min-w-full bg-white border border-zinc-300">
+                    <thead class="bg-blue-600 text-white">
+                        <tr>
+                            <th class="py-2 px-4">STT</th>
+                            <th class="py-2 px-4">Mã môn</th>
+                            <th class="py-2 px-4">Tên môn</th>
+                            <th class="py-2 px-4">Số tín chỉ</th>
+                            <th class="py-2 px-4">Điểm số</th>
+                            <th class="py-2 px-4">Điểm chữ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border px-4 py-2">1</td>
+                            <td class="border px-4 py-2">COMP0000</td>
+                            <td class="border px-4 py-2">LTCB</td>
+                            <td class="border px-4 py-2">1</td>
+                            <td class="border px-4 py-2">4</td>
+                            <td class="border px-4 py-2">A+</td>
+                        </tr>
+                        <tr>
+                            <td class="border px-4 py-2">2</td>
+                            <td class="border px-4 py-2">COMP0000</td>
+                            <td class="border px-4 py-2">LTNC</td>
+                            <td class="border px-4 py-2">1</td>
+                            <td class="border px-4 py-2">4</td>
+                            <td class="border px-4 py-2">A+</td>
+                        </tr>
+                        <tr>
+                            <td class="border px-4 py-2">3</td>
+                            <td class="border px-4 py-2">COMP0000</td>
+                            <td class="border px-4 py-2">LTHDT</td>
+                            <td class="border px-4 py-2">1</td>
+                            <td class="border px-4 py-2">4</td>
+                            <td class="border px-4 py-2">A+</td>
+                        </tr>
+                        <tr>
+                            <td class="border px-4 py-2">4</td>
+                            <td class="border px-4 py-2">COMP0000</td>
+                            <td class="border px-4 py-2">CNPM</td>
+                            <td class="border px-4 py-2">1</td>
+                            <td class="border px-4 py-2">4</td>
+                            <td class="border px-4 py-2">A+</td>
+                        </tr>
+                        <tr>
+                            <td class="border px-4 py-2">5</td>
+                            <td class="border px-4 py-2">COMP0000</td>
+                            <td class="border px-4 py-2">TTNT</td>
+                            <td class="border px-4 py-2">1</td>
+                            <td class="border px-4 py-2">4</td>
+                            <td class="border px-4 py-2">A+</td>
+                        </tr>
+                        <!-- Hàng chứa thông tin tín chỉ và điểm trung bình cho học kỳ 1 -->
+                        <tr>
+                            <td class="border px-4 py-2 font-semibold" colspan="2">Số tín chỉ đạt:</td>
+                            <td class="border px-4 py-2" colspan="4"></td>
+                        </tr>
+                        <tr>
+                            <td class="border px-4 py-2 font-semibold" colspan="2">Điểm trung bình học kỳ:</td>
+                            <td class="border px-4 py-2" colspan="4"></td>
+                        </tr>
+                    </tbody>
+                </table>
+        
+                <h2 class="text-xl font-semibold mt-8 mb-2">Học kì 2</h2>
+                <table class="min-w-full bg-white border border-zinc-300">
+                    <thead class="bg-blue-600 text-white">
+                        <tr>
+                            <th class="py-2 px-4">STT</th>
+                            <th class="py-2 px-4">Mã môn</th>
+                            <th class="py-2 px-4">Tên môn</th>
+                            <th class="py-2 px-4">Số tín chỉ</th>
+                            <th class="py-2 px-4">Điểm số</th>
+                            <th class="py-2 px-4">Điểm chữ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="border px-4 py-2">1</td>
+                            <td class="border px-4 py-2">COMP0000</td>
+                            <td class="border px-4 py-2">LTCB</td>
+                            <td class="border px-4 py-2">1</td>
+                            <td class="border px-4 py-2">4</td>
+                            <td class="border px-4 py-2">A+</td>
+                        </tr>
+                        <tr>
+                            <td class="border px-4 py-2">2</td>
+                            <td class="border px-4 py-2">COMP0000</td>
+                            <td class="border px-4 py-2">LTNC</td>
+                            <td class="border px-4 py-2">1</td>
+                            <td class="border px-4 py-2">4</td>
+                            <td class="border px-4 py-2">A+</td>
+                        </tr>
+                        <tr>
+                            <td class="border px-4 py-2">3</td>
+                            <td class="border px-4 py-2">COMP0000</td>
+                            <td class="border px-4 py-2">LTHDT</td>
+                            <td class="border px-4 py-2">1</td>
+                            <td class="border px-4 py-2">4</td>
+                            <td class="border px-4 py-2">A+</td>
+                        </tr>
+                        <tr>
+                            <td class="border px-4 py-2">4</td>
+                            <td class="border px-4 py-2">COMP0000</td>
+                            <td class="border px-4 py-2">CNPM</td>
+                            <td class="border px-4 py-2">1</td>
+                            <td class="border px-4 py-2">4</td>
+                            <td class="border px-4 py-2">A+</td>
+                        </tr>
+                        <!-- Hàng chứa thông tin tín chỉ và điểm trung bình cho học kỳ 2 -->
+                        <tr>
+                            <td class="border px-4 py-2 font-semibold" colspan="2">Số tín chỉ đạt:</td>
+                            <td class="border px-4 py-2" colspan="4"></td> <!-- Thay số tín chỉ đạt thực tế vào đây -->
+                        </tr>
+                        <tr>
+                            <td class="border px-4 py-2 font-semibold" colspan="2">Điểm trung bình học kỳ:</td>
+                            <td class="border px-4 py-2" colspan="4"></td> <!-- Thay điểm trung bình thực tế vào đây -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="schedule" class="content-section">
+            <br>
+            <h2 class="text-xl font-semibold mb-4">Thời Khóa Biểu</h2>
+            <table class="timetable">
+                <thead>
+                    <tr>
+                        <th class="day-column">Phòng</th>
+                        <th class="day-column">Thứ 2</th>
+                        <th class="day-column">Thứ 3</th>
+                        <th class="day-column">Thứ 4</th>
+                        <th class="day-column">Thứ 5</th>
+                        <th class="day-column">Thứ 6</th>
+                        <th class="day-column">Thứ 7</th>
+                        <th class="day-column">Chủ Nhật</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="room">101</td>
+                        <td>10:00 - 12:00</td>
+                        <td>11:00 - 13:00</td>
+                        <td>12:00 - 14:00</td>
+                        <td>13:00 - 15:00</td>
+                        <td>14:00 - 16:00</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="room">102</td>
+                        <td>08:00 - 10:00</td>
+                        <td>09:00 - 11:00</td>
+                        <td>10:00 - 12:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="room">201</td>
+                        <td></td>
+                        <td>10:00 - 12:00</td>
+                        <td>11:00 - 13:00</td>
+                        <td>12:00 - 14:00</td>
+                        <td>13:00 - 15:00</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="room">202</td>
+                        <td>09:00 - 11:00</td>
+                        <td></td>
+                        <td></td>
+                        <td>11:00 - 13:00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="room">301</td>
+                        <td></td>
+                        <td>08:00 - 10:00</td>
+                        <td>09:00 - 11:00</td>
+                        <td></td>
+                        <td>10:00 - 12:00</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="room">302</td>
+                        <td>10:00 - 12:00</td>
+                        <td></td>
+                        <td>12:00 - 14:00</td>
+                        <td></td>
+                        <td></td>
+                        <td>13:00 - 15:00</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+
+    <script src="/js/sinhvien.js"></script>
+</body>
+</html>
