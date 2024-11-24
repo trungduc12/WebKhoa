@@ -102,6 +102,8 @@ body {
 .main-content {
     width: calc(100% - 250px); /* Trừ chiều rộng sidebar */
     padding: 20px;
+    overflow-y: auto; /* Đảm bảo cuộn trang khi nội dung dài */
+    height: 100vh; /* Chiều cao của phần nội dung chính */
 }
 
 /* Header styling */
@@ -194,9 +196,10 @@ header {
 
 /* Banner styling */
 .banner img {
-    width: 100%;
+    width: 60%;
     margin: 20px 0;
     border-radius: 8px;
+    float: right;
 }
 
 /* Welcome Section */
@@ -280,7 +283,7 @@ footer .footer-content p {
 }
 
 /* Poster Section */
-.poster-section {
+.poster {
     width: 100%; /* Đảm bảo chiều rộng toàn màn hình */
     margin: 0; /* Loại bỏ khoảng cách thừa */
     padding: 0; /* Đảm bảo không có padding */
@@ -290,7 +293,7 @@ footer .footer-content p {
     background-color: #ffffff; /* Màu nền trắng */
 }
 
-.poster-section img {
+.poster img {
     width: 100%; /* Chiều rộng 100% để poster kéo dài hết chiều ngang */
     height: auto; /* Giữ nguyên tỷ lệ ảnh */
     object-fit: cover; /* Đảm bảo ảnh luôn vừa khung */
@@ -319,6 +322,12 @@ footer .footer-content p {
     width: 100%;
     max-width: 900px;  /* Adjust for a nice content width */
     margin: 20px auto;
+}
+
+.Noidung p {
+    font-size: 25px;
+    color: #555;
+    margin-bottom: 15px;
 }
 
 /* CSS CHO THÔNG TIN CÁ NHÂN */
