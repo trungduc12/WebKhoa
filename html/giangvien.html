@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ</title>
+    <link rel="stylesheet" href="/css/giangvien.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <img src="/img/Logo.png" alt="Logo">
+        </div>
+        <ul class="menu">
+            <li>
+                <a href="#" class="active" onclick="showContent('home')">
+                    <img src="/img/home.png" alt="Home Icon"> Trang chủ
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showContent('profile')">
+                    <img src="/img/profile.png" alt="Profile Icon"> Thông tin cá nhân
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showContent('notifications')">
+                    <img src="/img/notifications.png" alt="Notifications Icon"> Thông báo
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showContent('students')">
+                    <img src="/img/students.png" alt="Students Icon"> Quản lý sinh viên
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showContent('classes')">
+                    <img src="/img/classes.png" alt="Classes Icon"> Quản lý lớp học
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <header>
+            <div class="navbar">
+                <ul class="menu">
+                    <li><a href="#">GIỚI THIỆU</a></li>
+                    <li><a href="#">BIỂU MẪU</a></li>
+                    <li><a href="#">THÔNG BÁO CHUNG</a></li>
+                </ul>
+                <div class="search">
+                    <input type="text" placeholder="Tìm kiếm">
+                    <button class="search-btn">
+                        <img src="/img/search.png" alt="Search Icon">
+                    </button>
+                </div>
+                <button class="logout-btn">Đăng xuất</button>
+            </div>
+        </header>
+
+        <!-- Content Sections -->
+        <div id="home" class="content-section active">
+            <h2>Trang chủ content</h2>
+            <!-- Content for Trang chủ -->
+        </div>
+        <!-- Profile Section for Thông tin cá nhân -->
+        <div id="profile" class="content-section">
+            <h2>Thông tin cá nhân</h2>
+            <div class="profile-container">
+                <div class="profile-header">
+                    <img src="/img/user.png" alt="Profile" class="profile-image">
+                    <div class="profile-name">
+                        <h3>Tên giảng viên</h3>
+                        <p>Giảng viên</p>
+                    </div>
+                </div>
+                <div class="profile-details">
+                    <table>
+                        <tr>
+                            <td><strong>Mã giảng viên</strong></td>
+                            <td>48.01.104.000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phone</strong></td>
+                            <td>+12 345 6789 0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email</strong></td>
+                            <td>@teacher.hcmue.edu.vn</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Họ tên</strong></td>
+                            <td>Họ tên</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Giới tính</strong></td>
+                            <td>Nam/Nữ</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Môn giảng dạy</strong></td>
+                            <td>Môn</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="notifications" class="content-section">
+            <h2>Thông báo</h2>
+            <!-- Content for Thông báo -->
+            <div class="notification-box">
+                <div class="notification-item">
+                    <div class="notification-header">
+                        <h3>Thông báo</h3>
+                        <span class="notification-date">Thu Mar 07, 2024</span>
+                    </div>
+                    <div class="notification-body">
+                        <textarea placeholder="Viết bài đăng mới..." rows="3"></textarea>
+                    </div>
+                    <div class="notification-footer">
+                        <label for="audience">Tới</label>
+                        <select id="audience" name="audience">
+                            <option value="chung">Chung</option>
+                            <option value="lopcntta">Lớp CNTT.A</option>
+                            <option value="lopcnttb">Lớp CNTT.B</option>
+                        </select>
+                        <button class="post-button">Đăng</button>
+                    </div>
+                </div>
+        
+                <div class="notification-item">
+                    <div class="notification-header">
+                        <h3>Thông báo</h3>
+                        <span class="notification-date">Thu Mar 07, 2024</span>
+                    </div>
+                    <div class="notification-body">
+                        <textarea placeholder="Viết bài đăng mới..." rows="3"></textarea>
+                    </div>
+                    <div class="notification-footer">
+                        <label for="audience">Tới</label>
+                        <select id="audience" name="audience">
+                            <option value="chung">Chung</option>
+                            <option value="lopcntta">Lớp CNTT.A</option>
+                            <option value="lopcnttb">Lớp CNTT.B</option>
+                        </select>
+                        <button class="post-button">Đăng</button>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="news">
+                <h3>TIN TỨC MỚI NHẤT</h3>
+                <ul>
+                    <li><a href="#">Thông báo mới nhất từ trường</a></li>
+                    <li><a href="#">Thông báo việc ra soát số tín chỉ học kỳ II, năm học 2022-2023</a></li>
+                    <li><a href="#">Danh sách sinh viên tốt nghiệp</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="students" class="content-section">
+            <h2>Quản lý sinh viên</h2>
+            <!-- Content for Quản lý sinh viên -->
+             <!-- Search and Add controls -->
+    <div class="controls">
+        <div class="search-container">
+            <input type="text" placeholder="Tìm kiếm" class="search-input">
+            <button class="search-button">
+                <img src="/img/search.png" alt="Search">
+            </button>
+        </div>
+        <div class="add-controls">
+            <select>
+                <option value="add-class">Thêm lớp</option>
+                <option value="add-student">Thêm sinh viên</option>
+            </select>
+            <button class="add-button">+</button>
+        </div>
+    </div>
+
+    <!-- Student Table -->
+    <table class="student-table">
+        <thead>
+            <tr>
+                <th>Tên sinh viên</th>
+                <th>Mssv</th>
+                <th>Ngày sinh</th>
+                <th>Lớp</th>
+                <th>Liên hệ</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Họ tên sinh viên</td>
+                <td>48.01.104.000</td>
+                <td>31/2/2004</td>
+                <td>CNNT.A</td>
+                <td>
+                    <a href="tel:+1234567890"><img src="/img/phone.png" alt="Phone"></a>
+                    <a href="mailto:student@example.com"><img src="/img/email.png" alt="Email"></a>
+                </td>
+            </tr>
+            <tr>
+                <td>Họ tên sinh viên</td>
+                <td>48.01.104.001</td>
+                <td>31/2/2004</td>
+                <td>CNNT.C</td>
+                <td>
+                    <a href="tel:+1234567890"><img src="/img/phone.png" alt="Phone"></a>
+                    <a href="mailto:student@example.com"><img src="/img/email.png" alt="Email"></a>
+                </td>
+            </tr>
+            <!-- Add more rows as needed -->
+        </tbody>
+    </table>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <button class="pagination-button">&laquo;</button>
+        <button class="pagination-button">1</button>
+        <button class="pagination-button">2</button>
+        <button class="pagination-button">3</button>
+        <button class="pagination-button">&raquo;</button>
+    </div>
+
+        </div>
+        <div id="classes" class="content-section">
+            <h2>Lịch dạy</h2>
+            <!-- Content for Quản lý lớp học -->
+        </div>
+
+        
+    </div>
+
+    <script src="/js/giangvien.js"></script>
+</body>
+</html>
