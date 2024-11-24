@@ -1,116 +1,137 @@
-/* Reset the default margin and padding */
-* {
+/* Cải tiến font chữ và kích thước cho các trường */
+body {
+    font-family: 'Roboto', sans-serif;  /* Font đẹp */
+    background-color: rgb(184, 241, 241);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    overflow: hidden; /* Ẩn thanh cuộn khi sử dụng hiệu ứng */
 }
 
-/* Set up a full-screen layout */
-body, html {
-    height: 100%;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f0f0f0;
-}
-
-/* Container for the two parts of the page */
 .container {
-    display: flex;
-    width: 100%;
-    height: 100%;
-}
-
-/* Left section with the image */
-.left-side {
-    width: 70%;
-    height: 100%;
-    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Tr%C6%B0%E1%BB%9Dng_%C4%90H_Su_Pham_TP_HCM.jpg/1024px-Tr%C6%B0%E1%BB%9Dng_%C4%90H_Su_Pham_TP_HCM.jpg');
-    background-size: cover;
-    background-position: center;
-}
-
-/* Right section with the login form */
-.right-side {
-    width: 50%;
     background-color: white;
+    width: 550px;
     padding: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
-
-/* Style the login form container */
-.login-form {
-    width: 100%;
-    max-width: 400px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Tăng bóng đổ */
     text-align: center;
+    border-radius: 8px;
+    transform: translateY(-50px);
+    animation: fadeIn 1s ease-out forwards; /* Thời gian animation lâu hơn */
 }
 
-/* Logo size adjustment */
-.logo-university {
-    width: 100px;
+/* Logo */
+.logo img {
+    width: 300px;
     height: auto;
     margin-bottom: 20px;
 }
 
-/* Title styles */
-.login-form h2 {
-    font-size: 24px;
-    color: #0056b3;
-    margin-bottom: 10px;
-}
-
-.login-form h3 {
-    font-size: 18px;
-    color: #555;
-    margin-bottom: 20px;
-}
-
-.login-form h4 {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-/* Style input fields */
-.login-form input {
-    width: 100%;
-    padding: 10px;
+/* Tiêu đề */
+h2, h3 {
+    font: Verdana;
     margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    color: #333;
 }
 
-/* Style the login button */
-.login-form button {
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+h3 {
+    font-size: 20px;
+    color: #777;
+}
+
+/* Form đăng nhập */
+form {
+    margin-top: 50px;
+}
+
+/* Label cho username, password */
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: 8px;
+    font-size: 18px;
+    color: #444;
+    font-weight: 500;
+    transition: color 0.3s ease-in-out; /* Mượt mà hơn khi hover */
+}
+
+/* Input cho username, password */
+input[type="text"], input[type="password"] {
+    width: 90%;
+    padding: 20px;
+    margin-bottom: 30px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 25px; /* Tăng kích thước chữ */
+    background-color: #fafafa;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Easing mượt mà hơn */
+    font: Verdana;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    border-color: #007bff;
+    background-color: #fff;
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.4); /* Bóng mượt mà hơn */
+}
+
+/* Button đăng nhập */
+button {
     width: 100%;
-    padding: 10px;
-    background-color: #0056b3;
+    padding: 15px;
+    background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 4px;
-    font-size: 16px;
+    border-radius: 8px;
+    font-size: 25px;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Hiệu ứng mượt mà cho nút */
 }
 
-.login-form button:hover {
-    background-color: #00408f;
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-4px); /* Nâng nút mượt mà hơn */
+    box-shadow: 0 8px 20px rgba(0, 123, 255, 0.2); /* Hiệu ứng bóng đổ cho nút */
 }
 
-/* Link for "forgot password" */
-.login-form a {
-    display: block;
+button:active {
+    transform: translateY(1px); /* Hiệu ứng khi nhấn nút */
+    box-shadow: 0 5px 10px rgba(0, 123, 255, 0.2); /* Bóng khi nhấn */
+}
+
+/* Hiệu ứng text cho Quên mật khẩu */
+p {
     margin-top: 10px;
+    font-size: 18px;
+}
+
+a {
+    color: #007bff;
     text-decoration: none;
-    color: #0056b3;
-    font-size: 14px;
+    font-size: 18px;
+    transition: color 0.3s ease-in-out; /* Mượt mà khi hover */
 }
 
-.login-form a:hover {
+a:hover {
     text-decoration: underline;
+    color: #0056b3;
 }
 
+/* Animation cho form */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

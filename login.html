@@ -3,28 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng Nhập</title>
+    <title>Login</title>
     <link rel="stylesheet" href="login.css">
 </head>
 <body>
     <div class="container">
-        <div class="left-side">
-            <img src="dhsptphcm.jpg" alt="Trường Đại học Sư phạm" class="school-image">
+        <div class="logo">
+            <img src="Logo.png" alt="Logo">
         </div>
-        <div class="right-side">
-            <div class="login-form">
-                <img src="Logo.png" alt="Logo Trường đại học sư phạm tphcm" class = "logo-university">
-                <h2>TRƯỜNG ĐẠI HỌC SƯ PHẠM TP.HCM</h2>
-                <h3>Khoa Công Nghệ Thông Tin</h3>
-                <h4>ĐĂNG NHẬP</h4>
-                <form action="#" method="POST">
-                    <input type="text" name="username" placeholder="Username" required>
-                    <input type="password" name="password" placeholder="Password" required>
-                    <button type="submit">ĐĂNG NHẬP</button>
-                    <a href="#">Quên mật khẩu?</a>
-                </form>
-            </div>
-        </div>
+        <h2>TRƯỜNG ĐẠI HỌC SƯ PHẠM TP. HỒ CHÍ MINH</h2>
+        <h3>Khoa Công Nghệ Thông Tin</h3>
+        <form action="#" method="POST">
+            <label for="username">Tên đăng nhập</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Mật khẩu</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">ĐĂNG NHẬP</button>
+        </form>
+        <p><a href="#">Quên mật khẩu?</a></p>
     </div>
 </body>
 </html>
