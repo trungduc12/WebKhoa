@@ -214,8 +214,11 @@ header {
 
 /* Banner styling */
 .banner img {
-    width: 60%;
+    width: 52%;
+    height: 40%;
     margin: 20px 0;
+    margin-bottom: 0px;
+    margin-right: 40px;
     border-radius: 8px;
     float: right;
 }
