@@ -25,3 +25,33 @@ function showContent(contentId) {
         selectedSection.classList.add('active');
     }
 }
+
+const calendarHeader = document.querySelector(".calendar-header h3");
+const prevMonthButton = document.querySelector(".prev-month");
+const nextMonthButton = document.querySelector(".next-month");
+
+let currentMonth = 10; // Tháng 11 (lưu ý tháng trong JS bắt đầu từ 0)
+let currentYear = 2024;
+
+function updateCalendar(month, year) {
+    calendarHeader.textContent = `Tháng ${month + 1}, ${year}`;
+    // Viết thêm logic để tạo ngày tự động trong bảng (nếu cần)
+}
+
+prevMonthButton.addEventListener("click", () => {
+    currentMonth--;
+    if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+    }
+    updateCalendar(currentMonth, currentYear);
+});
+
+nextMonthButton.addEventListener("click", () => {
+    currentMonth++;
+    if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+    }
+    updateCalendar(currentMonth, currentYear);
+});
