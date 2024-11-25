@@ -301,8 +301,16 @@
         </div>
 
         <div id="schedule" class="content-section">
-            <br>
             <h2 class="text-xl font-semibold mb-4">Thời Khóa Biểu</h2>
+            <div class="month-selector">
+                <label for="month">Chọn học kì:</label>
+                <select id="month" onchange="updateSchedule()">
+                    <option value="1">Học kì 1</option>
+                    <option value="2">Học kì 2</option>
+                    <option value="3">Học kì hè</option>
+                    
+                </select>
+            </div>
             <table class="timetable">
                 <thead>
                     <tr>
@@ -316,71 +324,11 @@
                         <th class="day-column">Chủ Nhật</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td class="room">101</td>
-                        <td>10:00 - 12:00</td>
-                        <td>11:00 - 13:00</td>
-                        <td>12:00 - 14:00</td>
-                        <td>13:00 - 15:00</td>
-                        <td>14:00 - 16:00</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td class="room">102</td>
-                        <td>08:00 - 10:00</td>
-                        <td>09:00 - 11:00</td>
-                        <td>10:00 - 12:00</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td class="room">201</td>
-                        <td></td>
-                        <td>10:00 - 12:00</td>
-                        <td>11:00 - 13:00</td>
-                        <td>12:00 - 14:00</td>
-                        <td>13:00 - 15:00</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td class="room">202</td>
-                        <td>09:00 - 11:00</td>
-                        <td></td>
-                        <td></td>
-                        <td>11:00 - 13:00</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td class="room">301</td>
-                        <td></td>
-                        <td>08:00 - 10:00</td>
-                        <td>09:00 - 11:00</td>
-                        <td></td>
-                        <td>10:00 - 12:00</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td class="room">302</td>
-                        <td>10:00 - 12:00</td>
-                        <td></td>
-                        <td>12:00 - 14:00</td>
-                        <td></td>
-                        <td></td>
-                        <td>13:00 - 15:00</td>
-                        <td></td>
-                    </tr>
+                <tbody id="schedule-body">
+                    <!-- Các hàng TKB sẽ được cập nhật qua JavaScript -->
                 </tbody>
             </table>
         </div>
-        
 
     <script src="/js/sinhvien.js"></script>
 </body>

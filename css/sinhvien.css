@@ -681,3 +681,41 @@ tbody tr:hover {
     width: 100%; /* Độ rộng tối đa cho input */
     margin-bottom: 20px; /* Khoảng cách dưới input */
 }
+
+#month {
+    padding: 10px; /* Tăng kích thước padding */
+    font-size: 16px; /* Tăng kích thước chữ */
+    border-radius: 15px; /* Bo tròn */
+    border: 1px solid #ccc; /* Viền nhẹ */
+    background-color: #f9f9f9; /* Màu nền */
+    cursor: pointer; /* Con trỏ chuột thành dạng tay khi hover */
+    transition: border-color 0.3s; /* Hiệu ứng chuyển màu viền khi hover */
+}
+
+#month:hover {
+    border-color: #4CAF50; /* Màu viền khi hover */
+}
+
+.timetable {
+    
+    width: 100%; /* Đặt chiều rộng bảng là 100% */
+    border-collapse: collapse; /* Gộp các viền lại với nhau */
+    table-layout: fixed; /* Đặt bảng với layout cố định */
+}
+
+.timetable th, .timetable td {
+    border: 1px solid #ddd; /* Viền cho các ô */
+    padding: 8px; /* Khoảng cách bên trong các ô */
+    text-align: center; /* Căn giữa nội dung */
+    overflow: hidden; /* Ẩn nội dung tràn ra ngoài */
+    
+    
+}
+
+.day-column {
+    width: 12.5%; /* Đặt chiều rộng cho các cột (8 cột) */
+}
+
+.room {
+    width: 10%; /* Chiều rộng cố định cho cột phòng */
+}
