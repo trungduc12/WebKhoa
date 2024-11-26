@@ -105,7 +105,6 @@
         <!-- Profile Section for Thông tin cá nhân -->
         
 
-
         <div id="notifications" class="content-section">
             <br>
             <h2>Thông báo</h2>
@@ -283,6 +282,93 @@
                 <button class="Capnhat">+ Thêm người dùng</button>
             </div>
         </div>
+        <div id="grades" class="content-section">
+            <div class="stats-overview">
+                <div class="stat-item">
+                    <h3>Sinh viên</h3>
+                    <p class="stat-number">900</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Giảng viên</h3>
+                    <p class="stat-number">50</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Thông báo</h3>
+                    <p class="stat-number">5</p>
+                </div>
+            </div>
+        
+            <div class="dashboard-main">
+                <!-- Lịch -->
+                <div class="calendar">
+                    <div class="calendar-header">
+                        <h3>Lịch</h3>
+                        <p>Nov 2024</p>
+                    </div>
+                    <table class="calendar-body" id="calendarTable">
+                        <!-- Dòng tiêu đề cho ngày -->
+                        <thead>
+                            <tr>
+                                <th>Sun</th>
+                                <th>Mon</th>
+                                <th>Tue</th>
+                                <th>Wed</th>
+                                <th>Thu</th>
+                                <th>Fri</th>
+                                <th>Sat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Nội dung sẽ được tạo tự động bằng JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            
+                <!-- Biểu đồ -->
+                <div class="chart-section">
+                    <h3>Tài chính khoa</h3>
+                    <img src="\img\finance_chart.png" alt="Biểu đồ tài chính khoa" style="width:100%; max-width:800px;">
+                </div>
+                
+            </div>
+            
+        
+            <!-- Danh sách sinh viên tham gia -->
+            <div class="research-list">
+                <h3>Sinh viên tham gia nghiên cứu khoa học</h3>
+                <table class="research-table">
+                    <thead>
+                        <tr>
+                            <th>Tên sinh viên</th>
+                            <th>MSSV</th>
+                            <th>Giảng viên hướng dẫn</th>
+                            <th>Tên đề tài</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Nguyễn Văn A</td>
+                            <td>123456</td>
+                            <td>PGS. TS. B</td>
+                            <td>Nghiên cứu AI</td>
+                        </tr>
+                        <tr>
+                            <td>Trần Thị B</td>
+                            <td>654321</td>
+                            <td>TS. C</td>
+                            <td>Phân tích dữ liệu lớn</td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    <button class="page-btn">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                </div>
+            </div>
+        </div>
+        
 
     <script src="/js/admin.js"></script>
 </body>
