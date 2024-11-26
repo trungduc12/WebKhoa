@@ -907,3 +907,163 @@ tbody tr:hover {
 .page-btn:hover {
     background-color: #0056b3;
 }
+
+
+#papers {
+    padding: 20px;
+}
+
+.article-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.input-field {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid rgb(70, 115, 130);
+    border-radius: 5px;
+}
+
+.file-upload {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.upload-input {
+    border: none;
+    padding: 5px;
+}
+
+.add-article-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.article-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.article-table th,
+.article-table td {
+    border: 1px solid #000000;
+    padding: 10px;
+    text-align: left;
+}
+
+.article-table th {
+    background-color: #5a70b9;
+}
+
+.delete-btn,
+.edit-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-btn {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.edit-btn {
+    background-color: #3498db;
+    color: #fff;
+}
+
+.pagination {
+    display: flex;
+    gap: 5px;
+}
+
+.page-btn {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.page-btn.active {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+}
+
+/* Khóa học */
+#courses {
+    padding: 20px;
+}
+
+.course-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.add-course-btn,
+.delete-course-btn,
+.edit-course-btn {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.course-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.course-card {
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.course-thumbnail {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.course-title {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 20px;
+}
+
+.page-btn {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.page-btn.active {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+}

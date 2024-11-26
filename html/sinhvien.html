@@ -39,6 +39,16 @@
                     <img src="/img/grades.png" alt="Grades Icon"> Tài liệu học tập
                 </a>
             </li>
+            <li>
+                <a href="#" onclick="showContent('papers')">
+                    <img src="/img/papers.png" alt="Article Icon"> Bài báo khoa học
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showContent('courses')">
+                    <img src="/img/course.png" alt="Course Icon"> Khóa học
+                </a>
+            </li>
         </ul>
     </div>
 
@@ -96,7 +106,39 @@
                     <p class="copyright">© 2021 Trường Đại học Sư phạm TP.HCM - Khoa Công nghệ Thông tin</p>
                 </footer>
             </div>
-
+            <!-- Bài báo khoa học -->
+        <div id="papers" class="content-section">
+            <h2>Bài báo khoa học</h2>
+            <div class="article-form">
+                <label for="search-article">Tìm kiếm:</label>
+                <input type="text" id="search-article" placeholder="Tìm kiếm bài báo" class="input-field" />
+                <input type="text" placeholder="Tên bài báo" class="input-field" />
+                <input type="text" placeholder="Tên tác giả" class="input-field" />
+                <input type="number" placeholder="Năm sáng tác" class="input-field" />
+                <button>Tìm</button>
+            </div>
+            <table class="article-table">
+                <thead>
+                    <tr>
+                        <th>Tên bài báo</th>
+                        <th>Tên tác giả</th>
+                        <th>Đường dẫn</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Dự báo</td>
+                        <td>Hill</td>
+                        <td><a href="#">Link PDF</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+            </div>
+        </div>
 
         <!-- Profile Section for Thông tin cá nhân -->
         <div id="profile" class="content-section">

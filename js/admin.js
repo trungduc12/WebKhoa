@@ -79,3 +79,52 @@ function generateCalendar(month, year) {
 
 // Gọi hàm tạo lịch cho tháng 11, 2024
 generateCalendar(10, 2024);
+
+document.querySelector('.add-article-btn').addEventListener('click', function () {
+    const title = document.querySelector('.article-form input[placeholder="Tên bài báo"]').value;
+    const author = document.querySelector('.article-form input[placeholder="Tên tác giả"]').value;
+    const year = document.querySelector('.article-form input[placeholder="Năm sáng tác"]').value;
+
+    if (title && author && year) {
+        const table = document.querySelector('.article-table tbody');
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${title}</td>
+            <td>${author}</td>
+            <td><a href="#">Link PDF</a></td>
+            <td>
+                <button class="delete-btn">🗑️</button>
+                <button class="edit-btn">Sửa</button>
+            </td>
+        `;
+        table.appendChild(row);
+    } else {
+        alert('Vui lòng điền đầy đủ thông tin!');
+    }
+});
+
+document.querySelector('.article-table').addEventListener('click', function (event) {
+    if (event.target.classList.contains('delete-btn')) {
+        event.target.closest('tr').remove();
+    }
+});
+
+document.querySelector('.add-course-btn').addEventListener('click', function () {
+    const courseList = document.querySelector('.course-list');
+    const newCourse = document.createElement('div');
+    newCourse.className = 'course-card';
+    newCourse.innerHTML = `
+        <img src="/img/course_thumbnail.png" alt="Course Thumbnail" class="course-thumbnail">
+        <p class="course-title">New Course - Placeholder</p>
+    `;
+    courseList.appendChild(newCourse);
+});
+
+document.querySelector('.delete-course-btn').addEventListener('click', function () {
+    const courseList = document.querySelector('.course-list');
+    if (courseList.lastElementChild) {
+        courseList.removeChild(courseList.lastElementChild);
+    } else {
+        alert('Không có bài giảng nào để xóa!');
+    }
+});

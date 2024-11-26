@@ -60,3 +60,34 @@ function updateSchedule() {
 
 // Khởi tạo lịch với tháng đầu tiên
 updateSchedule();
+
+// Tìm kiếm bài báo theo tên hoặc tác giả
+document.querySelector('.article-form button').addEventListener('click', function () {
+    const searchValue = document.querySelector('#search-article').value.toLowerCase();
+    const rows = document.querySelectorAll('.article-table tbody tr');
+
+    rows.forEach(row => {
+        const title = row.children[0].textContent.toLowerCase();
+        const author = row.children[1].textContent.toLowerCase();
+
+        if (title.includes(searchValue) || author.includes(searchValue)) {
+            row.style.display = ''; // Hiển thị dòng nếu khớp
+        } else {
+            row.style.display = 'none'; // Ẩn dòng nếu không khớp
+        }
+    });
+});
+
+// Phân trang (giả lập)
+document.querySelectorAll('.page-btn').forEach(button => {
+    button.addEventListener('click', function () {
+        // Xóa trạng thái active cũ
+        document.querySelector('.page-btn.active').classList.remove('active');
+
+        // Thêm trạng thái active mới
+        this.classList.add('active');
+
+        // Xử lý hiển thị bài báo theo trang (tùy chỉnh nếu có dữ liệu thực tế)
+        alert(`Bạn đã chuyển đến trang ${this.textContent}`);
+    });
+});
