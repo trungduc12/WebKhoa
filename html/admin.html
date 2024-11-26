@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <img src="/img/Logo.png" alt="Logo">
+        </div>
+        <ul class="menu">
+            <li>
+                <a href="#" class="active" onclick="showContent('home')">
+                    <img src="/img/home.png" alt="Home Icon"> Trang chủ
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showContent('managenment')">
+                    <img src="/img/profile.png" alt="Profile Icon"> Quản lí người dùng
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showContent('list')">
+                    <img src="/img/schedule.png" alt="Schedule Icon"> Danh sách người dùng
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showContent('notifications')">
+                    <img src="/img/notifications.png" alt="Notifications Icon"> Thông báo
+                </a>
+            </li>
+            
+            <li>
+                <a href="#" onclick="showContent('grades')">
+                    <img src="/img/grades.png" alt="Grades Icon"> Thống kê
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <header>
+            <div class="navbar">
+                <ul class="menu">
+                    <li><a href="#">GIỚI THIỆU</a></li>
+                    <li><a href="#">BIỂU MẪU</a></li>
+                    <li><a href="#">THÔNG BÁO CHUNG</a></li>
+                </ul>
+                <div class="search">
+                    <input type="text" placeholder="Tìm kiếm">
+                    <button class="search-btn">
+                        <img src="/img/search.png" alt="Search Icon">
+                    </button>
+                </div>
+                <button class="logout-btn">Đăng xuất</button>
+            </div>
+        </header>
+
+                    <!-- Nội dung chỉ hiển thị ở trang chủ -->
+            <div id="home" class="content-section active">
+                <br>
+                <button class="Capnhat">Chỉnh sửa</button>
+                
+                <div class="poster">
+                    
+                    <img src="/img/poster.png" alt="Poster">
+                </div>
+
+                <!-- Banner Section -->
+                <div class="banner">
+                    <img src="/img/banner.jpg" alt="Banner">
+                </div>
+
+                <!-- Nội dung bài viết -->
+                <div class="Noidung">
+                    <p>THÂN MỜI ĐẾN CỔ VŨ ĐOÀN NGHỆ THUẬT KHOA CÔNG NGHỆ THÔNG TIN</p>
+                    <p>Tiếp nối truyền thống các năm học, tại Liên hoan Tiếng hát Sinh viên Trường Đại học Sư phạm TP.HCM năm 2024, Đoàn Nghệ thuật khoa Công nghệ Thông tin tiếp tục chinh chiến với bảng chương trình bằng những tiết mục vô cùng đặc sắc, 25 “mảnh ghép” đang vô cùng háo hức được thể hiện tài năng và thành quả của hơn 1 tháng tập luyện vừa qua.</p>
+                </div>
+                
+                <footer class="footer">
+                    <div class="container">
+                        <div class="footer-info">
+                            <h3>Khoa Công nghệ Thông tin</h3>
+                            <p>Địa chỉ: Phòng B507, 280 An Dương Vương, P.4, Q.5, TP.HCM</p>
+                            <p>Số điện thoại: 028 38352020</p>
+                            <p>Email: khoacntt@hcmue.edu.vn</p>
+                        </div>
+                        <div class="footer-links">
+                            <h3>Liên kết</h3>
+                            <p><a href="#">Trường Đại học Sư phạm TP.HCM</a></p>
+                            <p><a href="#">Trang online sinh viên</a></p>
+                        </div>
+                    </div>
+                    <p class="copyright">© 2021 Trường Đại học Sư phạm TP.HCM - Khoa Công nghệ Thông tin</p>
+                </footer>
+            </div>
+
+
+        <!-- Profile Section for Thông tin cá nhân -->
+        
+
+
+        <div id="notifications" class="content-section">
+            <br>
+            <h2>Thông báo</h2>
+            <!-- Content for Thông báo -->
+            <div class="notification-box">
+                <div class="notification-item">
+                    <div class="notification-header">
+                        <h3>Thông báo</h3>
+                        <span class="notification-date">Thu Mar 07, 2024</span>
+                    </div>
+                    <div class="notification-body">
+                        <textarea placeholder="Bài đăng mới..." rows="3"></textarea>
+                    </div>
+                    
+                </div>
+                <div>
+                    <button class="Capnhat">Xóa thông báo</button>
+                </div>
+                
+
+        
+                <div class="notification-item">
+                    <div class="notification-header">
+                        <h3>Thông báo</h3>
+                        <span class="notification-date">Thu Mar 07, 2024</span>
+                    </div>
+                    <div class="notification-body">
+                        <textarea placeholder="Bài đăng mới..." rows="3"></textarea>
+                    </div>
+                    
+                </div>
+                <div>
+                    <button class="Capnhat">Xóa thông báo</button>
+                </div>
+            </div>
+        
+            <div class="news">
+                <h3>TIN TỨC MỚI NHẤT</h3>
+                <ul>
+                    <li><a href="#">Thông báo mới nhất từ trường</a></li>
+                    <li><a href="#">Thông báo việc ra soát số tín chỉ học kỳ II, năm học 2022-2023</a></li>
+                    <li><a href="#">Danh sách sinh viên tốt nghiệp</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div id="list" class="content-section">
+            <div class="mb-4">
+                <br>
+                <input type="text" placeholder="Tìm kiếm người dùng" class="border1" />
+            </div>
+            
+                
+                <div>
+                    <button class="Capnhat">Chỉnh sửa danh sách</button>
+                    <button class="Capnhat">Xóa</button>
+                </div>
+            
+            <h2 class="text-xl font-bold">Danh sách giảng viên</h2>
+            <div class="container">
+                <div class="profile-card">
+                    <img src="/img/profile.png" alt="Hình ảnh giảng viên" class="profile-image">
+                    <h3 class="teacher-name">Giảng viên 1</h3>
+                    <p class="teacher-id">Mã GV: 123456</p>
+                    <div class="flex justify-center mt-2">
+                        <button class="phone-btn">
+                            <img src="/img/phone.png" alt="Search Icon">
+                        
+                        </button><button class="phone-btn">
+                            <img src="/img/mail.png" alt="Search Icon">
+                        </button>
+                    </div>
+                    
+                </div>
+                <div class="profile-card">
+                    <img src="https://via.placeholder.com/100" alt="Hình ảnh giảng viên" class="profile-image">
+                    <h3 class="teacher-name">Giảng viên 2</h3>
+                    <p class="teacher-id">Mã GV: 234567</p>
+                    <div class="flex justify-center mt-2">
+                        <button class="phone-btn">
+                            <img src="/img/phone.png" alt="Search Icon">
+                        
+                        </button><button class="phone-btn">
+                            <img src="/img/mail.png" alt="Search Icon">
+                        </button>
+                    </div>
+                </div>
+                <div class="profile-card">
+                    <img src="https://via.placeholder.com/100" alt="Hình ảnh giảng viên" class="profile-image">
+                    <h3 class="teacher-name">Giảng viên 3</h3>
+                    <p class="teacher-id">Mã GV: 345678</p>
+                    <div class="flex justify-center mt-2">
+                        <button class="phone-btn">
+                            <img src="/img/phone.png" alt="Search Icon">
+                        
+                        </button><button class="phone-btn">
+                            <img src="/img/mail.png" alt="Search Icon">
+                        </button>
+                    </div>
+                </div>
+                <div class="profile-card">
+                    <img src="https://via.placeholder.com/100" alt="Hình ảnh giảng viên" class="profile-image">
+                    <h3 class="teacher-name">Giảng viên 4</h3>
+                    <p class="teacher-id">Mã GV: 456789</p>
+                    <div class="flex justify-center mt-2">
+                        <button class="phone-btn">
+                            <img src="/img/phone.png" alt="Search Icon">
+                        
+                        </button><button class="phone-btn">
+                            <img src="/img/mail.png" alt="Search Icon">
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <h2 class="text-xl font-bold">Danh sách sinh viên</h2>
+            <div class="container">
+                <div class="profile-card">
+                    <img src="/img/profile.png" alt="Hình ảnh Sinh viên" class="profile-image">
+                    <h3 class="student-name">Sinh viên 1</h3>
+                    <p class="student-id">Mã SV: 123456</p>
+                    <div class="flex justify-center mt-2">
+                        <button class="phone-btn">
+                            <img src="/img/phone.png" alt="Search Icon">
+                        
+                        </button><button class="phone-btn">
+                            <img src="/img/mail.png" alt="Search Icon">
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div id="managenment" class="content-section">
+            <div class="mb-4">
+                <br>
+                <input type="text" placeholder="Tìm kiếm người dùng" class="border1" />
+              </div>
+              <div class="space-y-4">
+                <div class="flex items-start cursor-pointer" onclick="thucHienChucNang()">
+                    <img aria-hidden="true" alt="user-manager-icon" src="/img/nguoi.png" class="mr-2" />
+                    <div>
+                        <h2 class="font-semibold">Thêm quản lí mới</h2>
+                        <p class="text-muted-foreground">Cấp tài khoản cho người dùng mới, họ sẽ có quyền truy cập vào hệ thống với tư cách là sinh viên, giảng viên hoặc quản trị viên.</p>
+                        <br>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <img aria-hidden="true" alt="user-manager-icon" src="/img/lop.png" class="mr-2" />
+                    <div>
+                        <h2 class="font-semibold">Thêm lớp mới</h2>
+                        <p class="text-muted-foreground">Tạo lớp mới, thêm giảng viên và sinh viên mới sau khi đăng kí thành công lớp học phần</p>
+                        <br>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <img aria-hidden="true" alt="user-manager-icon" src="/img/nguoi.png" class="mr-2" />
+                    <div>
+                        <h2 class="font-semibold">Thêm người dùng mới</h2>
+                        <p class="text-muted-foreground">Cấp tài khoản cho người dùng mới, họ sẽ có quyền truy cập vào hệ thống với tư cách là sinh viên, giảng viên hoặc quản trị viên.</p>
+                        <br>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <img aria-hidden="true" alt="user-manager-icon" src="/img/account.png" class="mr-2" />
+                    <div>
+                        <h2 class="font-semibold">Danh sách account</h2>
+                        <p class="text-muted-foreground">Xem lại các accout đã cấp, xóa hoặc sửa người dùng.</p>
+                        <br>
+                    </div>
+                </div>
+              </div>
+              <div>
+                
+                <button class="Capnhat">+ Thêm người dùng</button>
+            </div>
+        </div>
+
+    <script src="/js/admin.js"></script>
+</body>
+</html>

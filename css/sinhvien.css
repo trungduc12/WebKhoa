@@ -719,3 +719,15 @@ tbody tr:hover {
 .room {
     width: 10%; /* Chiều rộng cố định cho cột phòng */
 }
+
+.Capnhat {
+    background-color: #007bff; /* Màu nền của nút */
+    color: white; /* Màu chữ */
+    border: none; /* Không viền */
+    padding: 10px 20px; /* Khoảng cách bên trong */
+    border-radius: 5px; /* Bo tròn góc */
+    cursor: pointer; /* Hiển thị con trỏ khi di chuột qua nút */
+    float: right; /* Đẩy nút sang bên trái */
+    
+}
+
