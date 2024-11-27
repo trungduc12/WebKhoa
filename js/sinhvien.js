@@ -6,56 +6,84 @@ function showContent(contentId) {
     menuItems.forEach(item => {
         item.classList.remove('active');
     });
-
     // Thêm class 'active' vào mục được chọn
     const selectedItem = document.querySelector(`.sidebar .menu li a[href='#${contentId}']`);
     if (selectedItem) {
         selectedItem.classList.add('active');
     }
-
     // Ẩn tất cả các content sections
     const sections = document.querySelectorAll('.content-section');
     sections.forEach(section => {
-        section.classList.remove('active');
+        section.style.display = 'none';
     });
-
     // Hiển thị content của phần tử được chọn
     const selectedSection = document.getElementById(contentId);
     if (selectedSection) {
-        selectedSection.classList.add('active');
+        selectedSection.style.display = 'block';
     }
-    
+
+    // Ẩn form bài giảng nếu đang hiển thị
+    const lectureForm = document.getElementById('lecture-form');
+    if (lectureForm) {
+        lectureForm.style.display = 'none';
+    }
 }
 
-function showCourseDetails(courseTitle) {
-    // Ẩn form khóa học
-    document.getElementById('courses').style.display = 'none'; 
-    // Hiển thị form bài giảng
-    document.getElementById('lecture-form').style.display = 'block'; 
-    const lectureList = document.getElementById('lecture-list');
-    lectureList.innerHTML = ''; // Xóa các bài giảng trước đó
-
-    // Ví dụ về danh sách bài giảng, thay thế bằng dữ liệu thực tế nếu cần
-    const lectures = [
-      { title: 'Bài giảng 1', link: 'lecture1.html' },
-      { title: 'Bài giảng 2', link: 'lecture2.html' },
-      { title: 'Bài giảng 3', link: 'lecture3.html' }
-    ];
-
-    lectures.forEach(lecture => {
-      const div = document.createElement('div');
-      div.className = 'lecture-item';
-      div.innerHTML = `<a href="${lecture.link}" target="_blank">${lecture.title}</a>`;
-      lectureList.appendChild(div);
+function showCourseDetails(courseId) {
+    // Ẩn tất cả các form khác
+    const sections = document.querySelectorAll('.content-section');
+    sections.forEach(section => {
+        section.style.display = 'none';
     });
-  }
 
-  function goBackToCourses() {
+    // Hiển thị form bài giảng
+    const lectureForm = document.getElementById('lecture-form');
+    if (lectureForm) {
+        lectureForm.style.display = 'block';
+        const lectureList = document.getElementById('lecture-list');
+        if (lectureList) {
+            lectureList.innerHTML = ''; // Xóa các bài giảng trước đó
+
+            // Dữ liệu bài giảng cho từng khóa học
+            const lecturesData = {
+                course1: [
+                    { title: 'Bài giảng 1', link: 'lecture1.html' },
+                    { title: 'Bài giảng 2', link: 'lecture2.html' },
+                    { title: 'Bài giảng 3', link: 'lecture3.html' }
+                ],
+                course2: [
+                    { title: 'Bài giảng A', link: 'lectureA.html' },
+                    { title: 'Bài giảng B', link: 'lectureB.html' },
+                    { title: 'Bài giảng C', link: 'lectureC.html' }
+                ]
+            };
+
+            // Lấy danh sách bài giảng tương ứng
+            const lectures = lecturesData[courseId] || [];
+
+            // Thêm các bài giảng vào danh sách
+            lectures.forEach(lecture => {
+                const li = document.createElement('li');
+                li.innerHTML = `<a href="${lecture.link}" target="_blank">${lecture.title}</a>`;
+                lectureList.appendChild(li);
+            });
+        }
+    }
+}
+
+function goBackToCourses() {
     // Ẩn form bài giảng
-    document.getElementById('lecture-form').style.display = 'none'; 
-    // Hiển thị lại trang khóa học
-    document.getElementById('courses').style.display = 'block'; 
-  }
+    const lectureForm = document.getElementById('lecture-form');
+    if (lectureForm) {
+        lectureForm.style.display = 'none';
+    }
+
+    // Hiển thị lại form khóa học
+    const coursesForm = document.getElementById('courses');
+    if (coursesForm) {
+        coursesForm.style.display = 'block';
+    }
+}
 
 const scheduleData = {
     1: [

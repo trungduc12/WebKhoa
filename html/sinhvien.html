@@ -376,21 +376,13 @@
             <h2>Khóa học</h2>
             
             <div class="course-list">
-                <div class="course-card" onclick="showCourseDetails('2311COMP170105 - Thứ Tư - Buổi Tối')">
+                <div class="course-card" onclick="showCourseDetails('course1')">
                     <img src="/img/thumbnail.png" alt="Hình thu nhỏ khóa học" class="course-thumbnail">
                     <p class="course-title">2311COMP170105 - Thứ Tư - Buổi Tối</p>
                 </div>
-                <div class="course-card">
-                    <img src="/img/thumbnail.png" alt="Course Thumbnail" class="course-thumbnail">
-                    <p class="course-title">2311COMP170105 - Wed - Evening</p>
-                </div>
-                <div class="course-card">
-                    <img src="/img/thumbnail.png" alt="Course Thumbnail" class="course-thumbnail">
-                    <p class="course-title">2311COMP170105 - Wed - Evening</p>
-                </div>
-                <div class="course-card">
-                    <img src="/img/thumbnail.png" alt="Course Thumbnail" class="course-thumbnail">
-                    <p class="course-title">2311COMP170105 - Wed - Evening</p>
+                <div class="course-card" onclick="showCourseDetails('course2')">
+                    <img src="/img/thumbnail.png" alt="Hình thu nhỏ khóa học" class="course-thumbnail">
+                    <p class="course-title">2311COMP170106 - Thứ Ba - Buổi Tối</p>
                 </div>
             </div>
             <div class="pagination">
@@ -399,11 +391,12 @@
                 <button class="page-btn">3</button>
             </div>
         </div>
-
-        <div id="lecture-form" class="lecture-form">
-            <h3>Danh sách bài giảng cho khóa học</h3>
+        
+        <div id="lecture-form" class="lecture-form" style="display: none;">
+            <br>
+            <h2>Danh sách bài giảng cho khóa học</h2>
             <ul id="lecture-list">
-              <!-- Danh sách bài giảng sẽ được thêm vào đây -->
+                <!-- Danh sách bài giảng sẽ được thêm vào đây -->
             </ul>
             
             <button class="Capnhat" onclick="goBackToCourses()">Quay lại trang khóa học</button>

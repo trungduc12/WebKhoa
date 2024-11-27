@@ -1002,6 +1002,7 @@ tbody tr:hover {
 /* Khóa học */
 #courses {
     padding: 20px;
+    
 }
 
 .course-actions {
@@ -1088,4 +1089,21 @@ tbody tr:hover {
 
   .hidden {
     display: none;
+}
+
+#lecture-form {
+    display: none;
+}
+#lecture-list {
+    list-style-type: none; /* Loại bỏ dấu chấm đầu dòng */
+    padding: 0; /* Loại bỏ khoảng cách thụt đầu dòng */
+}
+
+#lecture-list li {
+    padding: 10px 0; /* Thêm khoảng cách giữa các mục */
+    border-bottom: 1px solid #ccc; /* Thêm gạch ngang giữa các mục */
+}
+
+#lecture-list li:last-child {
+    border-bottom: none; /* Loại bỏ gạch ngang cho mục cuối cùng */
 }
