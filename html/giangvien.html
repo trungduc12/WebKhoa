@@ -38,6 +38,11 @@
                     <img src="/img/classes.png" alt="Classes Icon"> Quản lý lớp học
                 </a>
             </li>
+            <li>
+                <a href="#" onclick="showContent('papers')">
+                    <img src="/img/papers.png" alt="Article Icon"> Bài báo khoa học
+                </a>
+            </li>
         </ul>
     </div>
 
@@ -377,6 +382,45 @@
             </div>
         </div>
         
+        <div id="papers" class="content-section">
+            <h2>Bài báo khoa học</h2>
+            <div class="article-form">
+                <input type="text" placeholder="Tên bài báo" class="input-field" />
+                <input type="text" placeholder="Tên tác giả" class="input-field" />
+                <input type="number" placeholder="Năm sáng tác" class="input-field" />
+                <div class="file-upload">
+                    <input type="file" id="fileInput" class="upload-input" />
+                </div>
+                <button class="add-article-btn">Thêm bài báo</button>
+            </div>
+            <table class="article-table">
+                <thead>
+                    <tr>
+                        <th>Tên bài báo</th>
+                        <th>Tên tác giả</th>
+                        <th>Đường dẫn</th>
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Dự báo</td>
+                        <td>Hill</td>
+                        <td><a href="#">Link PDF</a></td>
+                        <td>
+                            <button class="delete-btn">🗑️</button>
+                            <button class="edit-btn">Sửa</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pagination">
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+            </div>
+        </div>
+
     </div>
 
     <script src="/js/giangvien.js"></script>

@@ -27,6 +27,36 @@ function showContent(contentId) {
     
 }
 
+function showCourseDetails(courseTitle) {
+    // Ẩn form khóa học
+    document.getElementById('courses').style.display = 'none'; 
+    // Hiển thị form bài giảng
+    document.getElementById('lecture-form').style.display = 'block'; 
+    const lectureList = document.getElementById('lecture-list');
+    lectureList.innerHTML = ''; // Xóa các bài giảng trước đó
+
+    // Ví dụ về danh sách bài giảng, thay thế bằng dữ liệu thực tế nếu cần
+    const lectures = [
+      { title: 'Bài giảng 1', link: 'lecture1.html' },
+      { title: 'Bài giảng 2', link: 'lecture2.html' },
+      { title: 'Bài giảng 3', link: 'lecture3.html' }
+    ];
+
+    lectures.forEach(lecture => {
+      const div = document.createElement('div');
+      div.className = 'lecture-item';
+      div.innerHTML = `<a href="${lecture.link}" target="_blank">${lecture.title}</a>`;
+      lectureList.appendChild(div);
+    });
+  }
+
+  function goBackToCourses() {
+    // Ẩn form bài giảng
+    document.getElementById('lecture-form').style.display = 'none'; 
+    // Hiển thị lại trang khóa học
+    document.getElementById('courses').style.display = 'block'; 
+  }
+
 const scheduleData = {
     1: [
         ["101", "Lập trình nâng cao 10:00 - 12:00 (20/2/2025-26/05/2025)", "Triết\n 11:00 - 13:00 ", "12:00 - 14:00", "13:00 - 15:00", "14:00 - 16:00", "", ""],

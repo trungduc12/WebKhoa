@@ -372,6 +372,43 @@
                 </tbody>
             </table>
         </div>
+        <div id="courses" class="content-section">
+            <h2>Khóa học</h2>
+            
+            <div class="course-list">
+                <div class="course-card" onclick="showCourseDetails('2311COMP170105 - Thứ Tư - Buổi Tối')">
+                    <img src="/img/thumbnail.png" alt="Hình thu nhỏ khóa học" class="course-thumbnail">
+                    <p class="course-title">2311COMP170105 - Thứ Tư - Buổi Tối</p>
+                </div>
+                <div class="course-card">
+                    <img src="/img/thumbnail.png" alt="Course Thumbnail" class="course-thumbnail">
+                    <p class="course-title">2311COMP170105 - Wed - Evening</p>
+                </div>
+                <div class="course-card">
+                    <img src="/img/thumbnail.png" alt="Course Thumbnail" class="course-thumbnail">
+                    <p class="course-title">2311COMP170105 - Wed - Evening</p>
+                </div>
+                <div class="course-card">
+                    <img src="/img/thumbnail.png" alt="Course Thumbnail" class="course-thumbnail">
+                    <p class="course-title">2311COMP170105 - Wed - Evening</p>
+                </div>
+            </div>
+            <div class="pagination">
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+            </div>
+        </div>
+
+        <div id="lecture-form" class="lecture-form" style="display: none;">
+            <h3>Danh sách bài giảng cho khóa học</h3>
+            <ul id="lecture-list">
+              <!-- Danh sách bài giảng sẽ được thêm vào đây -->
+            </ul>
+            
+            <button class="Capnhat" onclick="goBackToCourses()">Quay lại trang khóa học</button>
+        </div>
+          
 
     <script src="/js/sinhvien.js"></script>
 </body>
