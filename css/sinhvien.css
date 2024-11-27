@@ -190,17 +190,26 @@ header {
     background-color: #0056b3;
 }
 
-/* Footer styling */
 .footer {
     background: #333;
     color: white;
-    padding: 20px;
+    padding: 40px 20px; /* Tăng padding để làm footer dài hơn */
     text-align: center;
     max-width: 100%;
+    box-sizing: border-box; /* Đảm bảo padding và border được tính vào chiều rộng và chiều cao */
+}
+
+.footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
 }
 
 .footer-info, .footer-links {
-    margin-bottom: 20px;
+    flex: 1;
+    min-width: 200px;
+    margin: 10px;
 }
 
 .footer-links a {
@@ -210,6 +219,18 @@ header {
 
 .footer-links a:hover {
     text-decoration: underline;
+}
+
+.footer .container > div {
+    margin: 10px;
+}
+
+.footer .container h3 {
+    margin-bottom: 10px;
+}
+
+.footer .container p {
+    margin: 5px 0;
 }
 
 /* Banner styling */
