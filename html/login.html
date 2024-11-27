@@ -13,14 +13,55 @@
         </div>
         <h2>TRƯỜNG ĐẠI HỌC SƯ PHẠM TP. HỒ CHÍ MINH</h2>
         <h3>Khoa Công Nghệ Thông Tin</h3>
+        
         <form action="#" method="POST">
+            <!-- Chọn vai trò -->
+            <div class="role-selection">
+                <label>
+                    <input type="radio" name="role" value="admin" checked> Admin
+                </label>
+                <label>
+                    <input type="radio" name="role" value="giangvien"> Giảng viên
+                </label>
+                <label>
+                    <input type="radio" name="role" value="sinhvien"> Sinh viên
+                </label>
+            </div>
+
+            <!-- Tên đăng nhập và mật khẩu -->
             <label for="username">Tên đăng nhập</label>
             <input type="text" id="username" name="username" required>
+
             <label for="password">Mật khẩu</label>
             <input type="password" id="password" name="password" required>
+
             <button type="submit">ĐĂNG NHẬP</button>
         </form>
         <p><a href="#">Quên mật khẩu?</a></p>
     </div>
+
+    <script>
+        // JavaScript để thay đổi input theo vai trò
+        const roleRadios = document.querySelectorAll('input[name="role"]');
+        const usernameLabel = document.querySelector('label[for="username"]');
+        const passwordLabel = document.querySelector('label[for="password"]');
+
+        roleRadios.forEach(radio => {
+            radio.addEventListener('change', (event) => {
+                // Thay đổi label và placeholder dựa trên vai trò
+                const role = event.target.value;
+                if (role === 'admin') {
+                    usernameLabel.textContent = "Tên đăng nhập (admin)";
+                    passwordLabel.textContent = "Mật khẩu (admin)";
+                } else if (role === 'giangvien') {
+                    usernameLabel.textContent = "Tên đăng nhập (giảng viên)";
+                    passwordLabel.textContent = "Mật khẩu (giảng viên)";
+                } else if (role === 'sinhvien') {
+                    usernameLabel.textContent = "Tên đăng nhập (sinh viên)";
+                    passwordLabel.textContent = "Mật khẩu (sinh viên)";
+                }
+            });
+        });
+    </script>
 </body>
 </html>

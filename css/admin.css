@@ -1067,3 +1067,7 @@ tbody tr:hover {
     color: #fff;
     border: none;
 }
+.bieudotaichinh {
+    width:100%; 
+    max-width:800px;
+}
