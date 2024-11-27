@@ -35,7 +35,7 @@
             </li>
             <li>
                 <a href="#" onclick="showContent('classes')">
-                    <img src="/img/classes.png" alt="Classes Icon"> Quản lý lớp học
+                    <img src="/img/classes.png" alt="Classes Icon"> Quản lý lớp
                 </a>
             </li>
             <li>
@@ -264,6 +264,33 @@
         </div>
         <div id="classes" class="content-section">
             <h2>Lịch Dạy Học Kỳ 1 (Tháng 9 - Tháng 12, 2024)</h2>
+            <button class="add-course-btn" onclick="showAddCourseForm()">Thêm Khóa Học</button>
+            <!-- Modal thêm khóa học -->
+            <div id="add-course-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="closeModal()">×</span>
+                    <h2>Thêm Khóa Học</h2>
+                    <form id="add-course-form">
+                        <div class="form-group">
+                            <label for="course-name">Tên khóa học:</label>
+                            <input type="text" id="course-name" name="course-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="start-date">Ngày bắt đầu:</label>
+                            <input type="date" id="start-date" name="start-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="end-date">Ngày kết thúc:</label>
+                            <input type="date" id="end-date" name="end-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="course-description">Mô tả khóa học:</label>
+                            <textarea id="course-description" name="course-description" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Lưu</button>
+                    </form>
+                </div>
+            </div>
             <div class="calendar">
                 <div class="calendar-header">
                     <button class="prev-month">❮</button>

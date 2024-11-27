@@ -55,3 +55,52 @@ nextMonthButton.addEventListener("click", () => {
     }
     updateCalendar(currentMonth, currentYear);
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Mở Modal
+    function openModal() {
+        document.getElementById("add-course-modal").style.display = "flex";
+    }
+
+    // Đóng Modal
+    function closeModal() {
+        document.getElementById("add-course-modal").style.display = "none";
+    }
+
+    // Đóng modal khi click ra ngoài modal-content
+    window.onclick = function(event) {
+        var modal = document.getElementById("add-course-modal");
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+
+    // Thêm sự kiện cho nút
+    document.querySelector(".add-course-btn").addEventListener("click", openModal);
+    document.querySelector(".close-btn").addEventListener("click", closeModal);
+});
+
+// Đợi DOM load hoàn tất
+document.addEventListener("DOMContentLoaded", function() {
+    // Lấy các phần tử modal và các nút
+    var modal = document.getElementById("myCoursesModal");
+    var btn = document.querySelector(".view-my-courses-btn");
+    var closeBtn = document.querySelector(".close-btn");
+
+    // Khi người dùng nhấn nút "Xem khóa học của tôi", mở modal
+    btn.addEventListener("click", function() {
+        modal.style.display = "block";
+    });
+
+    // Khi người dùng nhấn vào nút đóng (x), đóng modal
+    closeBtn.addEventListener("click", function() {
+        modal.style.display = "none";
+    });
+
+    // Khi người dùng nhấn ra ngoài modal, đóng modal
+    window.addEventListener("click", function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+});
