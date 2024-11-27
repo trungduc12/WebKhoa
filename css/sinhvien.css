@@ -1128,3 +1128,6 @@ tbody tr:hover {
 #lecture-list li:last-child {
     border-bottom: none; /* Loại bỏ gạch ngang cho mục cuối cùng */
 }
+.lecture-form {
+    display: none;
+}

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ</title>
+    <style>
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        ul li {
+            margin: 0 80px;
+        }
+
+        ul li a {
+            text-decoration: none;
+            color: black;
+        }
+
+        ul li a:hover {
+            color: blue;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .poster {
+            max-width: 100%;
+            width: 100%;
+        }
+
+        /* Chỉnh sửa phần flexbox */
+        .main-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px; /* Khoảng cách giữa nội dung và banner */
+            margin-top: 30px;
+            padding: 0 20px; /* Khoảng cách xung quanh */
+        }
+
+        .banner {
+            width: 55%; /* Làm banner rộng hơn */
+            margin-right: 40px;
+        }
+
+        .Noidung {
+            width: 30%; /* Giảm phần nội dung */
+            text-align: justify;
+        }
+
+        .Noidung p {
+            margin-bottom: 20px; /* Giảm khoảng cách giữa các đoạn */
+            margin-left: 100px;
+            line-height: 1.6;
+            font-size: 19px;
+        }
+
+        /* Đảm bảo banner responsive */
+        .banner img {
+            width: 100%;
+            height: auto;
+        }
+
+        .logo {
+            width: 25%;
+        }
+
+        /* CSS cho phần tin tức */
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            color: red;
+        }
+
+        .duongke {
+            width: 50%;
+            margin: 20px auto;
+        }
+
+        .cacnoidung {
+            width: 60%;
+            margin-left: 400px;
+        }
+
+        /* Phần footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        footer .footer-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 30px;
+        }
+
+        footer .footer-container div {
+            width: 30%;
+        }
+
+        footer .footer-container h3 {
+            margin-bottom: 10px;
+        }
+
+        footer .footer-container ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        footer .footer-container ul li {
+            margin-bottom: 5px;
+        }
+
+        footer .footer-container ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        footer .footer-container ul li a:hover {
+            text-decoration: underline;
+        }
+
+        footer .footer-container .address p {
+            margin: 0;
+            line-height: 1.5;
+        }
+        .dangnhap {
+            background-color: #4CAF50; /* Màu nền của nút */
+            color: white; /* Màu chữ */
+            font-size: 16px; /* Kích thước chữ */
+            padding: 10px 20px; /* Khoảng cách trong nút */
+            border: none; /* Không viền */
+            border-radius: 5px; /* Bo góc */
+            cursor: pointer; /* Con trỏ khi di chuột */
+            transition: all 0.3s ease; /* Hiệu ứng mượt khi hover */
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        .dangnhap:hover {
+            background-color: #d1590e; /* Màu nền khi hover */
+            transform: scale(1.1); /* Phóng to một chút */
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between; /* Căn trái phải */
+            align-items: center;
+            padding: 10px 20px;
+            margin-left: 440px;
+        }
+
+        /* Điều chỉnh khoảng cách giữa các phần tử trong navbar */
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        /* Căn chỉnh nút đăng nhập bên phải */
+        nav div {
+            margin-left: auto; /* Đẩy nút đăng nhập sang bên phải */
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <img src="/img/LogoHCMUEpng.png" alt="Description of image" class="logo">
+    </div>
+    <div>
+        <nav>
+            <ul>
+                <li><a href="#">Trang chủ</a></li>
+                <li><a href="#">Giới thiệu</a></li>
+                <li><a href="#">Biểu mẫu</a></li>
+                <li><a href="#">Thông báo chung</a></li>
+            </ul>
+            <!-- Đặt nút đăng nhập vào div riêng để căn phải -->
+            <div>
+                <button onclick="location.href='/html/login.html'" class="dangnhap">Đăng nhập</button>
+            </div>
+        </nav>
+    </div>
+    
+    <div>
+        <img src="/img/poster.png" alt="Another description of image" class="poster">
+    </div>
+
+    <!-- Phần nội dung và banner -->
+    <div class="main-content">
+        <div class="Noidung">
+            <p>THÂN MỜI ĐẾN CỔ VŨ ĐOÀN NGHỆ THUẬT KHOA CÔNG NGHỆ THÔNG TIN</p>
+            <p>Tiếp nối truyền thống các năm học, tại Liên hoan Tiếng hát Sinh viên Trường Đại học Sư phạm TP.HCM năm 2024, Đoàn Nghệ thuật khoa Công nghệ Thông tin tiếp tục chinh chiến với bảng chương trình bằng những tiết mục vô cùng đặc sắc, 25 “mảnh ghép” đang vô cùng háo hức được thể hiện tài năng và thành quả của hơn 1 tháng tập luyện vừa qua.</p>
+        </div>
+        <div class="banner">
+            <img src="/img/banner.jpg" alt="Banner">
+        </div>
+    </div>
+    <div>
+        <nav>
+            <ul>
+                <li><a href="#">Tin tức mới nhất</a></li>
+                <li><a href="#">Tin tuyển sinh</a></li>
+                <li><a href="#">Tin tuyển dụng</a></li>
+                <li><a href="#">Tin hoạt động</a></li>
+                <li><a href="#">Sự kiện</a></li>
+            </ul>
+        </nav>
+    </div>
+    <hr class="duongke">
+    <div class="cacnoidung">
+        <p>NHỮNG KÊNH THÔNG TIN CHÍNH THỨC CỦA HCMUE</p>
+        <p>THÔNG BÁO ĐĂNG KÝ NỘI TRÚ KÝ TÚC XÁ ĐỐI VỚI SINH VIÊN NĂM NHẤT, KHOÁ 50</p>
+        <p>THÔGN BÁO VIỆC RÀ SOÁT SỐ TIN CHỈ HỌC BỐNG KHUYẾN KHÍCH HỌC TẬP HỌC KÌ 1, NĂM HỌC 2024-2025</p>
+        <p>THÔNG BÁO V/V TỔ CHỨC CHO SINH VIÊN THỰC HIỆN KHOÁ LUẬN TỐT NGHIỆP NĂM HỌC 2023-2024</p>
+        <p>Share - Scholarship Thailand - Japan</p>
+        <p>Thông báo thực hiện các chế độ chính sách cho sinh viên chính quy năm học 2024- 2025</p>
+        <p>Nhóm học phần Lý thuyết đồ thị và ứng dụng</p>
+        <p>Kế hoạch 360-KH-ĐHSP về việc triển khai công tác tuyên truyền, giáo dục pháp luật về đảm bảo trật tự, an toàn giao thông</p>
+        <p>Thông báo tuyển sinh viên thực tập Khóa 50</p>
+        <p>Thông báo v/v nhận bằng tốt nghiệp 2023-2024</p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="contact-info">
+                <h3>Thông tin liên hệ</h3>
+                <ul>
+                    <li><a href="#">Email: hcmue@hcmue.edu.vn</a></li>
+                    <li><a href="#">SĐT: (028) 3822 3845</a></li>
+                    <li><a href="#">Fax: (028) 3822 3647</a></li>
+                </ul>
+            </div>
+            <div class="quick-links">
+                <h3>Liên kết nhanh</h3>
+                <ul>
+                    <li><a href="#">Trang chủ</a></li>
+                    <li><a href="#">Giới thiệu</a></li>
+                    <li><a href="#">Tin tức</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                </ul>
+            </div>
+            <div class="address">
+                <h3>Địa chỉ</h3>
+                <p>Đại học Sư phạm TP.HCM</p>
+                <p>280 An Dương Vương, Quận 5, TP.HCM, Việt Nam</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
