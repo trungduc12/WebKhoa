@@ -751,9 +751,12 @@ h2 {
 }
 
 .input-field {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid rgb(70, 115, 130);
+    display: block;
+    margin-bottom: 10px;
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
     border-radius: 5px;
 }
 
@@ -828,4 +831,11 @@ h2 {
     background-color: #007bff;
     color: #fff;
     border: none;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #003366;
 }
