@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Ch?</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sinhvien.css') }}">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='img/Logo.png') }}" alt="Logo">
+        </div>
+        <ul class="menu">
+            <li>
+                <a href="#" class="active" onclick="showContent('home')">
+                    <img src="{{ url_for('static', filename='img/home.png') }}" alt="Home Icon"> Trang ch?
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showContent('profile')">
+                    <img src="{{ url_for('static', filename='img/profile.png') }}" alt="Profile Icon"> Thông tin sinh viên
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showContent('schedule')">
+                    <img src="{{ url_for('static', filename='img/schedule.png') }}" alt="Schedule Icon"> Lịch học
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showContent('notifications')">
+                    <img src="{{ url_for('static', filename='img/notifications.png') }}" alt="Notifications Icon"> Thông báo
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showContent('grades')">
+                    <img src="{{ url_for('static', filename='img/grades.png') }}" alt="Grades Icon"> Tài liệu học tập
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showContent('papers')">
+                    <img src="{{ url_for('static', filename='img/papers.png') }}" alt="Article Icon"> Bài báo khoa học
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showContent('courses')">
+                    <img src="{{ url_for('static', filename='img/course.png') }}" alt="Course Icon"> Khóa học
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <header>
+            <div class="navbar">
+                <ul class="menu">
+                    <li><a href="#">GIỚI THIỆU</a></li>
+                    <li><a href="#">BIỂU MẪU</a></li>
+                    <li><a href="#">THÔNG BÁO CHUNG</a></li>
+                </ul>
+                <div class="search">
+                    <input type="text" placeholder="Tìm kiếm">
+                    <button class="search-btn">
+                        <img src="{{ url_for('static', filename='img/search.png') }}" alt="Search Icon">
+                    </button>
+                </div>
+                <button class="logout-btn" onclick="window.location.href='{{ url_for('logout') }}'">Đăng xuất</button>
+            </div>
+        </header>
+        <!-- Nội dung chính -->
+        <div id="home" class="content-section active">
+            <div class="poster">
+                <img src="{{ url_for('static', filename='img/poster.png') }}" alt="Poster">
+            </div>
+            <!-- Banner Section -->
+            <div class="banner">
+                <img src="{{ url_for('static', filename='img/banner.jpg') }}" alt="Banner">
+            </div>
+            <!-- Nội dung bài viết -->
+            <div class="Noidung">
+                <p>THÂN MỜI ĐẾN CỦA VU ĐOÀN NGHỆ THUẬT KHOA CÔNG NGHỆ THÔNG TIN</p>
+                <p>Tiếp nối truyền thống các năm học, tại Liên hoan Tiếng hát Sinh viên Trường Đại học Sư phạm TP.HCM năm 2024, Đoàn Nghệ thuật khoa Công nghệ Thông tin tiếp tục chinh chiến với bảng chương trình bằng những tiết mục vô cùng đặc sắc, 25 "mảnh ghép" đang vô cùng hào hứng được thể hiện tài năng và thành quả của hơn 1 tháng tập luyện vừa qua.</p>
+            </div>
+        </div>
+        <!-- Thông tin sinh viên -->
+        <div id="profile" class="content-section">
+            <h2>Thông tin sinh viên</h2>
+            <table>
+                <tr>
+                    <td><strong>Mã sinh viên</strong></td>
+                    <td id="ma_sinh_vien"></td>
+                </tr>
+                <tr>
+                    <td><strong>Phone</strong></td>
+                    <td id="phone"></td>
+                </tr>
+                <tr>
+                    <td><strong>Email</strong></td>
+                    <td id="email"></td>
+                </tr>
+                <tr>
+                    <td><strong>Họ tên</strong></td>
+                    <td id="ho_ten"></td>
+                </tr>
+                <tr>
+                    <td><strong>Giới tính</strong></td>
+                    <td id="gioi_tinh"></td>
+                </tr>
+                <tr>
+                    <td><strong>Lớp</strong></td>
+                    <td id="lop"></td>
+                </tr>
+            </table>
+        </div>
+        <!-- Lịch học -->
+        <div id="schedule" class="content-section">
+            <h2 class="text-xl font-semibold mb-4">Thời Khóa Biểu</h2>
+            <div class="month-selector">
+                <label for="month">Chọn học kỳ:</label>
+                <select id="month" onchange="updateSchedule()">
+                    <option value="1">Học kỳ 1</option>
+                    <option value="2">Học kỳ 2</option>
+                    <option value="3">Học kỳ hè</option>
+                </select>
+            </div>
+            <table class="timetable">
+                <thead>
+                    <tr>
+                        <th class="day-column">Phòng</th>
+                        <th class="day-column">Thứ 2</th>
+                        <th class="day-column">Thứ 3</th>
+                        <th class="day-column">Thứ 4</th>
+                        <th class="day-column">Thứ 5</th>
+                        <th class="day-column">Thứ 6</th>
+                        <th class="day-column">Thứ 7</th>
+                        <th class="day-column">Chủ Nhật</th>
+                    </tr>
+                </thead>
+                <tbody id="schedule-body">
+                    <!-- Các hàng TKB sẽ được cập nhật qua JavaScript -->
+                </tbody>
+            </table>
+        </div>
+        <!-- Thông báo -->
+        <div id="notifications" class="content-section">
+            <h2>Thông báo</h2>
+            <div class="notification-box">
+                <div class="notification-item">
+                    <div class="notification-header">
+                        <h3>Thông báo</h3>
+                        <span class="notification-date">Thu Mar 07, 2024</span>
+                    </div>
+                    <div class="notification-body">
+                        <textarea placeholder="Viết bài đăng mới..." rows="3"></textarea>
+                    </div>
+                </div>
+                <div>
+                    <button class="Capnhat">Xóa thông báo</button>
+                </div>
+                <div class="notification-item">
+                    <div class="notification-header">
+                        <h3>Thông báo</h3>
+                        <span class="notification-date">Thu Mar 07, 2024</span>
+                    </div>
+                    <div class="notification-body">
+                        <textarea placeholder="Viết bài đăng mới..." rows="3"></textarea>
+                    </div>
+                </div>
+                <div>
+                    <button class="Capnhat">Xóa thông báo</button>
+                </div>
+            </div>
+            <div class="news">
+                <h3>TIN TỨC MỚI NHẤT</h3>
+                <ul>
+                    <li><a href="#">Thông báo mới nhất từ trường</a></li>
+                    <li><a href="#">Thông báo việc rà soát số tín chỉ học kỳ II, năm học 2022-2023</a></li>
+                    <li><a href="#">Danh sách sinh viên tốt nghiệp</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- Tài liệu học tập -->
+        <div id="grades" class="content-section">
+            <h2>Tài liệu khóa học</h2>
+            <div class="container mx-auto p-4">
+                <div class="mb-4">
+                    <input type="text" placeholder="Nhập tên môn học hoặc mã học phần" class="border1">
+                </div>
+                <h2 class="text-xl font-semibold mb-2">Học kỳ 1</h2>
+                <table class="min-w-full bg-white border border-zinc-300">
+                    <thead class="bg-blue-600 text-white">
+                        <tr>
+                            <th class="py-2 px-4">STT</th>
+                            <th class="py-2 px-4">Mã môn</th>
+                            <th class="py-2 px-4">Tên môn</th>
+                            <th class="py-2 px-4">Tiết lý thuyết</th>
+                            <th class="py-2 px-4">Tiết thực hành</th>
+                            <th class="py-2 px-4">Đề cương</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border px-4 py-2">1</td>
+                                <td class="border px-4 py-2">COMP0000</td>
+                                <td class="border px-4 py-2">LTCB</td>
+                                <td class="border px-4 py-2">1</td>
+                                <td class="border px-4 py-2">4</td>
+                                <td class="border px-4 py-2">
+                                    <button class="border px-4 py-2">
+                                        <img src="{{ url_for('static', filename='img/decuong.png') }}" alt="Button Image">
+                                    </button>
+                                </td>
+                            </tr>
+                            <!-- Add more rows as needed -->
+                        </tbody>
+                    </table>
+                    <h2 class="text-xl font-semibold mt-8 mb-2">Học kỳ 2</h2>
+                    <table class="min-w-full bg-white border border-zinc-300">
+                        <thead class="bg-blue-600 text-white">
+                            <tr>
+                                <th class="py-2 px-4">STT</th>
+                                <th class="py-2 px-4">Mã môn</th>
+                                <th class="py-2 px-4">Tên môn</th>
+                                <th class="py-2 px-4">Tiết lý thuyết</th>
+                                <th class="py-2 px-4">Tiết thực hành</th>
+                                <th class="py-2 px-4">Đề cương</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border px-4 py-2">1</td>
+                                <td class="border px-4 py-2">COMP0000</td>
+                                <td class="border px-4 py-2">LTCB</td>
+                                <td class="border px-4 py-2">1</td>
+                                <td class="border px-4 py-2">4</td>
+                                <td class="border px-4 py-2">
+                                    <button class="border px-4 py-2">
+                                        <img src="{{ url_for('static', filename='img/decuong.png') }}" alt="Button Image">
+                                    </button>
+                                </td>
+                            </tr>
+                            <!-- Add more rows as needed -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- Bài báo khoa học -->
+            <div id="papers" class="content-section">
+                <h2>Bài báo khoa học</h2>
+                <div class="article-form">
+                    <label for="search-article">Tìm kiếm:</label>
+                    <input type="text" id="search-article" placeholder="Tìm kiếm bài báo" class="input-field">
+                    <input type="text" placeholder="Tên bài báo" class="input-field">
+                    <input type="text" placeholder="Tên tác giả" class="input-field">
+                    <input type="number" placeholder="Năm sáng tác" class="input-field">
+                    <button>Tìm</button>
+                </div>
+                <table class="article-table">
+                    <thead>
+                        <tr>
+                            <th>Tên bài báo</th>
+                            <th>Tên tác giả</th>
+                            <th>Đường dẫn</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Dự báo</td>
+                            <td>Hill</td>
+                            <td><a href="#">Link PDF</a></td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                </div>
+            </div>
+            <!-- Khóa học -->
+            <div id="courses" class="content-section">
+                <h2>Khóa học</h2>
+                <div class="course-list">
+                    <div class="course-card" onclick="showCourseDetails('course1')">
+                        <img src="{{ url_for('static', filename='img/thumbnail.png') }}" alt="Hình thu nhỏ khóa học" class="course-thumbnail">
+                        <p class="course-title">2311COMP170105 - Thứ Tư - Buổi Tối</p>
+                    </div>
+                    <div class="course-card" onclick="showCourseDetails('course2')">
+                        <img src="{{ url_for('static', filename='img/thumbnail.png') }}" alt="Hình thu nhỏ khóa học" class="course-thumbnail">
+                        <p class="course-title">2311COMP170106 - Thứ Ba - Buổi Tối</p>
+                    </div>
+                </div>
+                <div class="pagination">
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                </div>
+            </div>
+            <div id="lecture-form" class="lecture-form">
+                <h2>Danh sách bài giảng cho khóa học</h2>
+                <ul id="lecture-list">
+                    <!-- Danh sách bài giảng sẽ được thêm vào đây -->
+                </ul>
+                <button class="Capnhat" onclick="goBackToCourses()">Quay lại trang khóa học</button>
+            </div>
+        </div>
+        <script src="{{ url_for('static', filename='js/sinhvien.js') }}"></script>
+</body>
+</html>

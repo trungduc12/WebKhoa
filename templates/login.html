@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='img/Logo.png') }}" alt="Logo">
+        </div>
+        <h2>TRƯỜNG ĐẠI HỌC SƯ PHẠM TP. HỒ CHÍ MINH</h2>
+        <h3>Khoa Công Nghệ Thông Tin</h3>
+        <form action="{{ url_for('login') }}" method="POST">
+            <!-- Chọn vai trò -->
+            <div class="role-selection">
+                <label>
+                    <input type="radio" name="vai_tro" value="quan_tri" checked> Admin
+                </label>
+                <label>
+                    <input type="radio" name="vai_tro" value="giang_vien"> Giảng viên
+                </label>
+                <label>
+                    <input type="radio" name="vai_tro" value="sinh_vien"> Sinh viên
+                </label>
+            </div>
+            <!-- Tên đăng nhập và mật khẩu -->
+            <label for="ten_dang_nhap">Tên đăng nhập</label>
+            <input type="text" id="ten_dang_nhap" name="ten_dang_nhap" required>
+            <label for="mat_khau">Mật khẩu</label>
+            <input type="password" id="mat_khau" name="mat_khau" required>
+            <button type="submit">Đăng nhập</button>
+        </form>
+        {% if error %}
+        <p style="color: red;">{{ error }}</p>
+        {% endif %}
+        <p><a href="#">Quên mật khẩu?</a></p>
+    </div>
+    <script>
+        // JavaScript để thay đổi input theo vai trò
+        const roleRadios = document.querySelectorAll('input[name="vai_tro"]');
+        const usernameLabel = document.querySelector('label[for="ten_dang_nhap"]');
+        const passwordLabel = document.querySelector('label[for="mat_khau"]');
+        roleRadios.forEach(radio => {
+            radio.addEventListener('change', (event) => {
+                const role = event.target.value;
+                if (role === 'quan_tri') {
+                    usernameLabel.textContent = "Tên đăng nhập (admin)";
+                    passwordLabel.textContent = "Mật khẩu (admin)";
+                } else if (role === 'giang_vien') {
+                    usernameLabel.textContent = "Tên đăng nhập (giảng viên)";
+                    passwordLabel.textContent = "Mật khẩu (giảng viên)";
+                } else if (role === 'sinh_vien') {
+                    usernameLabel.textContent = "Tên đăng nhập (sinh viên)";
+                    passwordLabel.textContent = "Mật khẩu (sinh viên)";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

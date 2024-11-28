@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/giangvien.css') }}">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='img/Logo.png') }}" alt="Logo">
+        </div>
+        <ul class="menu">
+            <li>
+                <a href="#" class="active" onclick="showContent('home')">
+                    <img src="{{ url_for('static', filename='img/home.png') }}" alt="Home Icon"> Trang chủ
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showContent('profile')">
+                    <img src="{{ url_for('static', filename='img/profile.png') }}" alt="Profile Icon"> Thông tin cá nhân
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showContent('notifications')">
+                    <img src="{{ url_for('static', filename='img/notifications.png') }}" alt="Notifications Icon"> Thông báo
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showContent('students')">
+                    <img src="{{ url_for('static', filename='img/students.png') }}" alt="Students Icon"> Quản lý sinh viên
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showContent('classes')">
+                    <img src="{{ url_for('static', filename='img/classes.png') }}" alt="Classes Icon"> Quản lý lớp học
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showContent('papers')">
+                    <img src="{{ url_for('static', filename='img/papers.png') }}" alt="Article Icon"> Bài báo khoa học
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <header>
+            <div class="navbar">
+                <ul class="menu">
+                    <li><a href="#">GIỚI THIỆU</a></li>
+                    <li><a href="#">BIỂU MẪU</a></li>
+                    <li><a href="#">THÔNG BÁO CHUNG</a></li>
+                </ul>
+                <div class="search">
+                    <input type="text" placeholder="Tìm kiếm">
+                    <button class="search-btn">
+                        <img src="{{ url_for('static', filename='img/search.png') }}" alt="Search Icon">
+                    </button>
+                </div>
+                <button class="logout-btn" onclick="window.location.href='{{ url_for('logout') }}'">Đăng xuất</button>
+            </div>
+        </header>
+        <!-- Nội dung chính -->
+        <div id="home" class="content-section active">
+            <div class="poster">
+                <img src="{{ url_for('static', filename='img/poster.png') }}" alt="Poster">
+            </div>
+            <!-- Banner Section -->
+            <div class="banner">
+                <img src="{{ url_for('static', filename='img/banner.jpg') }}" alt="Banner">
+            </div>
+            <!-- Nội dung bài viết -->
+            <div class="Noidung">
+                <p>THÂN MỜI ĐẾN CỬA VŨ ĐOÀN NGHỆ THUẬT KHOA CÔNG NGHỆ THÔNG TIN</p>
+                <p>Tiếp nối truyền thống các năm học, tại Liên hoan Tiếng hát Sinh viên Trường Đại học Sư phạm TP.HCM năm 2024, Đoàn Nghệ thuật khoa Công nghệ Thông tin tiếp tục chinh chiến với bảng chương trình bằng những tiết mục vô cùng đặc sắc, 25 "mảnh ghép" đang vô cùng hào hứng được thể hiện tài năng và thành quả của hơn 1 tháng tập luyện vừa qua.</p>
+            </div>
+            <footer class="footer">
+                <div class="container">
+                    <div class="footer-info">
+                        <h3>Khoa Công nghệ Thông tin</h3>
+                        <p>Địa chỉ: Phòng B507, 280 An Dương Vương, P.4, Q.5, TP.HCM</p>
+                        <p>Số điện thoại: 028 38352020</p>
+                        <p>Email: khoacntt@hcmue.edu.vn</p>
+                    </div>
+                    <div class="footer-links">
+                        <h3>Liên kết</h3>
+                        <p><a href="https://hcmue.edu.vn/vi/">Trường Đại học Sư phạm TP.HCM</a></p>
+                        <p><a href="https://online.hcmue.edu.vn/">Trang online sinh viên</a></p>
+                    </div>
+                </div>
+                <p class="copyright">© 2021 Trường Đại học Sư phạm TP.HCM - Khoa Công nghệ Thông tin</p>
+            </footer>
+        </div>
+        <!-- Profile Section for Thông tin cá nhân -->
+        <div id="profile" class="content-section">
+            <h2>Thông tin cá nhân</h2>
+            <div class="profile-container">
+                <div class="profile-header">
+                    <img src="{{ url_for('static', filename='img/user.png') }}" alt="Profile" class="profile-image">
+                    <div class="profile-name">
+                        <h3>Tên giảng viên</h3>
+                        <p>Giảng viên</p>
+                    </div>
+                </div>
+                <div class="profile-details">
+                    <table>
+                        <tr>
+                            <td><strong>Mã giảng viên</strong></td>
+                            <td id="ma_giang_vien"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Phone</strong></td>
+                            <td id="phone"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email</strong></td>
+                            <td id="email"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Họ tên</strong></td>
+                            <td id="ho_ten"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Giới tính</strong></td>
+                            <td id="gioi_tinh"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Môn giảng dạy</strong></td>
+                            <td id="mon_giang_day"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Notifications Section -->
+        <div id="notifications" class="content-section">
+            <h2>Thông báo</h2>
+            <div class="notification-box">
+                <div class="notification-item">
+                    <div class="notification-header">
+                        <h3>Thông báo</h3>
+                        <span class="notification-date">Thu Mar 07, 2024</span>
+                    </div>
+                    <div class="notification-body">
+                        <textarea placeholder="Viết bài đăng mới..." rows="3"></textarea>
+                    </div>
+                    <div class="notification-footer">
+                        <label for="audience">Tới</label>
+                        <select id="audience" name="audience">
+                            <option value="chung">Chung</option>
+                            <option value="lopcntta">Lớp CNTT.A</option>
+                            <option value="lopcnttb">Lớp CNTT.B</option>
+                        </select>
+                        <button class="post-button">Đăng</button>
+                    </div>
+                </div>
+                <div class="notification-item">
+                    <div class="notification-header">
+                        <h3>Thông báo</h3>
+                        <span class="notification-date">Thu Mar 07, 2024</span>
+                    </div>
+                    <div class="notification-body">
+                        <textarea placeholder="Viết bài đăng mới..." rows="3"></textarea>
+                    </div>
+                    <div class="notification-footer">
+                        <label for="audience">Tới</label>
+                        <select id="audience" name="audience">
+                            <option value="chung">Chung</option>
+                            <option value="lopcntta">Lớp CNTT.A</option>
+                            <option value="lopcnttb">Lớp CNTT.B</option>
+                        </select>
+                        <button class="post-button">Đăng</button>
+                    </div>
+                </div>
+            </div>
+            <div class="news">
+                <h3>TIN TỨC MỚI NHẤT</h3>
+                <ul>
+                    <li><a href="#">Thông báo mới nhất từ khoa</a></li>
+                    <li><a href="#">Thông báo việc rà soát số tín chỉ học kỳ II, năm học 2023-2024</a></li>
+                        <li><a href="#">Danh sách sinh viên tốt nghiệp</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Students Management Section -->
+        <!-- Quản lý sinh viên -->
+        <div id="students" class="content-section">
+            <h2>Quản lý sinh viên</h2>
+            <div class="controls">
+                <div class="search-container">
+                    <input type="text" placeholder="Tìm kiếm" class="search-input">
+                    <button class="search-button">
+                        <img src="{{ url_for('static', filename='img/search.png') }}" alt="Search">
+                    </button>
+                </div>
+                <div class="add-controls">
+                    <select>
+                        <option value="add-class">Thêm lớp</option>
+                        <option value="add-student">Thêm sinh viên</option>
+                    </select>
+                    <button class="add-button">+</button>
+                </div>
+            </div>
+            <table class="student-table">
+                <thead>
+                    <tr>
+                        <th>Tên sinh viên</th>
+                        <th>MSSV</th>
+                        <th>Ngày sinh</th>
+                        <th>Lớp</th>
+                        <th>Liên hệ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Họ tên sinh viên</td>
+                        <td>48.01.104.000</td>
+                        <td>31/2/2004</td>
+                        <td>CNNT.A</td>
+                        <td>
+                            <a href="tel:+1234567890"><img src="{{ url_for('static', filename='img/phone.png') }}" alt="Phone"></a>
+                            <a href="mailto:student@example.com"><img src="{{ url_for('static', filename='img/email.png') }}" alt="Email"></a>
+                        </td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+            <div class="pagination">
+                <button class="pagination-button">«</button>
+                <button class="pagination-button">1</button>
+                <button class="pagination-button">2</button>
+                <button class="pagination-button">3</button>
+                <button class="pagination-button">»</button>
+            </div>
+        </div>
+        <!-- Quản lý lớp học -->
+        <div id="classes" class="content-section">
+            <h2>Lịch Dạy Học Kỳ 1 (Tháng 9 - Tháng 12, 2024)</h2>
+            <button class="add-course-btn" onclick="showAddCourseForm()">Thêm Khóa Học</button>
+            <!-- Modal thêm khóa học -->
+            <div id="add-course-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="closeModal()">×</span>
+                    <h2>Thêm Khóa Học</h2>
+                    <form id="add-course-form">
+                        <div class="form-group">
+                            <label for="course-name">Tên khóa học:</label>
+                            <input type="text" id="course-name" name="course-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="start-date">Ngày bắt đầu:</label>
+                            <input type="date" id="start-date" name="start-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="end-date">Ngày kết thúc:</label>
+                            <input type="date" id="end-date" name="end-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="course-description">Mô tả khóa học:</label>
+                            <textarea id="course-description" name="course-description" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Lưu</button>
+                    </form>
+                </div>
+            </div>
+            <div class="calendar">
+                <div class="calendar-header">
+                    <button class="prev-month">«</button>
+                    <h3>Tháng 9, 2024</h3>
+                    <button class="next-month">»</button>
+                </div>
+                <table class="calendar-table">
+                    <thead>
+                        <tr>
+                            <th>Thứ Hai</th>
+                            <th>Thứ Ba</th>
+                            <th>Thứ Tư</th>
+                            <th>Thứ Năm</th>
+                            <th>Thứ Sáu</th>
+                            <th>Thứ Bảy</th>
+                            <th>Chủ Nhật</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Nội dung sẽ được tạo tự động bằng JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Papers Section -->
+        <!-- Bài báo khoa học -->
+        <div id="papers" class="content-section">
+            <h2>Bài báo khoa học</h2>
+            <div class="article-form">
+                <input type="text" placeholder="Tên bài báo" class="input-field">
+                <input type="text" placeholder="Tên tác giả" class="input-field">
+                <input type="number" placeholder="Năm sáng tác" class="input-field">
+                <div class="file-upload">
+                    <label for="fileInput">Upload File:</label>
+                    <input type="file" id="fileInput" class="upload-input">
+                </div>
+                <button class="add-article-btn">Thêm bài báo</button>
+            </div>
+            <table class="article-table">
+                <thead>
+                    <tr>
+                        <th>Tên bài báo</th>
+                        <th>Tên tác giả</th>
+                        <th>Đường dẫn</th>
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Dự báo</td>
+                        <td>Hill</td>
+                        <td><a href="#">Link PDF</a></td>
+                        <td>
+                            <button class="delete-btn">🗑️</button>
+                            <button class="edit-btn">Sửa</button>
+                        </td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+            <div class="pagination">
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+            </div>
+        </div>
+    <script src="{{ url_for('static', filename='js/giangvien.js') }}"></script>
+</body>
+</html>
