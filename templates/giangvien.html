@@ -33,11 +33,7 @@
                     <img src="{{ url_for('static', filename='img/students.png') }}" alt="Students Icon"> Quản lý sinh viên
                 </a>
             </li>
-            <li>
-                <a href="#" onclick="showContent('classes')">
-                    <img src="{{ url_for('static', filename='img/classes.png') }}" alt="Classes Icon"> Quản lý lớp học
-                </a>
-            </li>
+            
             <li>
                 <a href="#" onclick="showContent('papers')">
                     <img src="{{ url_for('static', filename='img/papers.png') }}" alt="Article Icon"> Bài báo khoa học
@@ -97,201 +93,128 @@
         </div>
         <!-- Profile Section for Thông tin cá nhân -->
         <div id="profile" class="content-section">
+            <br> 
             <h2>Thông tin cá nhân</h2>
-            <div class="profile-container">
-                <div class="profile-header">
-                    <img src="{{ url_for('static', filename='img/user.png') }}" alt="Profile" class="profile-image">
-                    <div class="profile-name">
-                        <h3>Tên giảng viên</h3>
-                        <p>Giảng viên</p>
-                    </div>
-                </div>
-                <div class="profile-details">
-                    <table>
-                        <tr>
-                            <td><strong>Mã giảng viên</strong></td>
-                            <td id="ma_giang_vien"></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Phone</strong></td>
-                            <td id="phone"></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Email</strong></td>
-                            <td id="email"></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Họ tên</strong></td>
-                            <td id="ho_ten"></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Giới tính</strong></td>
-                            <td id="gioi_tinh"></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Môn giảng dạy</strong></td>
-                            <td id="mon_giang_day"></td>
-                        </tr>
-                    </table>
+            <div class="profile-header">
+                <img src="{{ url_for('static', filename='img/user.png') }}" alt="Profile" class="profile-image">
+                <div class="profile-name">
+                    <h3>{{ chi_tiet_nguoi_dung.ho_ten }}</h3>
+                    <p>Giảng viên</p>
                 </div>
             </div>
+            <div class="profile-details">
+                <table>
+                    <tr>
+                        <td><strong>Tiểu sử</strong></td>
+                        <td id="tieuSuCell">
+                            <span id="tieuSuText">{{ chi_tiet_nguoi_dung.tieu_su }}</span>
+                            <input type="text" id="tieuSuInput" value="{{ chi_tiet_nguoi_dung.tieu_su }}" style="display:none;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Khoa</strong></td>
+                        <td id="khoaCell">
+                            <span id="khoaText">{{ chi_tiet_nguoi_dung.khoa }}</span>
+                            <input type="text" id="khoaInput" value="{{ chi_tiet_nguoi_dung.khoa }}" style="display:none;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lĩnh vực nghiên cứu</strong></td>
+                        <td id="linhVucCell">
+                            <span id="linhVucText">{{ chi_tiet_nguoi_dung.linh_vuc_nghien_cuu }}</span>
+                            <input type="text" id="linhVucInput" value="{{ chi_tiet_nguoi_dung.linh_vuc_nghien_cuu }}" style="display:none;">
+                        </td>
+                    </tr>
+                        <td><strong>Năm vào làm</strong></td>
+                        <td id="namHocCell">
+                            <span id="namHocText">{{ chi_tiet_nguoi_dung.nam_hoc }}</span>
+                            <input type="text" id="namHocInput" value="{{ chi_tiet_nguoi_dung.nam_hoc }}" style="display:none;">
+                        </td>
+                    </tr>
+                    <!-- Thêm cột Lĩnh vực nghiên cứu -->
+                    
+                </table>
+            </div>
+            <button class="Capnhat" id="editButton">Cập nhật</button>
         </div>
         <!-- Notifications Section -->
         <div id="notifications" class="content-section">
             <h2>Thông báo</h2>
-            <div class="notification-box">
-                <div class="notification-item">
-                    <div class="notification-header">
-                        <h3>Thông báo</h3>
-                        <span class="notification-date">Thu Mar 07, 2024</span>
+            
+            <!-- Form để giảng viên thêm thông báo mới -->
+            <div class="notification-create">
+                <h3>Thêm Thông Báo Mới</h3>
+                <form method="POST" action="{{ url_for('tao_thong_bao') }}">
+                    <div>
+                        <label for="tieu_de">Tiêu đề</label>
+                        <input type="text" id="tieu_de" name="tieu_de" required>
                     </div>
-                    <div class="notification-body">
-                        <textarea placeholder="Viết bài đăng mới..." rows="3"></textarea>
+                    <div>
+                        <label for="noi_dung">Nội dung</label>
+                        <textarea id="noi_dung" name="noi_dung" rows="4" required></textarea>
                     </div>
-                    <div class="notification-footer">
-                        <label for="audience">Tới</label>
-                        <select id="audience" name="audience">
-                            <option value="chung">Chung</option>
-                            <option value="lopcntta">Lớp CNTT.A</option>
-                            <option value="lopcnttb">Lớp CNTT.B</option>
-                        </select>
-                        <button class="post-button">Đăng</button>
-                    </div>
-                </div>
-                <div class="notification-item">
-                    <div class="notification-header">
-                        <h3>Thông báo</h3>
-                        <span class="notification-date">Thu Mar 07, 2024</span>
-                    </div>
-                    <div class="notification-body">
-                        <textarea placeholder="Viết bài đăng mới..." rows="3"></textarea>
-                    </div>
-                    <div class="notification-footer">
-                        <label for="audience">Tới</label>
-                        <select id="audience" name="audience">
-                            <option value="chung">Chung</option>
-                            <option value="lopcntta">Lớp CNTT.A</option>
-                            <option value="lopcnttb">Lớp CNTT.B</option>
-                        </select>
-                        <button class="post-button">Đăng</button>
-                    </div>
-                </div>
+                    <button type="submit">Đăng Thông Báo</button>
+                </form>
             </div>
-            <div class="news">
-                <h3>TIN TỨC MỚI NHẤT</h3>
-                <ul>
-                    <li><a href="#">Thông báo mới nhất từ khoa</a></li>
-                    <li><a href="#">Thông báo việc rà soát số tín chỉ học kỳ II, năm học 2023-2024</a></li>
-                        <li><a href="#">Danh sách sinh viên tốt nghiệp</a></li>
-                    </ul>
+        
+            <!-- Phần thông báo -->
+            <div class="notification-box">
+                {% for notification in notifications %}
+                <div class="notification-item" id="notification_{{ notification.ma_thong_bao }}">
+                    <div class="notification-header">
+                        <input type="text" class="notification-title" id="title_{{ notification.ma_thong_bao }}" value="{{ notification.tieu_de }}" disabled>
+                        <span class="notification-date">{{ notification.ngay_tao.strftime('%a %b %d, %Y') }}</span>
+                    </div>
+                    <div class="notification-body">
+                        <textarea id="content_{{ notification.ma_thong_bao }}" rows="3" disabled>{{ notification.noi_dung }}</textarea>
+                    </div>
+                    <div class="notification-actions">
+                        <button class="edit-btn" onclick="enableEdit({{ notification.ma_thong_bao }})">Sửa</button>
+                        <button class="save-btn" onclick="saveEdit({{ notification.ma_thong_bao }})" style="display:none;">Lưu</button>
+                        <button class="delete-btn" onclick="deleteNotification({{ notification.ma_thong_bao }})">Xóa</button>
+                    </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
+        
         <!-- Students Management Section -->
         <!-- Quản lý sinh viên -->
-        <div id="students" class="content-section">
-            <h2>Quản lý sinh viên</h2>
+        <div id="student" class="content-section">
+            <h2>Thông tin Sinh viên</h2>
             <div class="controls">
                 <div class="search-container">
-                    <input type="text" placeholder="Tìm kiếm" class="search-input">
-                    <button class="search-button">
+                    <input type="text" placeholder="Tìm kiếm" class="search-input" id="searchInput">
+                    <button class="search-button" id="searchButton">
                         <img src="{{ url_for('static', filename='img/search.png') }}" alt="Search">
                     </button>
                 </div>
                 <div class="add-controls">
-                    <select>
-                        <option value="add-class">Thêm lớp</option>
-                        <option value="add-student">Thêm sinh viên</option>
-                    </select>
                     <button class="add-button">+</button>
                 </div>
             </div>
-            <table class="student-table">
+        
+            <!-- Table to show the list of students -->
+            <table class="student-table" id="studentTable">
                 <thead>
                     <tr>
                         <th>Tên sinh viên</th>
-                        <th>MSSV</th>
-                        <th>Ngày sinh</th>
-                        <th>Lớp</th>
-                        <th>Liên hệ</th>
+                        <th>Khoa</th>
+                        <th>Lĩnh vực</th>
+                        <th>Năm học</th>
+                        <th>Email</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Họ tên sinh viên</td>
-                        <td>48.01.104.000</td>
-                        <td>31/2/2004</td>
-                        <td>CNNT.A</td>
-                        <td>
-                            <a href="tel:+1234567890"><img src="{{ url_for('static', filename='img/phone.png') }}" alt="Phone"></a>
-                            <a href="mailto:student@example.com"><img src="{{ url_for('static', filename='img/email.png') }}" alt="Email"></a>
-                        </td>
-                    </tr>
-                    <!-- Add more rows as needed -->
+                <tbody id="studentTableBody">
+                    <!-- Các sinh viên sẽ được điền vào đây qua AJAX -->
                 </tbody>
             </table>
-            <div class="pagination">
-                <button class="pagination-button">«</button>
-                <button class="pagination-button">1</button>
-                <button class="pagination-button">2</button>
-                <button class="pagination-button">3</button>
-                <button class="pagination-button">»</button>
-            </div>
         </div>
+        
+        
+        
         <!-- Quản lý lớp học -->
-        <div id="classes" class="content-section">
-            <h2>Lịch Dạy Học Kỳ 1 (Tháng 9 - Tháng 12, 2024)</h2>
-            <button class="add-course-btn" onclick="showAddCourseForm()">Thêm Khóa Học</button>
-            <!-- Modal thêm khóa học -->
-            <div id="add-course-modal" class="modal">
-                <div class="modal-content">
-                    <span class="close-btn" onclick="closeModal()">×</span>
-                    <h2>Thêm Khóa Học</h2>
-                    <form id="add-course-form">
-                        <div class="form-group">
-                            <label for="course-name">Tên khóa học:</label>
-                            <input type="text" id="course-name" name="course-name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="start-date">Ngày bắt đầu:</label>
-                            <input type="date" id="start-date" name="start-date" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="end-date">Ngày kết thúc:</label>
-                            <input type="date" id="end-date" name="end-date" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="course-description">Mô tả khóa học:</label>
-                            <textarea id="course-description" name="course-description" rows="4" required></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">Lưu</button>
-                    </form>
-                </div>
-            </div>
-            <div class="calendar">
-                <div class="calendar-header">
-                    <button class="prev-month">«</button>
-                    <h3>Tháng 9, 2024</h3>
-                    <button class="next-month">»</button>
-                </div>
-                <table class="calendar-table">
-                    <thead>
-                        <tr>
-                            <th>Thứ Hai</th>
-                            <th>Thứ Ba</th>
-                            <th>Thứ Tư</th>
-                            <th>Thứ Năm</th>
-                            <th>Thứ Sáu</th>
-                            <th>Thứ Bảy</th>
-                            <th>Chủ Nhật</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Nội dung sẽ được tạo tự động bằng JavaScript -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        
         <!-- Papers Section -->
         <!-- Bài báo khoa học -->
         <div id="papers" class="content-section">
@@ -328,11 +251,7 @@
                     <!-- Add more rows as needed -->
                 </tbody>
             </table>
-            <div class="pagination">
-                <button class="page-btn active">1</button>
-                <button class="page-btn">2</button>
-                <button class="page-btn">3</button>
-            </div>
+            
         </div>
     <script src="{{ url_for('static', filename='js/giangvien.js') }}"></script>
 </body>

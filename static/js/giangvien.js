@@ -1,3 +1,4 @@
+// Function to show content based on contentId
 function showContent(contentId) {
     const menuItems = document.querySelectorAll('.sidebar .menu li a');
     menuItems.forEach(item => {
@@ -7,29 +8,36 @@ function showContent(contentId) {
     if (selectedItem) {
         selectedItem.classList.add('active');
     }
+
     const sections = document.querySelectorAll('.content-section');
     sections.forEach(section => {
         section.classList.remove('active');
     });
+
     const selectedSection = document.getElementById(contentId);
     if (selectedSection) {
         selectedSection.classList.add('active');
     }
 }
 
+// Load profile data from API
 async function loadProfile() {
     try {
         const response = await fetch('/api/profile');
-        if (!response.ok) throw new Error('Failed to fetch profile data');
         
-        const data = await response.json();
-        
-        if (data.error) {
-            console.error(data.error); // In ra lỗi nếu có
-            return; // Nếu có lỗi, không làm gì thêm
+        if (!response.ok) {
+            console.error(`Error: ${response.status} ${response.statusText}`);
+            throw new Error('Failed to fetch profile data');
         }
 
-        // Cập nhật nội dung HTML
+        const data = await response.json();
+
+        if (data.error) {
+            console.error(data.error);
+            return; // Stop execution if there’s an error in the data
+        }
+
+        // Update HTML with profile data
         document.getElementById('ma_giang_vien').innerText = data.ma_nguoi_dung || 'N/A';
         document.getElementById('phone').innerText = data.phone || 'N/A';
         document.getElementById('email').innerText = data.email || 'N/A';
@@ -38,23 +46,21 @@ async function loadProfile() {
         document.getElementById('mon_giang_day').innerText = data.mon_giang_day || 'N/A';
     } catch (error) {
         console.error('Error loading profile:', error);
+        alert('Error loading profile. Please try again later.');
     }
 }
 
-document.addEventListener('DOMContentLoaded', loadProfile);
-
+// Calendar update logic
 const calendarHeader = document.querySelector(".calendar-header h3");
 const prevMonthButton = document.querySelector(".prev-month");
 const nextMonthButton = document.querySelector(".next-month");
-let currentMonth = 10; // Tháng 11 (lưu ý tháng trong JS bắt đầu từ 0)
+let currentMonth = 10; // November (Note: months are 0-indexed)
 let currentYear = 2024;
 
 function updateCalendar(month, year) {
     calendarHeader.textContent = `Tháng ${month + 1}, ${year}`;
-    // Viết thêm logic để tạo ngày tự động trong bảng (nếu cần)
+    // Add logic here to generate calendar dates if needed
 }
-
-
 
 prevMonthButton.addEventListener("click", () => {
     currentMonth--;
@@ -74,45 +80,120 @@ nextMonthButton.addEventListener("click", () => {
     updateCalendar(currentMonth, currentYear);
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-    // Mở Modal
-    function openModal() {
-        document.getElementById("add-course-modal").style.display = "flex";
+// Modal open and close functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Modal functions for adding courses
+    const addCourseButton = document.querySelector(".add-course-btn");
+    const closeModalButton = document.querySelector(".close-btn");
+    const addCourseModal = document.getElementById("add-course-modal");
+
+    // Check if element exists before adding event listener
+    if (addCourseButton) {
+        addCourseButton.addEventListener("click", function() {
+            addCourseModal.style.display = "flex";
+        });
     }
-    // Đóng Modal
-    function closeModal() {
-        document.getElementById("add-course-modal").style.display = "none";
+
+    if (closeModalButton) {
+        closeModalButton.addEventListener("click", function() {
+            addCourseModal.style.display = "none";
+        });
     }
-    // Đóng modal khi click ra ngoài modal-content
+
     window.onclick = function(event) {
-        var modal = document.getElementById("add-course-modal");
-        if (event.target == modal) {
-            closeModal();
+        if (event.target === addCourseModal) {
+            addCourseModal.style.display = "none";
         }
-    }
-    // Thêm sự kiện cho nút
-    document.querySelector(".add-course-btn").addEventListener("click", openModal);
-    document.querySelector(".close-btn").addEventListener("click", closeModal);
+    };
 });
 
-// Đợi DOM load hoàn tất
+// View my courses modal functionality
 document.addEventListener("DOMContentLoaded", function() {
-    // Lấy các phần tử modal và các nút
-    var modal = document.getElementById("myCoursesModal");
-    var btn = document.querySelector(".view-my-courses-btn");
-    var closeBtn = document.querySelector(".close-btn");
-    // Khi người dùng nhấn nút "Xem khóa học của tôi", mở modal
-    btn.addEventListener("click", function() {
-        modal.style.display = "block";
-    });
-    // Khi người dùng nhấn vào nút đóng (x), đóng modal
-    closeBtn.addEventListener("click", function() {
-        modal.style.display = "none";
-    });
-    // Khi người dùng nhấn ra ngoài modal, đóng modal
+    const viewMyCoursesButton = document.querySelector(".view-my-courses-btn");
+    const myCoursesModal = document.getElementById("myCoursesModal");
+    const closeMyCoursesModalButton = document.querySelector(".close-btn");
+
+    if (viewMyCoursesButton) {
+        viewMyCoursesButton.addEventListener("click", function() {
+            myCoursesModal.style.display = "block";
+        });
+    }
+
+    if (closeMyCoursesModalButton) {
+        closeMyCoursesModalButton.addEventListener("click", function() {
+            myCoursesModal.style.display = "none";
+        });
+    }
+
     window.addEventListener("click", function(event) {
-        if (event.target === modal) {
-            modal.style.display = "none";
+        if (event.target === myCoursesModal) {
+            myCoursesModal.style.display = "none";
         }
     });
 });
+
+// Edit profile button functionality
+document.getElementById("editButton").addEventListener("click", function() {
+    var isEditing = this.innerText === "Cập nhật";
+
+    if (isEditing) {
+        // Show input fields for editing
+        document.getElementById("tieuSuCell").querySelector("input").style.display = "block";
+        document.getElementById("khoaCell").querySelector("input").style.display = "block";
+        document.getElementById("namHocCell").querySelector("input").style.display = "block";
+        document.getElementById("linhVucCell").querySelector("input").style.display = "block";
+
+        // Hide the spans (labels)
+        document.getElementById("tieuSuCell").querySelector("span").style.display = "none";
+        document.getElementById("khoaCell").querySelector("span").style.display = "none";
+        document.getElementById("namHocCell").querySelector("span").style.display = "none";
+        document.getElementById("linhVucCell").querySelector("span").style.display = "none";
+
+        this.innerText = "Lưu";  // Change button text to "Save"
+    } else {
+        // Save updated data
+        var tieuSu = document.getElementById("tieuSuInput").value;
+        var khoa = document.getElementById("khoaInput").value;
+        var namHoc = document.getElementById("namHocInput").value;
+        var linhVuc = document.getElementById("linhVucInput").value;
+
+        // Send data to server via AJAX
+        fetch("/update_profile", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                tieu_su: tieuSu,
+                khoa: khoa,
+                nam_hoc: namHoc,
+                linh_vuc_nghien_cuu: linhVuc
+            })
+        }).then(response => response.json())
+          .then(data => {
+            if (data.success) {
+                // Update the profile display with the new values
+                document.getElementById("tieuSuText").innerText = tieuSu;
+                document.getElementById("khoaText").innerText = khoa;
+                document.getElementById("namHocText").innerText = namHoc;
+                document.getElementById("linhVucText").innerText = linhVuc;
+
+                // Hide input fields and show text again
+                document.getElementById("tieuSuCell").querySelector("input").style.display = "none";
+                document.getElementById("khoaCell").querySelector("input").style.display = "none";
+                document.getElementById("namHocCell").querySelector("input").style.display = "none";
+                document.getElementById("linhVucCell").querySelector("input").style.display = "none";
+
+                document.getElementById("tieuSuCell").querySelector("span").style.display = "block";
+                document.getElementById("khoaCell").querySelector("span").style.display = "block";
+                document.getElementById("namHocCell").querySelector("span").style.display = "block";
+                document.getElementById("linhVucCell").querySelector("span").style.display = "block";
+
+                this.innerText = "Cập nhật";  // Change button text back to "Update"
+            } else {
+                alert("Có lỗi xảy ra, vui lòng thử lại.");
+            }
+        });
+    }
+});
+

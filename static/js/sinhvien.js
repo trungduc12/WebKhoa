@@ -85,18 +85,7 @@ function goBackToCourses() {
     }
 }
 
-const scheduleData = {
-    1: [
-        ["101", "Lập trình nâng cao 10:00 - 12:00 (20/2/2025-26/05/2025)", "Triết\n 11:00 - 13:00 ", "12:00 - 14:00", "13:00 - 15:00", "14:00 - 16:00", "", ""],
-        ["102", "08:00 - 10:00", "09:00 - 11:00", "10:00 - 12:00", "", "", "", ""],
-        ["201", "", "10:00 - 12:00", "11:00 - 13:00", "12:00 - 14:00", "13:00 - 15:00", "", ""],
-    ],
-    2: [
-        ["301", "", "08:00 - 10:00", "09:00 - 11:00", "", "10:00 - 12:00", "", ""],
-        ["302", "10:00 - 12:00", "", "12:00 - 14:00", "", "", "13:00 - 15:00", ""],
-    ],
-    // Thêm dữ liệu cho các tháng khác
-};
+
 
 function updateSchedule() {
     const month = document.getElementById("month").value;
@@ -117,7 +106,7 @@ function updateSchedule() {
 }
 
 // Khởi tạo lịch với tháng đầu tiên
-updateSchedule();
+
 
 // Tìm kiếm bài báo theo tên hoặc tác giả
 document.querySelector('.article-form button').addEventListener('click', function () {
@@ -147,5 +136,110 @@ document.querySelectorAll('.page-btn').forEach(button => {
 
         // Xử lý hiển thị bài báo theo trang (tùy chỉnh nếu có dữ liệu thực tế)
         alert(`Bạn đã chuyển đến trang ${this.textContent}`);
+    });
+});
+
+
+document.getElementById("editButton").addEventListener("click", function() {
+    var isEditing = this.innerText === "Cập nhật";
+
+    // Chuyển đổi giữa chế độ xem và chỉnh sửa
+    if (isEditing) {
+        document.getElementById("tieuSuCell").querySelector("input").style.display = "block";
+        document.getElementById("khoaCell").querySelector("input").style.display = "block";
+        document.getElementById("namHocCell").querySelector("input").style.display = "block";
+        document.getElementById("linhVucCell").querySelector("input").style.display = "block";  // Hiển thị input của Lĩnh vực nghiên cứu
+        
+        document.getElementById("tieuSuCell").querySelector("span").style.display = "none";
+        document.getElementById("khoaCell").querySelector("span").style.display = "none";
+        document.getElementById("namHocCell").querySelector("span").style.display = "none";
+        document.getElementById("linhVucCell").querySelector("span").style.display = "none";  // Ẩn span của Lĩnh vực nghiên cứu
+
+        this.innerText = "Lưu";  // Đổi nút "Cập nhật" thành "Lưu"
+    } else {
+        // Lưu lại thông tin đã sửa
+        var tieuSu = document.getElementById("tieuSuInput").value;
+        var khoa = document.getElementById("khoaInput").value;
+        var namHoc = document.getElementById("namHocInput").value;
+        var linhVuc = document.getElementById("linhVucInput").value;  // Lấy giá trị Lĩnh vực nghiên cứu
+
+        // Gửi dữ liệu đến server qua AJAX
+        fetch("/update_profile", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                tieu_su: tieuSu,
+                khoa: khoa,
+                nam_hoc: namHoc,
+                linh_vuc_nghien_cuu: linhVuc  // Gửi thêm Lĩnh vực nghiên cứu
+            })
+        }).then(response => response.json())
+          .then(data => {
+            if (data.success) {
+                // Cập nhật lại giao diện với dữ liệu mới
+                document.getElementById("tieuSuText").innerText = tieuSu;
+                document.getElementById("khoaText").innerText = khoa;
+                document.getElementById("namHocText").innerText = namHoc;
+                document.getElementById("linhVucText").innerText = linhVuc;  // Cập nhật Lĩnh vực nghiên cứu
+
+                // Chuyển lại thành chế độ xem
+                document.getElementById("tieuSuCell").querySelector("input").style.display = "none";
+                document.getElementById("khoaCell").querySelector("input").style.display = "none";
+                document.getElementById("namHocCell").querySelector("input").style.display = "none";
+                document.getElementById("linhVucCell").querySelector("input").style.display = "none";  // Ẩn input Lĩnh vực nghiên cứu
+                
+                document.getElementById("tieuSuCell").querySelector("span").style.display = "block";
+                document.getElementById("khoaCell").querySelector("span").style.display = "block";
+                document.getElementById("namHocCell").querySelector("span").style.display = "block";
+                document.getElementById("linhVucCell").querySelector("span").style.display = "block";  // Hiển thị lại span Lĩnh vực nghiên cứu
+
+                document.getElementById("editButton").innerText = "Cập nhật";  // Đổi nút "Lưu" thành "Cập nhật"
+            } else {
+                alert("Có lỗi xảy ra, vui lòng thử lại.");
+            }
+        });
+    }
+});
+
+document.getElementById('searchInput').addEventListener('input', function () {
+    var searchQuery = this.value.toLowerCase();  // Lấy giá trị người dùng nhập vào và chuyển thành chữ thường
+    var rows = document.querySelectorAll('.document-row');  // Lấy tất cả các dòng trong bảng
+
+    rows.forEach(function (row) {
+        var tenMon = row.cells[1].textContent.toLowerCase();  // Lấy tên môn học từ cột thứ 2 (index 1)
+        var maMon = row.cells[2].textContent.toLowerCase();  // Nếu bạn có mã môn học trong cột thứ 3, có thể thay đổi theo
+
+        // Kiểm tra nếu tên môn học hoặc mã học phần khớp với từ khóa tìm kiếm
+        if (tenMon.indexOf(searchQuery) > -1 || maMon.indexOf(searchQuery) > -1) {
+            row.style.display = '';  // Hiển thị dòng nếu tìm thấy
+        } else {
+            row.style.display = 'none';  // Ẩn dòng nếu không khớp
+        }
+    });
+});
+
+document.getElementById('search-button').addEventListener('click', function() {
+    var searchTitle = document.getElementById('search-title').value.toLowerCase();  // Lấy giá trị từ ô tìm kiếm tên bài báo
+    var searchYear = document.getElementById('search-year').value;  // Lấy giá trị từ ô tìm kiếm năm sáng tác
+    
+    var rows = document.querySelectorAll('.article-row');  // Lấy tất cả các dòng bài báo
+    
+    rows.forEach(function(row) {
+        var title = row.cells[0].textContent.toLowerCase();  // Lấy tên bài báo trong cột đầu tiên
+        var content = row.cells[1].textContent.toLowerCase();  // Lấy nội dung bài báo trong cột thứ hai
+        var date = row.cells[2].textContent;  // Lấy ngày đăng bài báo trong cột thứ ba
+        
+        // Kiểm tra nếu bất kỳ điều kiện nào trong hai ô tìm kiếm khớp với thông tin bài báo
+        var matchTitle = searchTitle === '' || title.includes(searchTitle);  // Tìm kiếm tên bài báo
+        var matchYear = searchYear === '' || date.includes(searchYear);  // Tìm kiếm năm sáng tác
+        
+        // Hiển thị hoặc ẩn bài báo tùy thuộc vào việc tìm kiếm có khớp không
+        if (matchTitle && matchYear) {
+            row.style.display = '';  // Hiển thị bài báo
+        } else {
+            row.style.display = 'none';  // Ẩn bài báo
+        }
     });
 });

@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
-from models import db, NguoiDung, ChiTietNguoiDung 
+from models import db, NguoiDung, ChiTietNguoiDung , ThongBao, TaiLieuKhoaHoc, BaiVietKhoaHoc
 from sqlalchemy import text
 from config import Config
+from datetime import datetime
+from sqlalchemy.orm import joinedload
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -50,20 +52,174 @@ def admin():
 
 @app.route('/giangvien')
 def giangvien():
-    return render_template('giangvien.html')
+    ma_nguoi_dung = session.get('ma_nguoi_dung')
+    if not ma_nguoi_dung:
+        return redirect(url_for('login'))  # Redirect nếu chưa đăng nhập
+
+    chi_tiet_nguoi_dung = ChiTietNguoiDung.query.filter_by(ma_nguoi_dung=ma_nguoi_dung).first()
+
+    # Lấy tất cả thông báo (có thể tùy chỉnh theo điều kiện giảng viên)
+    notifications = ThongBao.query.all()
+
+    # Lấy danh sách tài liệu (có thể tùy chỉnh theo điều kiện giảng viên)
+    danh_sach_tai_lieu = TaiLieuKhoaHoc.query.all()
+
+    danhsachbaibao = BaiVietKhoaHoc.query.all()
+
+    # Render dữ liệu vào template
+    return render_template('giangvien.html', notifications=notifications, danh_sach_tai_lieu=danh_sach_tai_lieu, danhsachbaibao=danhsachbaibao, chi_tiet_nguoi_dung=chi_tiet_nguoi_dung)
+
 
 @app.route('/sinhvien')
 def sinhvien():
-    return render_template('sinhvien.html')
+    ma_nguoi_dung = session.get('ma_nguoi_dung')
+    if not ma_nguoi_dung:
+        return redirect(url_for('login'))  # Redirect nếu chưa đăng nhập
+
+    chi_tiet_nguoi_dung = ChiTietNguoiDung.query.filter_by(ma_nguoi_dung=ma_nguoi_dung).first()
+
+    # Lấy tất cả thông báo
+    notifications = ThongBao.query.all()
+
+    # Lấy danh sách tài liệu
+    danh_sach_tai_lieu = TaiLieuKhoaHoc.query.all()
+
+    danhsachbaibao = BaiVietKhoaHoc.query.all()
+
+    # Render dữ liệu vào template
+    return render_template('sinhvien.html', notifications=notifications, danh_sach_tai_lieu=danh_sach_tai_lieu, danhsachbaibao=danhsachbaibao, chi_tiet_nguoi_dung=chi_tiet_nguoi_dung)
+
+@app.route('/get_students', methods=['GET'])
+def get_students():
+    # Lấy tất cả người dùng có vai trò 'sinh_vien'
+    sinh_vien = NguoiDung.query.filter_by(vai_tro='sinh_vien').all()
+
+    # Lấy chi tiết người dùng từ bảng ChiTietNguoiDung
+    students_info = []
+    for user in sinh_vien:
+        chi_tiet = ChiTietNguoiDung.query.filter_by(ma_nguoi_dung=user.ma_nguoi_dung).first()
+        if chi_tiet:
+            students_info.append({
+                'ho_ten': chi_tiet.ho_ten,
+                'khoa': chi_tiet.khoa,
+                'linh_vuc_nghien_cuu': chi_tiet.linh_vuc_nghien_cuu,
+                'nam_hoc': chi_tiet.nam_hoc,
+                'email': user.email  # Lấy email từ bảng NguoiDung
+            })
+
+    return jsonify(students_info)
+
+@app.route('/update_profile', methods=['POST'])
+def update_profile():
+    # Lấy dữ liệu gửi từ client
+    data = request.get_json()
+    ma_nguoi_dung = session.get('ma_nguoi_dung')
+    
+    if not ma_nguoi_dung:
+        return jsonify({"success": False, "message": "Chưa đăng nhập"})
+    
+    # Tìm sinh viên trong cơ sở dữ liệu
+    chi_tiet_nguoi_dung = ChiTietNguoiDung.query.filter_by(ma_nguoi_dung=ma_nguoi_dung).first()
+    
+    if chi_tiet_nguoi_dung:
+        chi_tiet_nguoi_dung.tieu_su = data.get('tieu_su')
+        chi_tiet_nguoi_dung.khoa = data.get('khoa')
+        chi_tiet_nguoi_dung.linh_vuc_nghien_cuu = data.get('linh_vuc_nghien_cuu')
+        chi_tiet_nguoi_dung.nam_hoc = data.get('nam_hoc')
+        
+        try:
+            # Cập nhật vào database
+            db.session.commit()
+            return jsonify({"success": True})
+        except Exception as e:
+            db.session.rollback()
+            return jsonify({"success": False, "message": str(e)})
+    else:
+        return jsonify({"success": False, "message": "Không tìm thấy sinh viên"})
+
+
+@app.route('/tao_thong_bao', methods=['POST'])
+def tao_thong_bao():
+    ma_nguoi_dung = session.get('ma_nguoi_dung')
+    if not ma_nguoi_dung:
+        return redirect(url_for('login'))  # Redirect nếu chưa đăng nhập
+
+    tieu_de = request.form['tieu_de']
+    noi_dung = request.form['noi_dung']
+    nguoi_tao = ma_nguoi_dung  # Lấy mã người dùng từ session
+
+    # Lấy thời gian hiện tại cho trường 'ngay_tao'
+    ngay_tao = datetime.now()
+
+    # Tạo một đối tượng ThongBao mới
+    thong_bao = ThongBao(
+        tieu_de=tieu_de,
+        noi_dung=noi_dung,
+        nguoi_tao=nguoi_tao,
+        ngay_tao=ngay_tao  # Lưu ngày tạo
+    )
+
+    try:
+        db.session.add(thong_bao)  # Thêm vào cơ sở dữ liệu
+        db.session.commit()  # Lưu vào cơ sở dữ liệu
+        return redirect(url_for('giangvien'))  # Redirect về trang giảng viên sau khi tạo thành công
+    except Exception as e:
+        db.session.rollback()  # Rollback nếu có lỗi
+        return jsonify({"success": False, "message": str(e)})
+    
+
+    
+@app.route('/update_thong_bao/<int:id>', methods=['POST'])
+def update_thong_bao(id):
+    data = request.get_json()
+    notification = ThongBao.query.get(id)
+    
+    if notification:
+        try:
+            notification.tieu_de = data.get('tieu_de')
+            notification.noi_dung = data.get('noi_dung')
+            db.session.commit()
+            return jsonify({"success": True, "message": "Notification updated successfully"})
+        except Exception as e:
+            db.session.rollback()  # Rollback in case of an error
+            return jsonify({"success": False, "message": str(e)})
+    return jsonify({"success": False, "message": "Notification not found"})
+
+
+
+@app.route('/delete_thong_bao/<int:id>', methods=['DELETE'])
+def delete_thong_bao(id):
+    notification = ThongBao.query.get(id)
+    
+    if notification:
+        try:
+            db.session.delete(notification)  # Delete the notification
+            db.session.commit()  # Commit the changes to the database
+            return jsonify({"success": True, "message": "Notification deleted successfully"})
+        except Exception as e:
+            db.session.rollback()  # Rollback in case of an error
+            return jsonify({"success": False, "message": str(e)})
+    
+    return jsonify({"success": False, "message": "Notification not found"})
+
+
+
+
 
 @app.route('/test_db')
 def test_db():
     try:
-        with db.engine.connect() as connection:
-            result = connection.execute(text("SELECT 1"))
-            return "Kết nối thành công!" if result.scalar() == 1 else "Kết nối thất bại!"
+        # Thử lấy một số thông báo từ bảng ThongBao
+        notifications = ThongBao.query.all()
+        return jsonify([{
+            'ma_thong_bao': n.ma_thong_bao,
+            'tieu_de': n.tieu_de,
+            'noi_dung': n.noi_dung,
+            'nguoi_tao': n.nguoi_tao,
+            'ngay_tao': n.ngay_tao
+        } for n in notifications])
     except Exception as e:
-        return f"Kết nối thất bại: {e}"
+        return str(e)
 
 @app.route('/check_session')
 def check_session():
@@ -71,6 +227,7 @@ def check_session():
         'ma_nguoi_dung': session.get('ma_nguoi_dung'),
         'vai_tro': session.get('vai_tro')
     }
+
 
 
 if __name__ == '__main__':
