@@ -145,15 +145,13 @@ document.getElementById("editButton").addEventListener("click", function() {
 
     // Chuyển đổi giữa chế độ xem và chỉnh sửa
     if (isEditing) {
-        document.getElementById("tieuSuCell").querySelector("input").style.display = "block";
-        document.getElementById("khoaCell").querySelector("input").style.display = "block";
-        document.getElementById("namHocCell").querySelector("input").style.display = "block";
-        document.getElementById("linhVucCell").querySelector("input").style.display = "block";  // Hiển thị input của Lĩnh vực nghiên cứu
-        
-        document.getElementById("tieuSuCell").querySelector("span").style.display = "none";
-        document.getElementById("khoaCell").querySelector("span").style.display = "none";
-        document.getElementById("namHocCell").querySelector("span").style.display = "none";
-        document.getElementById("linhVucCell").querySelector("span").style.display = "none";  // Ẩn span của Lĩnh vực nghiên cứu
+        // Hiển thị các input
+        document.querySelectorAll("input[type='text']").forEach(input => {
+            input.style.display = "block";
+        });
+        document.querySelectorAll("span").forEach(span => {
+            span.style.display = "none";
+        });
 
         this.innerText = "Lưu";  // Đổi nút "Cập nhật" thành "Lưu"
     } else {
@@ -161,7 +159,10 @@ document.getElementById("editButton").addEventListener("click", function() {
         var tieuSu = document.getElementById("tieuSuInput").value;
         var khoa = document.getElementById("khoaInput").value;
         var namHoc = document.getElementById("namHocInput").value;
-        var linhVuc = document.getElementById("linhVucInput").value;  // Lấy giá trị Lĩnh vực nghiên cứu
+        var linhVuc = document.getElementById("linhVucInput").value;
+        var soDienThoai = document.getElementById("soDienThoaiInput").value;
+        var gioiTinh = document.getElementById("gioiTinhInput").value;
+        var diaChi = document.getElementById("diaChiInput").value;
 
         // Gửi dữ liệu đến server qua AJAX
         fetch("/update_profile", {
@@ -173,7 +174,10 @@ document.getElementById("editButton").addEventListener("click", function() {
                 tieu_su: tieuSu,
                 khoa: khoa,
                 nam_hoc: namHoc,
-                linh_vuc_nghien_cuu: linhVuc  // Gửi thêm Lĩnh vực nghiên cứu
+                linh_vuc_nghien_cuu: linhVuc,
+                so_dien_thoai: soDienThoai,
+                gioi_tinh: gioiTinh,
+                dia_chi: diaChi
             })
         }).then(response => response.json())
           .then(data => {
@@ -182,18 +186,18 @@ document.getElementById("editButton").addEventListener("click", function() {
                 document.getElementById("tieuSuText").innerText = tieuSu;
                 document.getElementById("khoaText").innerText = khoa;
                 document.getElementById("namHocText").innerText = namHoc;
-                document.getElementById("linhVucText").innerText = linhVuc;  // Cập nhật Lĩnh vực nghiên cứu
+                document.getElementById("linhVucText").innerText = linhVuc;
+                document.getElementById("soDienThoaiText").innerText = soDienThoai;
+                document.getElementById("gioiTinhText").innerText = gioiTinh;
+                document.getElementById("diaChiText").innerText = diaChi;
 
                 // Chuyển lại thành chế độ xem
-                document.getElementById("tieuSuCell").querySelector("input").style.display = "none";
-                document.getElementById("khoaCell").querySelector("input").style.display = "none";
-                document.getElementById("namHocCell").querySelector("input").style.display = "none";
-                document.getElementById("linhVucCell").querySelector("input").style.display = "none";  // Ẩn input Lĩnh vực nghiên cứu
-                
-                document.getElementById("tieuSuCell").querySelector("span").style.display = "block";
-                document.getElementById("khoaCell").querySelector("span").style.display = "block";
-                document.getElementById("namHocCell").querySelector("span").style.display = "block";
-                document.getElementById("linhVucCell").querySelector("span").style.display = "block";  // Hiển thị lại span Lĩnh vực nghiên cứu
+                document.querySelectorAll("input[type='text']").forEach(input => {
+                    input.style.display = "none";
+                });
+                document.querySelectorAll("span").forEach(span => {
+                    span.style.display = "block";
+                });
 
                 document.getElementById("editButton").innerText = "Cập nhật";  // Đổi nút "Lưu" thành "Cập nhật"
             } else {

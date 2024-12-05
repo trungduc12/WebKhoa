@@ -101,3 +101,121 @@ document.querySelector('.delete-course-btn').addEventListener('click', function 
         alert('Không có bài giảng nào để xóa!');
     }
 });
+
+function showAddUserModal() {
+    document.getElementById('addUserModal').style.display = 'block';
+}
+
+function closeAddUserModal() {
+    document.getElementById('addUserModal').style.display = 'none';
+}
+
+function addUser() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const email = document.getElementById('email').value;
+    const role = document.getElementById('role').value;
+
+    fetch('/add_user', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password, email, role })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error adding user');
+        }
+        return response.json();
+    })
+    .then(data => {
+        alert(data.message);
+        closeAddUserModal();
+        loadUsers(); // Tải lại danh sách người dùng
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Có lỗi xảy ra khi thêm người dùng.');
+    });
+}
+
+function loadUsers() {
+    fetch('/get_users')
+        .then(response => response.json())
+        .then(data => {
+            const tbody = document.getElementById('userTableBody');
+            tbody.innerHTML = ''; // Xóa nội dung hiện tại
+
+            data.users.forEach(user => {
+                const row = `
+                    <tr>
+                        <td>${user.ma_nguoi_dung}</td>
+                        <td>${user.ten_dang_nhap}</td>
+                        <td>${user.email}</td>
+                        <td>${user.vai_tro}</td>
+                        <td>${user.ngay_tao}</td>
+                    </tr>
+                `;
+                tbody.insertAdjacentHTML('beforeend', row);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching users:', error);
+        });
+}
+
+// Gọi hàm loadUsers khi trang được tải
+window.onload = loadUsers;
+
+
+document.getElementById("addArticleBtn").addEventListener("click", function() {
+    var title = document.getElementById("articleTitle").value;
+    var content = document.getElementById("articleContent").value;
+
+    // Kiểm tra xem các trường có trống không
+    if (title.trim() === "" || content.trim() === "") {
+        alert("Vui lòng nhập tiêu đề và nội dung bài báo.");
+        return;
+    }
+
+    // Gửi yêu cầu AJAX để thêm bài viết
+    fetch("/add_article", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            tieu_de: title,
+            noi_dung: content
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Thêm bài viết mới vào bảng
+            var newRow = `<tr id="article-${data.article.id}">
+                            <td>${data.article.tieu_de}</td>
+                            <td>${data.article.noi_dung}</td>
+                            <td>${data.article.ngay_dang}</td>
+                            <td>${data.article.trang_thai}</td>
+                            <td>
+                                <button class="delete-btn" onclick="deleteArticle(${data.article.id})">🗑️</button>
+                                <button class="edit-btn" onclick="editArticle(${data.article.id})">Sửa</button>
+                            </td>
+                          </tr>`;
+            document.getElementById("articleTableBody").insertAdjacentHTML('beforeend', newRow);
+
+            // Xóa giá trị input
+            document.getElementById("articleTitle").value = "";
+            document.getElementById("articleContent").value = "";
+        } else {
+            alert("Có lỗi xảy ra: " + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert("Có lỗi xảy ra khi gửi yêu cầu.");
+    });
+});
+

@@ -96,50 +96,70 @@
         </div>
         <!-- Thông tin sinh viên -->
         <div id="profile" class="content-section">
-            <br> 
-            <h2>Thông tin cá nhân</h2>
-            <div class="profile-header">
-                <img src="{{ url_for('static', filename='img/user.png') }}" alt="Profile" class="profile-image">
-                <div class="profile-name">
-                    <h3>{{ chi_tiet_nguoi_dung.ho_ten }}</h3>
-                    <p>Sinh viên</p>
-                </div>
-            </div>
-            <div class="profile-details">
-                <table>
-                    <tr>
-                        <td><strong>Tiểu sử</strong></td>
-                        <td id="tieuSuCell">
-                            <span id="tieuSuText">{{ chi_tiet_nguoi_dung.tieu_su }}</span>
-                            <input type="text" id="tieuSuInput" value="{{ chi_tiet_nguoi_dung.tieu_su }}" style="display:none;">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Khoa</strong></td>
-                        <td id="khoaCell">
-                            <span id="khoaText">{{ chi_tiet_nguoi_dung.khoa }}</span>
-                            <input type="text" id="khoaInput" value="{{ chi_tiet_nguoi_dung.khoa }}" style="display:none;">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Khóa học</strong></td>
-                        <td id="namHocCell">
-                            <span id="namHocText">{{ chi_tiet_nguoi_dung.nam_hoc }}</span>
-                            <input type="text" id="namHocInput" value="{{ chi_tiet_nguoi_dung.nam_hoc }}" style="display:none;">
-                        </td>
-                    </tr>
-                    <!-- Thêm cột Lĩnh vực nghiên cứu -->
-                    <tr>
-                        <td><strong>Lĩnh vực nghiên cứu</strong></td>
-                        <td id="linhVucCell">
-                            <span id="linhVucText">{{ chi_tiet_nguoi_dung.linh_vuc_nghien_cuu }}</span>
-                            <input type="text" id="linhVucInput" value="{{ chi_tiet_nguoi_dung.linh_vuc_nghien_cuu }}" style="display:none;">
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <button class="Capnhat" id="editButton">Cập nhật</button>
+    <br> 
+    <h2>Thông tin cá nhân</h2>
+    <div class="profile-header">
+        <img src="{{ url_for('static', filename='img/user.png') }}" alt="Profile" class="profile-image">
+        <div class="profile-name">
+            <h3>{{ chi_tiet_nguoi_dung.ho_ten }}</h3>
+            <p>Sinh viên</p>
         </div>
+    </div>
+    <div class="profile-details">
+        <table>
+            <tr>
+                <td><strong>Tiểu sử</strong></td>
+                <td id="tieuSuCell">
+                    <span id="tieuSuText">{{ chi_tiet_nguoi_dung.tieu_su }}</span>
+                    <input type="text" id="tieuSuInput" value="{{ chi_tiet_nguoi_dung.tieu_su }}" style="display:none;">
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Khoa</strong></td>
+                <td id="khoaCell">
+                    <span id="khoaText">{{ chi_tiet_nguoi_dung.khoa }}</span>
+                    <input type="text" id="khoaInput" value="{{ chi_tiet_nguoi_dung.khoa }}" style="display:none;">
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Khóa học</strong></td>
+                <td id="namHocCell">
+                    <span id="namHocText">{{ chi_tiet_nguoi_dung.nam_hoc }}</span>
+                    <input type="text" id="namHocInput" value="{{ chi_tiet_nguoi_dung.nam_hoc }}" style="display:none;">
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Lĩnh vực nghiên cứu</strong></td>
+                <td id="linhVucCell">
+                    <span id="linhVucText">{{ chi_tiet_nguoi_dung.linh_vuc_nghien_cuu }}</span>
+                    <input type="text" id="linhVucInput" value="{{ chi_tiet_nguoi_dung.linh_vuc_nghien_cuu }}" style="display:none;">
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Số điện thoại</strong></td>
+                <td id="soDienThoaiCell">
+                    <span id="soDienThoaiText">{{ chi_tiet_nguoi_dung.so_dien_thoai }}</span>
+                    <input type="text" id="soDienThoaiInput" value="{{ chi_tiet_nguoi_dung.so_dien_thoai }}" style="display:none;">
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Giới tính</strong></td>
+                <td id="gioiTinhCell">
+                    <span id="gioiTinhText">{{ chi_tiet_nguoi_dung.gioi_tinh }}</span>
+                    <input type="text" id="gioiTinhInput" value="{{ chi_tiet_nguoi_dung.gioi_tinh }}" style="display:none;">
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Địa chỉ</strong></td>
+                <td id="diaChiCell">
+                    <span id="diaChiText">{{ chi_tiet_nguoi_dung.dia_chi }}</span>
+                    <input type="text" id="diaChiInput" value="{{ chi_tiet_nguoi_dung.dia_chi }}" style="display:none;">
+                </td>
+            </tr>
+        </table>
+    </div>
+    <button class="Capnhat" id="editButton">Cập nhật</button>
+</div>
         
         
         

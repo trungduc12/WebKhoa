@@ -39,6 +39,11 @@
                     <img src="{{ url_for('static', filename='img/papers.png') }}" alt="Article Icon"> Bài báo khoa học
                 </a>
             </li>
+            <li>
+                <a href="#" onclick="showContent('grades')">
+                    <img src="{{ url_for('static', filename='img/grades.png') }}" alt="Grades Icon"> Tài liệu học tập
+                </a>
+            </li>
         </ul>
     </div>
     <!-- Main Content -->
@@ -131,6 +136,27 @@
                             <input type="text" id="namHocInput" value="{{ chi_tiet_nguoi_dung.nam_hoc }}" style="display:none;">
                         </td>
                     </tr>
+                    <tr>
+                        <td><strong>Số điện thoại</strong></td>
+                        <td id="soDienThoaiCell">
+                            <span id="soDienThoaiText">{{ chi_tiet_nguoi_dung.so_dien_thoai }}</span>
+                            <input type="text" id="soDienThoaiInput" value="{{ chi_tiet_nguoi_dung.so_dien_thoai }}" style="display:none;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Giới tính</strong></td>
+                        <td id="gioiTinhCell">
+                            <span id="gioiTinhText">{{ chi_tiet_nguoi_dung.gioi_tinh }}</span>
+                            <input type="text" id="gioiTinhInput" value="{{ chi_tiet_nguoi_dung.gioi_tinh }}" style="display:none;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Địa chỉ</strong></td>
+                        <td id="diaChiCell">
+                            <span id="diaChiText">{{ chi_tiet_nguoi_dung.dia_chi }}</span>
+                            <input type="text" id="diaChiInput" value="{{ chi_tiet_nguoi_dung.dia_chi }}" style="display:none;">
+                        </td>
+                    </tr>
                     <!-- Thêm cột Lĩnh vực nghiên cứu -->
                     
                 </table>
@@ -162,15 +188,21 @@
                 {% for notification in notifications %}
                 <div class="notification-item" id="notification_{{ notification.ma_thong_bao }}">
                     <div class="notification-header">
+                        <!-- Tiêu đề thông báo -->
                         <input type="text" class="notification-title" id="title_{{ notification.ma_thong_bao }}" value="{{ notification.tieu_de }}" disabled>
+                        <!-- Ngày tạo thông báo -->
                         <span class="notification-date">{{ notification.ngay_tao.strftime('%a %b %d, %Y') }}</span>
                     </div>
                     <div class="notification-body">
+                        <!-- Nội dung thông báo -->
                         <textarea id="content_{{ notification.ma_thong_bao }}" rows="3" disabled>{{ notification.noi_dung }}</textarea>
                     </div>
                     <div class="notification-actions">
-                        <button class="edit-btn" onclick="enableEdit({{ notification.ma_thong_bao }})">Sửa</button>
-                        <button class="save-btn" onclick="saveEdit({{ notification.ma_thong_bao }})" style="display:none;">Lưu</button>
+                        <!-- Nút Sửa -->
+                        <button class="edit-btn" id="edit_{{ notification.ma_thong_bao }}" onclick="enableEdit({{ notification.ma_thong_bao }})">Sửa</button>
+                        <!-- Nút Lưu (ẩn mặc định) -->
+                        <button class="save-btn" id="save_{{ notification.ma_thong_bao }}" onclick="saveEdit({{ notification.ma_thong_bao }})" style="display:none;">Lưu</button>
+                        <!-- Nút Xóa -->
                         <button class="delete-btn" onclick="deleteNotification({{ notification.ma_thong_bao }})">Xóa</button>
                     </div>
                 </div>
@@ -181,7 +213,7 @@
         <!-- Students Management Section -->
         <!-- Quản lý sinh viên -->
         <div id="student" class="content-section">
-            <h2>Thông tin Sinh viên</h2>
+            <h2>Danh sách Sinh viên</h2>
             <div class="controls">
                 <div class="search-container">
                     <input type="text" placeholder="Tìm kiếm" class="search-input" id="searchInput">
@@ -193,7 +225,7 @@
                     <button class="add-button">+</button>
                 </div>
             </div>
-        
+    
             <!-- Table to show the list of students -->
             <table class="student-table" id="studentTable">
                 <thead>
@@ -206,7 +238,15 @@
                     </tr>
                 </thead>
                 <tbody id="studentTableBody">
-                    <!-- Các sinh viên sẽ được điền vào đây qua AJAX -->
+                    {% for student in students %}
+                    <tr>
+                        <td>{{ student.ho_ten }}</td>
+                        <td>{{ student.khoa }}</td>
+                        <td>{{ student.linh_vuc_nghien_cuu }}</td>
+                        <td>{{ student.nam_hoc }}</td>
+                        <td>{{ student.nguoi_dung.email }}</td>  <!-- Giả sử đã liên kết với NguoiDung -->
+                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
@@ -220,39 +260,72 @@
         <div id="papers" class="content-section">
             <h2>Bài báo khoa học</h2>
             <div class="article-form">
-                <input type="text" placeholder="Tên bài báo" class="input-field">
-                <input type="text" placeholder="Tên tác giả" class="input-field">
-                <input type="number" placeholder="Năm sáng tác" class="input-field">
-                <div class="file-upload">
-                    <label for="fileInput">Upload File:</label>
-                    <input type="file" id="fileInput" class="upload-input">
-                </div>
-                <button class="add-article-btn">Thêm bài báo</button>
+                <input type="text" id="articleTitle" placeholder="Tiêu đề bài báo" class="input-field" required>
+                <textarea id="articleContent" placeholder="Nội dung" class="input-field" required></textarea>
+                
+                <button class="add-article-btn" id="addArticleBtn">Thêm bài báo</button>
             </div>
             <table class="article-table">
                 <thead>
                     <tr>
                         <th>Tên bài báo</th>
-                        <th>Tên tác giả</th>
-                        <th>Đường dẫn</th>
+                        <th>Nội dung</th>
                         <th>Chức năng</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Dự báo</td>
-                        <td>Hill</td>
-                        <td><a href="#">Link PDF</a></td>
+                <tbody id="articleTableBody">
+                    {% for bai_viet in danhsachbaibao %}
+                    <tr id="article-{{ bai_viet.ma_bai_viet }}">
+                        <td>{{ bai_viet.tieu_de }}</td>
+                        <td>{{ bai_viet.noi_dung }}</td>
                         <td>
-                            <button class="delete-btn">🗑️</button>
-                            <button class="edit-btn">Sửa</button>
+                            <button class="delete-btn" onclick="deleteArticle({{ bai_viet.ma_bai_viet }})">🗑️</button>
+                            <button class="edit-btn" onclick="editArticle({{ bai_viet.ma_bai_viet }})">Sửa</button>
                         </td>
                     </tr>
-                    <!-- Add more rows as needed -->
+                    {% endfor %}
                 </tbody>
             </table>
-            
         </div>
+
+        <div id="grades" class="content-section">
+            <h2>Tài liệu khóa học</h2>
+            <div class="container mx-auto p-4">
+                <div class="mb-4">
+                    <input type="text" id="searchInput" placeholder="Nhập tên môn học hoặc mã học phần" class="border1">
+                </div>
+        
+                <table id="documentTable" class="min-w-full bg-white border border-zinc-300">
+                    <thead class="bg-blue-600 text-white">
+                        <tr>
+                            <th class="py-2 px-4">STT</th> <!-- Số thứ tự -->
+                            <th class="py-2 px-4">Tên môn</th> <!-- Tên khóa học -->
+                            <th class="py-2 px-4">Tiêu đề</th> <!-- Tiêu đề tài liệu -->
+                            <th class="py-2 px-4">Ngày tải</th> <!-- Ngày tài liệu được tải -->
+                            <th class="py-2 px-4">Đề cương</th> <!-- Button tải tài liệu -->
+                        </tr>
+                    </thead>
+                    <tbody id="documentTableBody">
+                        <!-- Duyệt qua danh sách tài liệu -->
+                        {% for tai_lieu in danh_sach_tai_lieu %}
+                        <tr class="document-row">
+                            <td class="border px-4 py-2">{{ loop.index }}</td> <!-- Số thứ tự -->
+                            <td class="border px-4 py-2">{{ tai_lieu.KhoaHoc.ten_khoa_hoc }}</td> <!-- Tên môn học -->
+                            <td class="border px-4 py-2">{{ tai_lieu.tieu_de }}</td> <!-- Tiêu đề tài liệu -->
+                            <td class="border px-4 py-2">{{ tai_lieu.ngay_tai.strftime('%d-%m-%Y') }}</td> <!-- Ngày tải -->
+                            <td class="border px-4 py-2">
+                                <a href="{{ tai_lieu.duong_dan_tai_lieu }}" class="border px-4 py-2">
+                                    <img src="{{ url_for('static', filename='img/decuong.png') }}" alt="Button Image">
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
     <script src="{{ url_for('static', filename='js/giangvien.js') }}"></script>
 </body>
 </html>

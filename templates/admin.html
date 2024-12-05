@@ -33,11 +33,7 @@
                     <img src="{{ url_for('static', filename='img/notifications.png') }}" alt="Notifications Icon"> Thông báo
                 </a>
             </li>
-            <li>
-                <a href="#" onclick="showContent('grades')">
-                    <img src="{{ url_for('static', filename='img/grades.png') }}" alt="Grades Icon"> Thống kê
-                </a>
-            </li>
+            
             <li>
                 <a href="#" onclick="showContent('papers')">
                     <img src="{{ url_for('static', filename='img/papers.png') }}" alt="Article Icon"> Bài báo khoa học
@@ -106,41 +102,32 @@
          <div id="papers" class="content-section">
             <h2>Bài báo khoa học</h2>
             <div class="article-form">
-                <input type="text" placeholder="Tên bài báo" class="input-field" />
-                <input type="text" placeholder="Tên tác giả" class="input-field" />
-                <input type="number" placeholder="Năm sáng tác" class="input-field" />
-                <div class="file-upload">
-                    <label for="fileInput">Upload File:</label>
-                    <input type="file" id="fileInput" class="upload-input" />
-                </div>
-                <button class="add-article-btn">Thêm bài báo</button>
+                <input type="text" id="articleTitle" placeholder="Tiêu đề bài báo" class="input-field">
+                <input type="text" id="articleContent" placeholder="Nội dung" class="input-field">
+                
+                <button class="add-article-btn" id="addArticleBtn">Thêm bài báo</button>
             </div>
             <table class="article-table">
                 <thead>
                     <tr>
                         <th>Tên bài báo</th>
-                        <th>Tên tác giả</th>
-                        <th>Đường dẫn</th>
+                        <th>Nội dung</th>
                         <th>Chức năng</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Dự báo</td>
-                        <td>Hill</td>
-                        <td><a href="#">Link PDF</a></td>
+                <tbody id="articleTableBody">
+                    {% for bai_viet in danhsachbaibao %}
+                    <tr id="article-{{ bai_viet.ma_bai_viet }}">
+                        <td>{{ bai_viet.tieu_de }}</td>
+                        <td>{{ bai_viet.noi_dung }}</td>
                         <td>
-                            <button class="delete-btn">🗑️</button>
-                            <button class="edit-btn">Sửa</button>
+                            <button class="delete-btn" onclick="deleteArticle({{ bai_viet.ma_bai_viet }})">🗑️</button>
+                            <button class="edit-btn" onclick="editArticle({{ bai_viet.ma_bai_viet }})">Sửa</button>
                         </td>
                     </tr>
+                    {% endfor %}
                 </tbody>
             </table>
-            <div class="pagination">
-                <button class="page-btn active">1</button>
-                <button class="page-btn">2</button>
-                <button class="page-btn">3</button>
-            </div>
         </div>
 
         <!-- Courses Section -->
@@ -178,41 +165,27 @@
 
         <!-- Notifications Section -->
         <div id="notifications" class="content-section">
-            <br>
             <h2>Thông báo</h2>
+            
+            
+        
+            <!-- Phần thông báo -->
             <div class="notification-box">
-                <div class="notification-item">
+                {% for notification in notifications %}
+                <div class="notification-item" id="notification_{{ notification.ma_thong_bao }}">
                     <div class="notification-header">
-                        <h3>Thông báo</h3>
-                        <span class="notification-date">Thu Mar 07, 2024</span>
+                        <input type="text" class="notification-title" id="title_{{ notification.ma_thong_bao }}" value="{{ notification.tieu_de }}" disabled>
+                        <span class="notification-date">{{ notification.ngay_tao.strftime('%a %b %d, %Y') }}</span>
                     </div>
                     <div class="notification-body">
-                        <textarea placeholder="Bài đăng mới..." rows="3"></textarea>
+                        <textarea id="content_{{ notification.ma_thong_bao }}" rows="3" disabled>{{ notification.noi_dung }}</textarea>
+                    </div>
+                    <div class="notification-actions">
+                        
+                        <button class="delete-btn" onclick="deleteNotification({{ notification.ma_thong_bao }})">Xóa</button>
                     </div>
                 </div>
-                <div>
-                    <button class="Capnhat">Xóa thông báo</button>
-                </div>
-                <div class="notification-item">
-                    <div class="notification-header">
-                        <h3>Thông báo</h3>
-                        <span class="notification-date">Thu Mar 07, 2024</span>
-                    </div>
-                    <div class="notification-body">
-                        <textarea placeholder="Bài đăng mới..." rows="3"></textarea>
-                    </div>
-                </div>
-                <div>
-                    <button class="Capnhat">Xóa thông báo</button>
-                </div>
-            </div>
-            <div class="news">
-                <h3>TIN TỨC MỚI NHẤT</h3>
-                <ul>
-                    <li><a href="#">Thông báo mới nhất từ trường</a></li>
-                    <li><a href="#">Thông báo việc rà soát số tín chỉ học kỳ II, năm học 2022-2023</a></li>
-                    <li><a href="#">Danh sách sinh viên tốt nghiệp</a></li>
-                </ul>
+                {% endfor %}
             </div>
         </div>
 
@@ -303,34 +276,20 @@
         <div id="managenment" class="content-section">
             <div class="mb-4">
                 <br>
-                <input type="text" placeholder="Tìm kiếm người dùng" class="border1" />
+                <input type="text" placeholder="Tìm kiếm người dùng" class="border1" id="searchUser" />
             </div>
             <div class="space-y-4">
                 <div class="flex items-start cursor-pointer" onclick="thucHienChucNang()">
                     <img aria-hidden="true" alt="user-manager-icon" src="{{ url_for('static', filename='img/nguoi.png') }}" class="mr-2" />
                     <div>
-                        <h2 class="font-semibold">Thêm quản lý mới</h2>
-                        <p class="text-muted-foreground">Cấp tài khoản cho người dùng mới, họ sẽ có quyền truy cập vào hệ thống với tư cách là sinh viên, giảng viên hoặc quản trị viên.</p>
-                        <br>
-                    </div>
-                </div>
-                <div class="flex items-start">
-                    <img aria-hidden="true" alt="user-manager-icon" src="{{ url_for('static', filename='img/lop.png') }}" class="mr-2" />
-                    <div>
-                        <h2 class="font-semibold">Thêm lớp mới</h2>
-                        <p class="text-muted-foreground">Tạo lớp mới, thêm giảng viên và sinh viên mới sau khi đăng ký thành công lớp học phần</p>
-                        <br>
-                    </div>
-                </div>
-                <div class="flex items-start">
-                    <img aria-hidden="true" alt="user-manager-icon" src="{{ url_for('static', filename='img/nguoi.png') }}" class="mr-2" />
-                    <div>
                         <h2 class="font-semibold">Thêm người dùng mới</h2>
                         <p class="text-muted-foreground">Cấp tài khoản cho người dùng mới, họ sẽ có quyền truy cập vào hệ thống với tư cách là sinh viên, giảng viên hoặc quản trị viên.</p>
                         <br>
+                        <button onclick="showAddUserModal()">Thêm người dùng</button>
                     </div>
                 </div>
-                <div class="flex items-start">
+                
+                <div class="flex items-start" onclick="loadUsers()">
                     <img aria-hidden="true" alt="user-manager-icon" src="{{ url_for('static', filename='img/account.png') }}" class="mr-2" />
                     <div>
                         <h2 class="font-semibold">Danh sách account</h2>
@@ -340,92 +299,43 @@
                 </div>
             </div>
             <div>
-                <button class="Capnhat">+ Thêm người dùng</button>
+                <button class="Capnhat" onclick="loadUsers()">+ Thêm người dùng</button>
             </div>
+        
+            <!-- Modal thêm người dùng -->
+            <div id="addUserModal" style="display:none;">
+                <h3>Thêm người dùng mới</h3>
+                <input type="text" id="username" placeholder="Tên đăng nhập" required />
+                <input type="password" id="password" placeholder="Mật khẩu" required />
+                <input type="email" id="email" placeholder="Email" required />
+                <select id="role">
+                    <option value="sinh vien">Sinh viên</option>
+                    <option value="giang vien">Giảng viên</option>
+                    <option value="quan tri">Quản trị viên</option>
+                </select>
+                <button onclick="addUser()">Lưu</button>
+                <button onclick="closeAddUserModal()">Đóng</button>
+            </div>
+        
+            <!-- Bảng danh sách người dùng -->
+            <table id="userTable">
+                <thead>
+                    <tr>
+                        <th>Mã người dùng</th>
+                        <th>Tên đăng nhập</th>
+                        <th>Email</th>
+                        <th>Vai trò</th>
+                        <th>Ngày tạo</th>
+                    </tr>
+                </thead>
+                <tbody id="userTableBody">
+                    <!-- Người dùng sẽ được thêm vào đây qua AJAX -->
+                </tbody>
+            </table>
         </div>
 
         <!-- Grades Section -->
-        <div id="grades" class="content-section">
-            <div class="stats-overview">
-                <div class="stat-item">
-                    <h3>Sinh viên</h3>
-                    <p class="stat-number">900</p>
-                </div>
-                <div class="stat-item">
-                    <h3>Giảng viên</h3>
-                    <p class="stat-number">50</p>
-                </div>
-                <div class="stat-item">
-                    <h3>Thông báo</h3>
-                    <p class="stat-number">5</p>
-                </div>
-            </div>
-            <div class="dashboard-main">
-                <!-- Lịch -->
-                <div class="calendar">
-                    <div class="calendar-header">
-                        <h3>Lịch</h3>
-                        <p>Nov 2024</p>
-                    </div>
-                    <table class="calendar-body" id="calendarTable">
-                        <thead>
-                            <tr>
-                                <th>Sun</th>
-                                <th>Mon</th>
-                                <th>Tue</th>
-                                <th>Wed</th>
-                                <th>Thu</th>
-                                <th>Fri</th>
-                                <th>Sat</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Nội dung sẽ được tạo tự động bằng JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-                <!-- Biểu đồ -->
-                <div class="chart-section">
-                    <h3>Tài chính khoa</h3>
-                    <img src="{{ url_for('static', filename='img/finance_chart.png') }}" alt="Biểu đồ tài chính khoa" class="bieudotaichinh">
-                </div>
-            </div>
-            <!-- Danh sách sinh viên tham gia -->
-            <div class="research-list">
-                <h3>Sinh viên tham gia nghiên cứu khoa học</h3>
-                <table class="research-table">
-                    <thead>
-                        <tr>
-                            <th>Tên sinh viên</th>
-                            <th>MSSV</th>
-                            <th>Giảng viên hướng dẫn</th>
-                            <th>Tên đề tài</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Nguyễn Văn A</td>
-                            <td>123456</td>
-                            <td>PGS. TS. B</td>
-                            <td>Nghiên cứu AI</td>
-                        </tr>
-                        <tr>
-                            <td>Trần Thị B</td>
-                            <td>654321</td>
-                            <td>TS. C</td>
-                            <td>Phân tích dữ liệu lớn</td>
-                        </tr>
-                        <!-- Add more rows as needed -->
-                    </tbody>
-                </table>
-                <div class="pagination">
-                    <button class="page-btn">1</button>
-                    <button class="page-btn">2</button>
-                    <button class="page-btn">3</button>
-                </div>
-            </div>
-        </div>
-    </div>
+        
     <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
 </body>
 </html>

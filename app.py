@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for, session, jsonify
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify, flash
 from models import db, NguoiDung, ChiTietNguoiDung , ThongBao, TaiLieuKhoaHoc, BaiVietKhoaHoc
 from sqlalchemy import text
 from config import Config
 from datetime import datetime
 from sqlalchemy.orm import joinedload
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -48,7 +49,22 @@ def home():
 
 @app.route('/admin')
 def admin():
-    return render_template('admin.html')
+    ma_nguoi_dung = session.get('ma_nguoi_dung')
+    if not ma_nguoi_dung:
+        return redirect(url_for('login'))  # Redirect nếu chưa đăng nhập
+
+    chi_tiet_nguoi_dung = ChiTietNguoiDung.query.filter_by(ma_nguoi_dung=ma_nguoi_dung).first()
+
+    # Lấy tất cả thông báo (có thể tùy chỉnh theo điều kiện giảng viên)
+    notifications = ThongBao.query.all()
+
+    # Lấy danh sách tài liệu (có thể tùy chỉnh theo điều kiện giảng viên)
+    danh_sach_tai_lieu = TaiLieuKhoaHoc.query.all()
+
+    danhsachbaibao = BaiVietKhoaHoc.query.all()
+
+    # Render dữ liệu vào template
+    return render_template('admin.html', notifications=notifications, danh_sach_tai_lieu=danh_sach_tai_lieu, danhsachbaibao=danhsachbaibao, chi_tiet_nguoi_dung=chi_tiet_nguoi_dung)
 
 @app.route('/giangvien')
 def giangvien():
@@ -104,7 +120,10 @@ def get_students():
                 'khoa': chi_tiet.khoa,
                 'linh_vuc_nghien_cuu': chi_tiet.linh_vuc_nghien_cuu,
                 'nam_hoc': chi_tiet.nam_hoc,
-                'email': user.email  # Lấy email từ bảng NguoiDung
+                'email': user.email,  # Lấy email từ bảng NguoiDung
+                'so_dien_thoai': chi_tiet.so_dien_thoai,  # New field
+                'gioi_tinh': chi_tiet.gioi_tinh,  # New field
+                'dia_chi': chi_tiet.dia_chi  # New field
             })
 
     return jsonify(students_info)
@@ -126,6 +145,9 @@ def update_profile():
         chi_tiet_nguoi_dung.khoa = data.get('khoa')
         chi_tiet_nguoi_dung.linh_vuc_nghien_cuu = data.get('linh_vuc_nghien_cuu')
         chi_tiet_nguoi_dung.nam_hoc = data.get('nam_hoc')
+        chi_tiet_nguoi_dung.so_dien_thoai = data.get('so_dien_thoai')  # New field
+        chi_tiet_nguoi_dung.gioi_tinh = data.get('gioi_tinh')  # New field
+        chi_tiet_nguoi_dung.dia_chi = data.get('dia_chi')  # New field
         
         try:
             # Cập nhật vào database
@@ -166,7 +188,8 @@ def tao_thong_bao():
     except Exception as e:
         db.session.rollback()  # Rollback nếu có lỗi
         return jsonify({"success": False, "message": str(e)})
-    
+
+
 
     
 @app.route('/update_thong_bao/<int:id>', methods=['POST'])
@@ -206,6 +229,40 @@ def delete_thong_bao(id):
 
 
 
+
+@app.route('/add_article', methods=['POST'])
+def add_article():
+    ma_nguoi_dung = session.get('ma_nguoi_dung')
+    if not ma_nguoi_dung:
+        return jsonify({"success": False, "message": "Chưa đăng nhập"})
+
+    data = request.get_json()
+    tieu_de = data.get('tieu_de')
+    noi_dung = data.get('noi_dung')
+    
+    # Kiểm tra tính hợp lệ của dữ liệu
+    if not tieu_de or not noi_dung:
+        return jsonify({"success": False, "message": "Tiêu đề và nội dung không được để trống."})
+
+    # Tạo đối tượng bài viết mới
+    new_article = BaiVietKhoaHoc(tieu_de=tieu_de, noi_dung=noi_dung, ma_tac_gia=ma_nguoi_dung)
+
+    try:
+        db.session.add(new_article)
+        db.session.commit()
+        return jsonify({"success": True, "message": "Bài viết đã được thêm", "article": {
+            "id": new_article.ma_bai_viet,
+            "tieu_de": new_article.tieu_de,
+            "noi_dung": new_article.noi_dung,
+            "ngay_dang": new_article.ngay_dang.strftime("%Y-%m-%d %H:%M:%S"),  # Định dạng ngày giờ
+            "trang_thai": new_article.trang_thai
+        }})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"success": False, "message": str(e)})
+
+
+
 @app.route('/test_db')
 def test_db():
     try:
@@ -227,6 +284,70 @@ def check_session():
         'ma_nguoi_dung': session.get('ma_nguoi_dung'),
         'vai_tro': session.get('vai_tro')
     }
+
+
+@app.route('/add_user', methods=['POST'])
+def add_user():
+    data = request.get_json()
+    try:
+        new_user = NguoiDung(
+            ten_dang_nhap=data['username'],
+            mat_khau=generate_password_hash(data['password']),
+            email=data['email'],
+            vai_tro=data['role']
+        )
+        db.session.add(new_user)
+        db.session.commit()
+        return jsonify({'message': 'User added successfully!'}), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 400
+
+@app.route('/get_users', methods=['GET'])
+def get_users():
+    users = NguoiDung.query.all()
+    users_info = [
+        {
+            'ma_nguoi_dung': user.ma_nguoi_dung,
+            'ten_dang_nhap': user.ten_dang_nhap,
+            'email': user.email,
+            'vai_tro': user.vai_tro,
+            'ngay_tao': user.ngay_tao
+        } for user in users
+    ]
+    return jsonify({'users': users_info})
+
+
+@app.route('/add_article', methods=['POST'])
+def add_article():
+    data = request.get_json()
+    tieu_de = data.get('tieu_de')
+    noi_dung = data.get('noi_dung')
+
+    if not tieu_de or not noi_dung:
+        return jsonify({'success': False, 'message': 'Thiếu thông tin'}), 400
+
+    new_article = BaiVietKhoaHoc(tieu_de=tieu_de, noi_dung=noi_dung)
+    db.session.add(new_article)
+    db.session.commit()
+
+    return jsonify({
+        'success': True,
+        'ma_bai_viet': new_article.ma_bai_viet,
+        'tieu_de': new_article.tieu_de,
+        'noi_dung': new_article.noi_dung
+    }), 201
+
+
+@app.route('/delete_article/<int:ma_bai_viet>', methods=['DELETE'])
+def delete_article(ma_bai_viet):
+    article = BaiVietKhoaHoc.query.get(ma_bai_viet)
+    if article:
+        db.session.delete(article)
+        db.session.commit()
+        return jsonify({'success': True})
+    else:
+        return jsonify({'success': False, 'message': 'Bài báo không tồn tại'}), 404
 
 
 

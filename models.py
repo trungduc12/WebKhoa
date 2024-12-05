@@ -30,8 +30,11 @@ class ChiTietNguoiDung(db.Model):
     ho_ten = db.Column(db.String(100))
     tieu_su = db.Column(db.Text)
     linh_vuc_nghien_cuu = db.Column(db.String(100))
-    nam_hoc=db.Column(db.String(100))
+    nam_hoc = db.Column(db.String(100))
     khoa = db.Column(db.String(100))
+    so_dien_thoai = db.Column(db.String(15))  # New field
+    gioi_tinh = db.Column(db.String(10))  # New field
+    dia_chi = db.Column(db.String(255))  # New field
 
     # Liên kết ngược tới tài liệu khóa học
     bai_viet_khoa_hoc = db.relationship('BaiVietKhoaHoc', backref='ChiTietNguoiDung', lazy=True)
@@ -63,6 +66,7 @@ class KhoaHoc(db.Model):
     mo_ta = db.Column(db.Text)
     ma_giang_vien = db.Column(db.Integer, db.ForeignKey('NguoiDung.ma_nguoi_dung'))
     ngay_tao = db.Column(db.DateTime, default=db.func.current_timestamp())
+    duong_dan_khoa_hoc = db.Column(db.String(255))  # New field
 
     # Liên kết ngược tới tài liệu khóa học
     tai_lieu_khoa_hoc = db.relationship('TaiLieuKhoaHoc', backref='KhoaHoc', lazy=True)
