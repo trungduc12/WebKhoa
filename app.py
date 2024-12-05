@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify, flash
-from models import db, NguoiDung, ChiTietNguoiDung , ThongBao, TaiLieuKhoaHoc, BaiVietKhoaHoc
+from models import db, NguoiDung, ChiTietNguoiDung , ThongBao, TaiLieuKhoaHoc, BaiVietKhoaHoc, KhoaHoc
 from sqlalchemy import text
 from config import Config
 from datetime import datetime
@@ -189,7 +189,30 @@ def tao_thong_bao():
         db.session.rollback()  # Rollback nếu có lỗi
         return jsonify({"success": False, "message": str(e)})
 
+@app.route('/get_courses', methods=['GET'])
+def get_courses():
+    courses = KhoaHoc.query.all()
+    course_list = [{
+        'ten_khoa_hoc': course.ten_khoa_hoc,
+        'mo_ta': course.mo_ta
+    } for course in courses]
+    return jsonify(course_list)
 
+# Route thêm khóa học mới
+@app.route('/add_course', methods=['POST'])
+def add_course():
+    data = request.get_json()
+    ten_khoa_hoc = data.get('ten_khoa_hoc')
+    mo_ta = data.get('mo_ta')
+
+    if not ten_khoa_hoc or not mo_ta:
+        return jsonify({'success': False, 'message': 'Thiếu thông tin'}), 400
+
+    new_course = KhoaHoc(ten_khoa_hoc=ten_khoa_hoc, mo_ta=mo_ta)
+    db.session.add(new_course)
+    db.session.commit()
+
+    return jsonify({'success': True, 'ten_khoa_hoc': new_course.ten_khoa_hoc}), 201
 
     
 @app.route('/update_thong_bao/<int:id>', methods=['POST'])
@@ -230,36 +253,7 @@ def delete_thong_bao(id):
 
 
 
-@app.route('/add_article', methods=['POST'])
-def add_article():
-    ma_nguoi_dung = session.get('ma_nguoi_dung')
-    if not ma_nguoi_dung:
-        return jsonify({"success": False, "message": "Chưa đăng nhập"})
 
-    data = request.get_json()
-    tieu_de = data.get('tieu_de')
-    noi_dung = data.get('noi_dung')
-    
-    # Kiểm tra tính hợp lệ của dữ liệu
-    if not tieu_de or not noi_dung:
-        return jsonify({"success": False, "message": "Tiêu đề và nội dung không được để trống."})
-
-    # Tạo đối tượng bài viết mới
-    new_article = BaiVietKhoaHoc(tieu_de=tieu_de, noi_dung=noi_dung, ma_tac_gia=ma_nguoi_dung)
-
-    try:
-        db.session.add(new_article)
-        db.session.commit()
-        return jsonify({"success": True, "message": "Bài viết đã được thêm", "article": {
-            "id": new_article.ma_bai_viet,
-            "tieu_de": new_article.tieu_de,
-            "noi_dung": new_article.noi_dung,
-            "ngay_dang": new_article.ngay_dang.strftime("%Y-%m-%d %H:%M:%S"),  # Định dạng ngày giờ
-            "trang_thai": new_article.trang_thai
-        }})
-    except Exception as e:
-        db.session.rollback()
-        return jsonify({"success": False, "message": str(e)})
 
 
 
@@ -289,33 +283,48 @@ def check_session():
 @app.route('/add_user', methods=['POST'])
 def add_user():
     data = request.get_json()
+    ten_dang_nhap = data.get('ten_dang_nhap')
+    mat_khau = data.get('mat_khau')
+    email = data.get('email')
+    vai_tro = data.get('vai_tro')
+
+    if not ten_dang_nhap or not mat_khau or not email or not vai_tro:
+        return jsonify({'success': False, 'message': 'Thiếu thông tin!'}), 400
+
+    if NguoiDung.query.filter_by(ten_dang_nhap=ten_dang_nhap).first():
+        return jsonify({'success': False, 'message': 'Tên đăng nhập đã tồn tại!'}), 400
+
+    hashed_password = generate_password_hash(mat_khau)
+
+    new_user = NguoiDung(
+        ten_dang_nhap=ten_dang_nhap,
+        mat_khau=hashed_password,
+        email=email,
+        vai_tro=vai_tro
+    )
+
     try:
-        new_user = NguoiDung(
-            ten_dang_nhap=data['username'],
-            mat_khau=generate_password_hash(data['password']),
-            email=data['email'],
-            vai_tro=data['role']
-        )
         db.session.add(new_user)
         db.session.commit()
-        return jsonify({'message': 'User added successfully!'}), 201
+        return jsonify({'success': True}), 201
     except Exception as e:
         db.session.rollback()
-        return jsonify({'error': str(e)}), 400
+        return jsonify({'success': False, 'message': str(e)}), 500
 
 @app.route('/get_users', methods=['GET'])
 def get_users():
     users = NguoiDung.query.all()
-    users_info = [
-        {
+    user_list = []
+    for user in users:
+        user_list.append({
             'ma_nguoi_dung': user.ma_nguoi_dung,
             'ten_dang_nhap': user.ten_dang_nhap,
             'email': user.email,
             'vai_tro': user.vai_tro,
-            'ngay_tao': user.ngay_tao
-        } for user in users
-    ]
-    return jsonify({'users': users_info})
+            'ngay_tao': user.ngay_tao.strftime('%Y-%m-%d %H:%M:%S')
+        })
+    return jsonify(user_list)
+
 
 
 @app.route('/add_article', methods=['POST'])

@@ -23,11 +23,7 @@
                     <img src="{{ url_for('static', filename='img/profile.png') }}" alt="Profile Icon"> Quản lý người dùng
                 </a>
             </li>
-            <li>
-                <a href="#" onclick="showContent('list')">
-                    <img src="{{ url_for('static', filename='img/schedule.png') }}" alt="Schedule Icon"> Danh sách người dùng
-                </a>
-            </li>
+            
             <li>
                 <a href="#" onclick="showContent('notifications')">
                     <img src="{{ url_for('static', filename='img/notifications.png') }}" alt="Notifications Icon"> Thông báo
@@ -134,34 +130,26 @@
         <div id="courses" class="content-section">
             <h2>Khóa học</h2>
             <div class="course-actions">
-                <button class="add-course-btn">Thêm bài giảng</button>
-                <button class="delete-course-btn">Xóa bài giảng</button>
-                <button class="edit-course-btn">Sửa bài giảng</button>
+                <button class="add-course-btn" onclick="showAddCourseModal()">Thêm bài giảng</button>
             </div>
-            <div class="course-list">
-                <div class="course-card">
-                    <img src="{{ url_for('static', filename='img/thumbnail.png') }}" alt="Course Thumbnail" class="course-thumbnail">
-                    <p class="course-title">2311COMP170105 - Wed - Evening</p>
-                </div>
-                <div class="course-card">
-                    <img src="{{ url_for('static', filename='img/thumbnail.png') }}" alt="Course Thumbnail" class="course-thumbnail">
-                    <p class="course-title">2311COMP170105 - Wed - Evening</p>
-                </div>
-                <div class="course-card">
-                    <img src="{{ url_for('static', filename='img/thumbnail.png') }}" alt="Course Thumbnail" class="course-thumbnail">
-                    <p class="course-title">2311COMP170105 - Wed - Evening</p>
-                </div>
-                <div class="course-card">
-                    <img src="{{ url_for('static', filename='img/thumbnail.png') }}" alt="Course Thumbnail" class="course-thumbnail">
-                    <p class="course-title">2311COMP170105 - Wed - Evening</p>
-                </div>
+    
+            <!-- Danh sách khóa học -->
+            <div id="courseList" class="course-list">
+                <!-- Các khóa học sẽ được hiển thị tại đây thông qua JavaScript -->
             </div>
-            <div class="pagination">
-                <button class="page-btn active">1</button>
-                <button class="page-btn">2</button>
-                <button class="page-btn">3</button>
+    
+            <!-- Modal thêm khóa học -->
+            <div id="addCourseModal" style="display:none;">
+                <h3>Thêm Khóa Học Mới</h3>
+                <input type="text" id="courseTitle" placeholder="Tên khóa học" required />
+                <textarea id="courseDescription" placeholder="Mô tả khóa học" required></textarea>
+                <button onclick="addCourse()">Lưu</button>
+                <button onclick="closeAddCourseModal()">Đóng</button>
             </div>
         </div>
+    
+        
+        
 
         <!-- Notifications Section -->
         <div id="notifications" class="content-section">
@@ -289,17 +277,10 @@
                     </div>
                 </div>
                 
-                <div class="flex items-start" onclick="loadUsers()">
-                    <img aria-hidden="true" alt="user-manager-icon" src="{{ url_for('static', filename='img/account.png') }}" class="mr-2" />
-                    <div>
-                        <h2 class="font-semibold">Danh sách account</h2>
-                        <p class="text-muted-foreground">Xem lại các account đã cấp, xóa hoặc sửa người dùng.</p>
-                        <br>
-                    </div>
-                </div>
+                
             </div>
             <div>
-                <button class="Capnhat" onclick="loadUsers()">+ Thêm người dùng</button>
+                <button class="Capnhat" onclick="loadUsers()">Xem người dùng</button>
             </div>
         
             <!-- Modal thêm người dùng -->

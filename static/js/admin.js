@@ -110,63 +110,7 @@ function closeAddUserModal() {
     document.getElementById('addUserModal').style.display = 'none';
 }
 
-function addUser() {
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    const email = document.getElementById('email').value;
-    const role = document.getElementById('role').value;
 
-    fetch('/add_user', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ username, password, email, role })
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Error adding user');
-        }
-        return response.json();
-    })
-    .then(data => {
-        alert(data.message);
-        closeAddUserModal();
-        loadUsers(); // Tải lại danh sách người dùng
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Có lỗi xảy ra khi thêm người dùng.');
-    });
-}
-
-function loadUsers() {
-    fetch('/get_users')
-        .then(response => response.json())
-        .then(data => {
-            const tbody = document.getElementById('userTableBody');
-            tbody.innerHTML = ''; // Xóa nội dung hiện tại
-
-            data.users.forEach(user => {
-                const row = `
-                    <tr>
-                        <td>${user.ma_nguoi_dung}</td>
-                        <td>${user.ten_dang_nhap}</td>
-                        <td>${user.email}</td>
-                        <td>${user.vai_tro}</td>
-                        <td>${user.ngay_tao}</td>
-                    </tr>
-                `;
-                tbody.insertAdjacentHTML('beforeend', row);
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching users:', error);
-        });
-}
-
-// Gọi hàm loadUsers khi trang được tải
-window.onload = loadUsers;
 
 
 document.getElementById("addArticleBtn").addEventListener("click", function() {
@@ -219,3 +163,162 @@ document.getElementById("addArticleBtn").addEventListener("click", function() {
     });
 });
 
+
+function showAddUserModal() {
+    document.getElementById('addUserModal').style.display = 'block';
+}
+
+// Đóng modal thêm người dùng
+function closeAddUserModal() {
+    document.getElementById('addUserModal').style.display = 'none';
+}
+
+// Thêm người dùng mới
+function addUser() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const email = document.getElementById('email').value;
+    const role = document.getElementById('role').value;
+
+    if (!username || !password || !email || !role) {
+        alert("Vui lòng điền đầy đủ thông tin!");
+        return;
+    }
+
+    fetch('/add_user', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            ten_dang_nhap: username,
+            mat_khau: password,
+            email: email,
+            vai_tro: role
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            loadUsers(); // Cập nhật lại danh sách người dùng
+            closeAddUserModal(); // Đóng modal
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('email').value = '';
+            alert("Thêm người dùng thành công!");
+        } else {
+            alert(data.message || "Có lỗi xảy ra. Vui lòng thử lại.");
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Có lỗi xảy ra. Vui lòng thử lại.");
+    });
+}
+
+// Tải danh sách người dùng
+function loadUsers() {
+    fetch('/get_users')
+    .then(response => response.json())
+    .then(data => {
+        const userTableBody = document.getElementById('userTableBody');
+        userTableBody.innerHTML = '';
+        data.forEach(user => {
+            const newRow = `<tr>
+                <td>${user.ma_nguoi_dung}</td>
+                <td>${user.ten_dang_nhap}</td>
+                <td>${user.email}</td>
+                <td>${user.vai_tro}</td>
+                <td>${user.ngay_tao}</td>
+            </tr>`;
+            userTableBody.insertAdjacentHTML('beforeend', newRow);
+        });
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Có lỗi xảy ra khi tải danh sách người dùng.");
+    });
+}
+
+// Tải danh sách người dùng ngay khi trang được tải
+document.addEventListener('DOMContentLoaded', loadUsers);
+
+
+// Hàm mở modal thêm khóa học
+function showAddCourseModal() {
+    document.getElementById('addCourseModal').style.display = 'block';
+}
+
+// Hàm đóng modal thêm khóa học
+function closeAddCourseModal() {
+    document.getElementById('addCourseModal').style.display = 'none';
+}
+
+// Hàm thêm khóa học mới (tạm thời chỉ hiển thị trên giao diện)
+function addCourse() {
+    const courseTitle = document.getElementById('courseTitle').value;
+    const courseDescription = document.getElementById('courseDescription').value;
+
+    if (!courseTitle || !courseDescription) {
+        alert("Vui lòng nhập đầy đủ thông tin khóa học!");
+        return;
+    }
+
+    // Gửi dữ liệu khóa học mới đến backend (tạm thời thêm vào giao diện)
+    fetch('/add_course', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            ten_khoa_hoc: courseTitle,
+            mo_ta: courseDescription
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Thêm khóa học mới vào danh sách hiển thị
+            const newCourse = `
+                <div class="course-card">
+                    <img src="static/img/thumbnail.png" alt="Course Thumbnail" class="course-thumbnail">
+                    <p class="course-title">${data.ten_khoa_hoc}</p>
+                </div>`;
+            document.getElementById('courseList').insertAdjacentHTML('beforeend', newCourse);
+            closeAddCourseModal();
+            document.getElementById('courseTitle').value = '';
+            document.getElementById('courseDescription').value = '';
+        } else {
+            alert("Không thể thêm khóa học. Vui lòng thử lại.");
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Có lỗi xảy ra.");
+    });
+}
+
+// Hàm tải danh sách khóa học từ backend
+function loadCourses() {
+    fetch('/get_courses')
+    .then(response => response.json())
+    .then(data => {
+        const courseList = document.getElementById('courseList');
+        courseList.innerHTML = ''; // Xóa danh sách cũ trước khi thêm mới
+
+        data.forEach(course => {
+            const courseCard = `
+                <div class="course-card">
+                    <img src="static/img/thumbnail.png" alt="Course Thumbnail" class="course-thumbnail">
+                    <p class="course-title">${course.ten_khoa_hoc}</p>
+                </div>`;
+            courseList.insertAdjacentHTML('beforeend', courseCard);
+        });
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
+}
+
+// Tải danh sách khóa học khi trang được tải
+document.addEventListener('DOMContentLoaded', loadCourses);
